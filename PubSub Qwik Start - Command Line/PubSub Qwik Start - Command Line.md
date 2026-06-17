@@ -1,6 +1,6 @@
 # Pub/Sub: Qwik Start - Command Line || [GSP095](https://www.cloudskillsboost.google/focuses/925?parent=catalog) ||
 
-## Solution [here](https://youtu.be/dGZv09mWsQI)
+## Solution [here](https://youtu.be/0ZUw9QbevFU)
 
 ### Run the following Commands in CloudShell
 
