@@ -227,4 +227,4 @@ view: user_facts {
 Your hard work and determination paid off! 💻  
 You've successfully completed the lab. Way to go! 🚀  
 
-💚 [WhatsApp Community](https://chat.whatsapp.com/ECJ9h8GA3CA1ksaI9m5NrX)  # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
