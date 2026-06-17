@@ -9,7 +9,7 @@ export INSTANCE=
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Deploy%20and%20Troubleshoot%20a%20Website%20Challenge%20Lab/gsp101.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Deploy%20and%20Troubleshoot%20a%20Website%20Challenge%20Lab/gsp101.sh
 
 sudo chmod +x gsp101.sh
 
@@ -22,6 +22,5 @@ sudo chmod +x gsp101.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

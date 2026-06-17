@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Creating%20a%20De-identified%20Copy%20of%20Data%20in%20Cloud%20Storage/gsp1073.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Creating%20a%20De-identified%20Copy%20of%20Data%20in%20Cloud%20Storage/gsp1073.sh
 
 sudo chmod +x gsp1073.sh
 
@@ -18,6 +18,5 @@ sudo chmod +x gsp1073.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

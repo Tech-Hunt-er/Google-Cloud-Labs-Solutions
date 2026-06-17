@@ -9,7 +9,7 @@
  export USER_2=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Secure%20BigLake%20Data%20Challenge%20Lab/arc129.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Secure%20BigLake%20Data%20Challenge%20Lab/arc129.sh
 
 sudo chmod +x arc129.sh
 
@@ -22,6 +22,5 @@ sudo chmod +x arc129.sh
 
 #### *Keep the momentum going—more success is just around the corner!* 🚀  
 
-### **Join the community for more resources and support:** **[Telegram Channel](https://t.me/cloudwalabanda)** &  **[Discussion Group](https://t.me/cloudwalabandachats)**   
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter  

@@ -7,7 +7,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Implement%20Private%20Google%20Access%20and%20Cloud%20NAT/shell.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Implement%20Private%20Google%20Access%20and%20Cloud%20NAT/shell.sh
 
 sudo chmod +x shell.sh
 
@@ -20,7 +20,6 @@ sudo chmod +x shell.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
 

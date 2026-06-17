@@ -9,7 +9,7 @@ export MESSAGE=""
 ```
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/App%20Engine%203%20Ways%20Challenge%20Lab/arc112.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/App%20Engine%203%20Ways%20Challenge%20Lab/arc112.sh
 
 sudo chmod +x arc112.sh
 
@@ -22,6 +22,5 @@ sudo chmod +x arc112.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

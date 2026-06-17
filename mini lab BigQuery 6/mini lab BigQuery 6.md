@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO https://raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/mini%20lab%20BigQuery%206/shell.sh
+curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/mini%20lab%20BigQuery%206/shell.sh
 
 sudo chmod +x *.sh
 

@@ -8,9 +8,9 @@
 
 2. In the `General` tab, scroll down to the `Signature` section and click `Create New`.
 
-3. Give this signature `cloudwalabanda` name, then click `Create`.
+3. Give this signature `Tech Hunter` name, then click `Create`.
 
-4. In the Signature defaults section, use the dropdown menu under `For New Emails Use` and select `cloudwalabanda`.
+4. In the Signature defaults section, use the dropdown menu under `For New Emails Use` and select `Tech Hunter`.
 
 * Paste the following
 
@@ -96,7 +96,7 @@ Comments
 
 2. Select `App` > `Blank app`.
 
-3. For `App name`, type `cloudwalabanda` to name your app.
+3. For `App name`, type `Tech Hunter` to name your app.
 
 4. For `Category`, select `Education & Training` from the list.
 
@@ -108,6 +108,5 @@ Comments
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

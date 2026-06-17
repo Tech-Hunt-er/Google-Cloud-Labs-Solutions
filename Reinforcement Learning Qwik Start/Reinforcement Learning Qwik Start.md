@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Reinforcement%20Learning%20Qwik%20Start/gsp691.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Reinforcement%20Learning%20Qwik%20Start/gsp691.sh
 
 sudo chmod +x *.sh
 

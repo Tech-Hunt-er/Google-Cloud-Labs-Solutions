@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Dataproc%20Qwik%20Start%20-%20Console/gsp103.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Dataproc%20Qwik%20Start%20-%20Console/gsp103.sh
 
 sudo chmod +x *.sh
 

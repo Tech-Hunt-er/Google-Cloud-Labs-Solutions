@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Deploying%20GKE%20Autopilot%20Clusters%20from%20Cloud%20Shell/shell.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Deploying%20GKE%20Autopilot%20Clusters%20from%20Cloud%20Shell/shell.sh
 
 sudo chmod +x *.sh
 

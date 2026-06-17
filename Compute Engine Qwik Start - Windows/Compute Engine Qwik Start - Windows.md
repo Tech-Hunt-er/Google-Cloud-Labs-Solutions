@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Compute%20Engine%20Qwik%20Start%20-%20Windows/gsp093.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Compute%20Engine%20Qwik%20Start%20-%20Windows/gsp093.sh
 
 sudo chmod +x *.sh
 

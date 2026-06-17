@@ -8,7 +8,7 @@
 export RULE_NAME=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Arcade%20Hero%20Enter%20the%20Outbound%20Firewall/arc141.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Arcade%20Hero%20Enter%20the%20Outbound%20Firewall/arc141.sh
 
 sudo chmod +x arc141.sh
 
@@ -21,6 +21,5 @@ sudo chmod +x arc141.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Offloading%20Financial%20Mainframe%20Data%20into%20BigQuery%20and%20Elastic%20Search/gsp1153.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Offloading%20Financial%20Mainframe%20Data%20into%20BigQuery%20and%20Elastic%20Search/gsp1153.sh
 
 sudo chmod +x *.sh
 

@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Analyze%20Customer%20Reviews%20with%20Gemini%20Using%20Python%20Notebooks/gsp1249.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Analyze%20Customer%20Reviews%20with%20Gemini%20Using%20Python%20Notebooks/gsp1249.sh
 
 sudo chmod +x *.sh
 

@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Bigtable%20Qwik%20Start%20-%20Command%20Line/gsp099.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Bigtable%20Qwik%20Start%20-%20Command%20Line/gsp099.sh
 
 sudo chmod +x *.sh
 

@@ -15,7 +15,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Google%20Kubernetes%20Engine%20Pipeline%20using%20Cloud%20Build/gsp1077.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Google%20Kubernetes%20Engine%20Pipeline%20using%20Cloud%20Build/gsp1077.sh
 
 sudo chmod +x *.sh
 

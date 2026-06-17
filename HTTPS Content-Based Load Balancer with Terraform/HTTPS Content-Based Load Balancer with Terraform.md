@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/HTTPS%20Content-Based%20Load%20Balancer%20with%20Terraform/gsp206.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/HTTPS%20Content-Based%20Load%20Balancer%20with%20Terraform/gsp206.sh
 
 sudo chmod +x *.sh
 

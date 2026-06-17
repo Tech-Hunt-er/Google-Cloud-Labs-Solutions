@@ -9,7 +9,7 @@ export REPO=
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Arcade%20Hero%20Enter%20the%20Artifact%20Registry%20YUM/arc155.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Arcade%20Hero%20Enter%20the%20Artifact%20Registry%20YUM/arc155.sh
 
 sudo chmod +x arc155.sh
 
@@ -22,6 +22,5 @@ sudo chmod +x arc155.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

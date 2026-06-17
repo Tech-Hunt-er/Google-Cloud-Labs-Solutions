@@ -7,7 +7,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Deploy%20Your%20Website%20on%20Cloud%20Run/gsp659.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Deploy%20Your%20Website%20on%20Cloud%20Run/gsp659.sh
 
 sudo chmod +x gsp659.sh
 
@@ -20,6 +20,5 @@ sudo chmod +x gsp659.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

@@ -8,7 +8,7 @@
 export USER_2=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Build%20a%20Data%20Mesh%20with%20Dataplex%20Challenge%20Lab/gsp514.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20a%20Data%20Mesh%20with%20Dataplex%20Challenge%20Lab/gsp514.sh
 
 sudo chmod +x gsp514.sh
 
@@ -25,6 +25,5 @@ sudo chmod +x gsp514.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

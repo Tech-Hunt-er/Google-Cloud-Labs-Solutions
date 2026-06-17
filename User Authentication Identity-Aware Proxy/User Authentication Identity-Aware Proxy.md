@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/User%20Authentication%20Identity-Aware%20Proxy/gsp499.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/User%20Authentication%20Identity-Aware%20Proxy/gsp499.sh
 
 sudo chmod +x *.sh
 

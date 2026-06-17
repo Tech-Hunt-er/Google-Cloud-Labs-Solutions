@@ -19,7 +19,5 @@ sudo chmod +x *.sh
 #### *Well done!*
 
 #### 🌟 **Stay Connected for More:**  
-- 💬 Join the [Telegram Channel](https://t.me/cloudwalabanda)  
-- 🗣️ Participate in the [Discussion Group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

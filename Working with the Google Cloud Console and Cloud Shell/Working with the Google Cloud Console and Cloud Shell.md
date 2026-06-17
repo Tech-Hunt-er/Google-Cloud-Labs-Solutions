@@ -4,11 +4,11 @@
 
 ### Run the following Commands in CloudShell
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Working%20with%20the%20Google%20Cloud%20Console%20and%20Cloud%20Shell/cloudwalabanda.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Working%20with%20the%20Google%20Cloud%20Console%20and%20Cloud%20Shell/Tech Hunter.sh
 
-sudo chmod +x cloudwalabanda.sh
+sudo chmod +x Tech Hunter.sh
 
-./cloudwalabanda.sh
+./Tech Hunter.sh
 ```
 
 ### Congratulations 🎉 for Completing the Lab !
@@ -17,6 +17,5 @@ sudo chmod +x cloudwalabanda.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

@@ -5,7 +5,7 @@
 ### 🚀 Run the following commands in **Cloud Shell**:
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Modernizing%20Applications%20with%20Apigee%20X/gsp842.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Modernizing%20Applications%20with%20Apigee%20X/gsp842.sh
 
 sudo chmod +x gsp842.sh
 
@@ -31,6 +31,5 @@ sudo chmod +x gsp842.sh
 
 #### *Outstanding Effort—Well Done!*  
 
-#### Stay connected and updated—join the [Telegram Channel](https://t.me/cloudwalabanda) and [Discussion Group](https://t.me/cloudwalabandachats) today!  
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter  

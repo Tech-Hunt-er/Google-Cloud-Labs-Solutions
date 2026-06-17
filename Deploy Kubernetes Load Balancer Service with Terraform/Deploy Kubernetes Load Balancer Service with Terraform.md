@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Deploy%20Kubernetes%20Load%20Balancer%20Service%20with%20Terraform/gsp233.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Deploy%20Kubernetes%20Load%20Balancer%20Service%20with%20Terraform/gsp233.sh
 
 sudo chmod +x gsp233.sh
 
@@ -21,6 +21,5 @@ sudo chmod +x gsp233.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

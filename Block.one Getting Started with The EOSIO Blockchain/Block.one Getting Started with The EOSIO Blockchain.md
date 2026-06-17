@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Block.one%20Getting%20Started%20with%20The%20EOSIO%20Blockchain/gsp873.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Block.one%20Getting%20Started%20with%20The%20EOSIO%20Blockchain/gsp873.sh
 
 sudo chmod +x *.sh
 

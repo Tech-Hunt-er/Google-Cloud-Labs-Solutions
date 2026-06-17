@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Creating%20Dynamic%20Secrets%20for%20Google%20Cloud%20with%20Vault/gsp1007.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Creating%20Dynamic%20Secrets%20for%20Google%20Cloud%20with%20Vault/gsp1007.sh
 
 sudo chmod +x gsp1007.sh
 
@@ -103,6 +103,5 @@ vault write gcp/static-account/my-key-account \
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

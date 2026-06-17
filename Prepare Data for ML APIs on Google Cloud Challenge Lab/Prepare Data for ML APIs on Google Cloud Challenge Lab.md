@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Prepare%20Data%20for%20ML%20APIs%20on%20Google%20Cloud%20Challenge%20Lab/gsp323.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Prepare%20Data%20for%20ML%20APIs%20on%20Google%20Cloud%20Challenge%20Lab/gsp323.sh
 
 sudo chmod +x *.sh
 

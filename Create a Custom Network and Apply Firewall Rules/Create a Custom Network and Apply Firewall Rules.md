@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Create%20a%20Custom%20Network%20and%20Apply%20Firewall%20Rules/gsp159.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Create%20a%20Custom%20Network%20and%20Apply%20Firewall%20Rules/gsp159.sh
 
 sudo chmod +x *.sh
 

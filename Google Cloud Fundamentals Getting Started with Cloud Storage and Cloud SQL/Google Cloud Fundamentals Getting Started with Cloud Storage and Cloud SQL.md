@@ -7,7 +7,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Google%20Cloud%20Fundamentals%20Getting%20Started%20with%20Cloud%20Storage%20and%20Cloud%20SQL/CloudStorageCloudSQL.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Google%20Cloud%20Fundamentals%20Getting%20Started%20with%20Cloud%20Storage%20and%20Cloud%20SQL/CloudStorageCloudSQL.sh
 
 sudo chmod +x CloudStorageCloudSQL.sh
 
@@ -19,6 +19,5 @@ sudo chmod +x CloudStorageCloudSQL.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

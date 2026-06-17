@@ -4,7 +4,7 @@
 
 ### Run the following Commands in CloudShell
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Movie%20Recommendations%20in%20BigQuery%20ML%202.5/MovieRecommendations.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Movie%20Recommendations%20in%20BigQuery%20ML%202.5/MovieRecommendations.sh
 
 sudo chmod +x MovieRecommendations.sh
 
@@ -17,6 +17,5 @@ sudo chmod +x MovieRecommendations.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

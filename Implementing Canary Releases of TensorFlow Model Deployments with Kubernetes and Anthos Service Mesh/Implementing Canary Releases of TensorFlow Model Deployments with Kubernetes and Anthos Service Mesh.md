@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Implementing%20Canary%20Releases%20of%20TensorFlow%20Model%20Deployments%20with%20Kubernetes%20and%20Anthos%20Service%20Mesh/gsp778.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Implementing%20Canary%20Releases%20of%20TensorFlow%20Model%20Deployments%20with%20Kubernetes%20and%20Anthos%20Service%20Mesh/gsp778.sh
 
 sudo chmod +x gsp778.sh
 
@@ -21,6 +21,5 @@ sudo chmod +x gsp778.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

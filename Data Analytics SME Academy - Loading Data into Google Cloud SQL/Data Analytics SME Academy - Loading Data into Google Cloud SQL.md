@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Data%20Analytics%20SME%20Academy%20-%20Loading%20Data%20into%20Google%20Cloud%20SQL/gsp196.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Data%20Analytics%20SME%20Academy%20-%20Loading%20Data%20into%20Google%20Cloud%20SQL/gsp196.sh
 
 sudo chmod +x gsp196.sh
 
@@ -21,6 +21,5 @@ sudo chmod +x gsp196.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

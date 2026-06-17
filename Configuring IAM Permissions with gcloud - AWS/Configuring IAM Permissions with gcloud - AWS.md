@@ -19,7 +19,7 @@ gcloud --version
 gcloud auth login --no-launch-browser --quiet
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Configuring%20IAM%20Permissions%20with%20gcloud%20-%20AWS/gsp1126.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Configuring%20IAM%20Permissions%20with%20gcloud%20-%20AWS/gsp1126.sh
 sudo chmod +x gsp1126.sh
 ./gsp1126.sh
 ```
@@ -64,6 +64,5 @@ gcloud compute instances create lab-3 --machine-type=e2-standard-2 --service-acc
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

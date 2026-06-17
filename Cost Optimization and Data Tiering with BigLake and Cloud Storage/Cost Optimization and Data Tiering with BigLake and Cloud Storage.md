@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Cost%20Optimization%20and%20Data%20Tiering%20with%20BigLake%20and%20Cloud%20Storage/gsp267.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Cost%20Optimization%20and%20Data%20Tiering%20with%20BigLake%20and%20Cloud%20Storage/gsp267.sh
 
 sudo chmod +x *.sh
 

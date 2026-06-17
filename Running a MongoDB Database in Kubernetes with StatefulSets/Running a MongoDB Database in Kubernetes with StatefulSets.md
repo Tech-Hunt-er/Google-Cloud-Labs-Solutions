@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Running%20a%20MongoDB%20Database%20in%20Kubernetes%20with%20StatefulSets/gsp022.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Running%20a%20MongoDB%20Database%20in%20Kubernetes%20with%20StatefulSets/gsp022.sh
 
 sudo chmod +x gsp022.sh
 
@@ -21,6 +21,5 @@ sudo chmod +x gsp022.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

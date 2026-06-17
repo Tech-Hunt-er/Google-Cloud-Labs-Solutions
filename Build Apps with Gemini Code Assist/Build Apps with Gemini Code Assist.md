@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Build%20Apps%20with%20Gemini%20Code%20Assist/shell.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20Apps%20with%20Gemini%20Code%20Assist/shell.sh
 
 sudo chmod +x *.sh
 
@@ -15,7 +15,7 @@ sudo chmod +x *.sh
 ### ⚙️ Execute the Following Commands in Workstations Terminal
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Build%20Apps%20with%20Gemini%20Code%20Assist/code-assist.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20Apps%20with%20Gemini%20Code%20Assist/code-assist.sh
 
 sudo chmod +x *.sh
 

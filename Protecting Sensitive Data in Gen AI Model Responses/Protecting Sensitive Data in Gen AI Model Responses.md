@@ -7,7 +7,7 @@
 ```
 rm deidentify-model-response-v1.0.0.ipynb
 
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Protecting%20Sensitive%20Data%20in%20Gen%20AI%20Model%20Responses/deidentify-model-response-v1.0.0.ipynb
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Protecting%20Sensitive%20Data%20in%20Gen%20AI%20Model%20Responses/deidentify-model-response-v1.0.0.ipynb
 ```
 
 # 🎉 Woohoo! You Did It! 🎉  

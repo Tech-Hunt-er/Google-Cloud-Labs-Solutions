@@ -7,7 +7,7 @@
 ```
 rm CLS_Vertex_AI_CNN_horse_or_human-v1.0.0.ipynb
 
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Identify%20Horses%20or%20Humans%20with%20TensorFlow%20and%20Vertex%20AI/CLS_Vertex_AI_CNN_horse_or_human-v1.0.0.ipynb
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Identify%20Horses%20or%20Humans%20with%20TensorFlow%20and%20Vertex%20AI/CLS_Vertex_AI_CNN_horse_or_human-v1.0.0.ipynb
 ```
 
 # 🎉 Woohoo! You Did It! 🎉

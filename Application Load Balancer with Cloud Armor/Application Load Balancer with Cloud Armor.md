@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Application%20Load%20Balancer%20with%20Cloud%20Armor/gsp215.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Application%20Load%20Balancer%20with%20Cloud%20Armor/gsp215.sh
 
 sudo chmod +x *.sh
 

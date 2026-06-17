@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/App%20Engine%20Qwik%20Start%20-%20Python/gsp067.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/App%20Engine%20Qwik%20Start%20-%20Python/gsp067.sh
 
 sudo chmod +x gsp067.sh
 
@@ -21,6 +21,5 @@ sudo chmod +x gsp067.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

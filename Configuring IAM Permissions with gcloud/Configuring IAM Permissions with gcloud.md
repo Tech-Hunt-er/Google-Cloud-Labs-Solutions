@@ -11,7 +11,7 @@ export ZONE=$(gcloud compute project-info describe \
 gcloud compute ssh centos-clean --zone=$ZONE --quiet
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Configuring%20IAM%20Permissions%20with%20gcloud/gsp647.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Configuring%20IAM%20Permissions%20with%20gcloud/gsp647.sh
 sudo chmod +x gsp647.sh
 
 sudo chmod +x *.sh

@@ -8,8 +8,8 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Serverless%20Data%20Processing%20with%20Dataflow%20-%20Advanced%20Streaming%20Analytics%20Pipeline%20with%20Cloud%20Dataflow%20Java/cloudwalabanda.sh
-source cloudwalabanda.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Serverless%20Data%20Processing%20with%20Dataflow%20-%20Advanced%20Streaming%20Analytics%20Pipeline%20with%20Cloud%20Dataflow%20Java/Tech Hunter.sh
+source Tech Hunter.sh
 ```
 
 * If you do not get a message, then run the below command until you get a message.
@@ -24,6 +24,5 @@ gsutil cat $BUCKET/*/*
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

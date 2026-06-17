@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Monitoring%20Applications%20in%20Google%20Cloud/shell-1.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Monitoring%20Applications%20in%20Google%20Cloud/shell-1.sh
 
 sudo chmod +x shell-1.sh
 
@@ -20,7 +20,7 @@ sudo chmod +x shell-1.sh
 ### Run again the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Monitoring%20Applications%20in%20Google%20Cloud/shell-2.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Monitoring%20Applications%20in%20Google%20Cloud/shell-2.sh
 
 sudo chmod +x shell-2.sh
 
@@ -33,6 +33,5 @@ sudo chmod +x shell-2.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

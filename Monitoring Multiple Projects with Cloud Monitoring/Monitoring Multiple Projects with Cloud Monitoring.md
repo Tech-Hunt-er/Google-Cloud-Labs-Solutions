@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Monitoring%20Multiple%20Projects%20with%20Cloud%20Monitoring/gsp090.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Monitoring%20Multiple%20Projects%20with%20Cloud%20Monitoring/gsp090.sh
 
 sudo chmod +x *.sh
 

@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Monitoring%20in%20Google%20Cloud%20Challenge%20Lab/arc115.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Monitoring%20in%20Google%20Cloud%20Challenge%20Lab/arc115.sh
 
 sudo chmod +x arc115.sh
 
@@ -16,7 +16,7 @@ sudo chmod +x arc115.sh
 
 * Go to `Create Uptime Check` from [here](https://console.cloud.google.com/monitoring/uptime/create?)
 
-1. For Title: enter `cloudwalabanda`
+1. For Title: enter `Tech Hunter`
 
 * Go to `Dashboards` from [here](https://console.cloud.google.com/monitoring/dashboards?)
 
@@ -26,7 +26,7 @@ sudo chmod +x arc115.sh
 
 * Go to `Create log-based metric` from [here](https://console.cloud.google.com/logs/metrics/edit?)
 
-1. For Log-based metric name: enter `cloudwalabanda`
+1. For Log-based metric name: enter `Tech Hunter`
 
 2. Paste The Following in `Build filter` & Replace PROJECT_ID
 ```
@@ -46,6 +46,5 @@ execution took (\d+)
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

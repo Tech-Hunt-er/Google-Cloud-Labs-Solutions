@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/BigQuery%20Machine%20Learning%20using%20Soccer%20Data/gsp851.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/BigQuery%20Machine%20Learning%20using%20Soccer%20Data/gsp851.sh
 
 sudo chmod +x gsp851.sh
 
@@ -18,6 +18,5 @@ sudo chmod +x gsp851.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

@@ -5,7 +5,7 @@
 ### 🚀 **Execute the following commands in Cloud Shell:**
 
 ```bash
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Develop%20and%20Secure%20APIs%20with%20Apigee%20X%20Challenge%20Lab/gsp363.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Develop%20and%20Secure%20APIs%20with%20Apigee%20X%20Challenge%20Lab/gsp363.sh
 
 sudo chmod +x gsp363.sh
 
@@ -35,6 +35,5 @@ sudo chmod +x gsp363.sh
 
 #### *Stay determined—amazing opportunities are just ahead! 🚀*  
 
-#### Don't miss out on joining the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion Group](https://t.me/cloudwalabandachats)  
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter  

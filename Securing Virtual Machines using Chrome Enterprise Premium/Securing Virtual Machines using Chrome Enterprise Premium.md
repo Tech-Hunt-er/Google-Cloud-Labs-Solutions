@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Securing%20Virtual%20Machines%20using%20Chrome%20Enterprise%20Premium/gsp1036.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Securing%20Virtual%20Machines%20using%20Chrome%20Enterprise%20Premium/gsp1036.sh
 
 sudo chmod +x gsp1036.sh
 
@@ -18,6 +18,5 @@ sudo chmod +x gsp1036.sh
 
 #### *Keep striving for greatness!*  
 
-#### Join the [Telegram Channel](https://t.me/cloudwalabanda) and [Discussion Group](https://t.me/cloudwalabandachats) to connect with the community and share your insights.  
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

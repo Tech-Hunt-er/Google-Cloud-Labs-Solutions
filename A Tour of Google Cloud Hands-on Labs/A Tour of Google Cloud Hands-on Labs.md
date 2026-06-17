@@ -8,7 +8,7 @@
 export USER_2=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/A%20Tour%20of%20Google%20Cloud%20Hands-on%20Labs/gsp282.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/A%20Tour%20of%20Google%20Cloud%20Hands-on%20Labs/gsp282.sh
 
 sudo chmod +x *.sh
 

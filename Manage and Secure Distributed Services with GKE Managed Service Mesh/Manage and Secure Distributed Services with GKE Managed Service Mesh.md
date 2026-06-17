@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Manage%20and%20Secure%20Distributed%20Services%20with%20GKE%20Managed%20Service%20Mesh/gsp1242.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Manage%20and%20Secure%20Distributed%20Services%20with%20GKE%20Managed%20Service%20Mesh/gsp1242.sh
 
 sudo chmod +x *.sh
 

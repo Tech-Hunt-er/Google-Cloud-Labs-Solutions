@@ -5,7 +5,7 @@
 ####  Download and Run the Initial Script 
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Running%20a%20Dedicated%20Ethereum%20RPC%20Node%20in%20Google%20Cloud/gsp1116-1.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Running%20a%20Dedicated%20Ethereum%20RPC%20Node%20in%20Google%20Cloud/gsp1116-1.sh
 
 sudo chmod +x gsp1116-1.sh
 
@@ -168,7 +168,7 @@ exit
 ```
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Running%20a%20Dedicated%20Ethereum%20RPC%20Node%20in%20Google%20Cloud/gsp1116-2.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Running%20a%20Dedicated%20Ethereum%20RPC%20Node%20in%20Google%20Cloud/gsp1116-2.sh
 
 sudo chmod +x gsp1116-2.sh
 
@@ -180,7 +180,5 @@ sudo chmod +x gsp1116-2.sh
 ##### *Your expertise and effort are shining through—keep up the amazing work!*  
 
 #### 🔗 **Stay Connected for More Labs and Resources:**  
-- 🌐 [Telegram Channel](https://t.me/cloudwalabanda)  
-- 🤝 [Discussion Group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/HTTP%20Google%20Cloud%20Run%20Functions%20in%20Go/gsp602.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/HTTP%20Google%20Cloud%20Run%20Functions%20in%20Go/gsp602.sh
 
 sudo chmod +x *.sh
 

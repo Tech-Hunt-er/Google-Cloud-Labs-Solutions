@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Artifact%20Registry%20Qwik%20Start/gsp1131.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Artifact%20Registry%20Qwik%20Start/gsp1131.sh
 
 sudo chmod +x *.sh
 

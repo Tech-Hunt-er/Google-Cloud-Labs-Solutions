@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Identify%20Damaged%20Car%20Parts%20with%20Vertex%20AutoML%20Vision/gsp972-1.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Identify%20Damaged%20Car%20Parts%20with%20Vertex%20AutoML%20Vision/gsp972-1.sh
 
 sudo chmod +x gsp972-1.sh
 
@@ -31,7 +31,7 @@ sudo chmod +x gsp972-1.sh
 export AUTOML_PROXY=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Identify%20Damaged%20Car%20Parts%20with%20Vertex%20AutoML%20Vision/gsp972-2.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Identify%20Damaged%20Car%20Parts%20with%20Vertex%20AutoML%20Vision/gsp972-2.sh
 
 sudo chmod +x gsp972-2.sh
 
@@ -44,6 +44,5 @@ sudo chmod +x gsp972-2.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

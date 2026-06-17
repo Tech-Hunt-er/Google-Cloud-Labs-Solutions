@@ -9,7 +9,7 @@ export ZONE_1=
 export ZONE_2=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Configuring%20Traffic%20Management%20with%20a%20Load%20Balancer/shell.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Configuring%20Traffic%20Management%20with%20a%20Load%20Balancer/shell.sh
 
 sudo chmod +x shell.sh
 
@@ -22,6 +22,5 @@ sudo chmod +x shell.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

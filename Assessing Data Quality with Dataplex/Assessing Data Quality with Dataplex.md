@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Assessing%20Data%20Quality%20with%20Dataplex/gsp1158.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Assessing%20Data%20Quality%20with%20Dataplex/gsp1158.sh
 
 sudo chmod +x gsp1158.sh
 
@@ -34,6 +34,5 @@ sudo chmod +x gsp1158.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

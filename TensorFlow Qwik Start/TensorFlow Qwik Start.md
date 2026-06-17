@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Jupyter notebook terminal
 
 ```
-curl -LO https://raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/TensorFlow%20Qwik%20Start/model.ipynb
+curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/TensorFlow%20Qwik%20Start/model.ipynb
 ```
 
 # 🎉 Woohoo! You Did It! 🎉

@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Deploy%20Go%20Apps%20on%20Google%20Cloud%20Serverless%20Platforms/gsp702.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Deploy%20Go%20Apps%20on%20Google%20Cloud%20Serverless%20Platforms/gsp702.sh
 
 sudo chmod +x gsp702.sh
 
@@ -21,6 +21,5 @@ sudo chmod +x gsp702.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

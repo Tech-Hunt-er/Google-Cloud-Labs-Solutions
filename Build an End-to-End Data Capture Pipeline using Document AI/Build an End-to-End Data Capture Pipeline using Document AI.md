@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Build%20an%20End-to-End%20Data%20Capture%20Pipeline%20using%20Document%20AI/gsp927.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20an%20End-to-End%20Data%20Capture%20Pipeline%20using%20Document%20AI/gsp927.sh
 
 sudo chmod +x *.sh
 

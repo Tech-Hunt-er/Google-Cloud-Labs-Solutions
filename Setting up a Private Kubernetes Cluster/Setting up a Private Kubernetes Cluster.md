@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Setting%20up%20a%20Private%20Kubernetes%20Cluster/gsp178.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Setting%20up%20a%20Private%20Kubernetes%20Cluster/gsp178.sh
 
 sudo chmod +x gsp178.sh
 
@@ -21,6 +21,5 @@ sudo chmod +x gsp178.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Build%20a%20Data%20Warehouse%20with%20BigQuery%20Challenge%20Lab/gsp340.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Build%20a%20Data%20Warehouse%20with%20BigQuery%20Challenge%20Lab/gsp340.sh
 
 sudo chmod +x *.sh
 

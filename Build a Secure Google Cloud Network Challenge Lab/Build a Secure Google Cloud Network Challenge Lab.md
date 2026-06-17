@@ -10,7 +10,7 @@ export HTTP_NET_TAG=
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Build%20a%20Secure%20Google%20Cloud%20Network%20Challenge%20Lab/gsp322.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Build%20a%20Secure%20Google%20Cloud%20Network%20Challenge%20Lab/gsp322.sh
 
 sudo chmod +x gsp322.sh
 
@@ -23,6 +23,5 @@ sudo chmod +x gsp322.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

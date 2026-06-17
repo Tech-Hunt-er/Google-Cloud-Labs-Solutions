@@ -13,7 +13,7 @@ export TOPIC=
 export JOB=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Streaming%20Analytics%20into%20BigQuery%20Challenge%20Lab/arc106.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Streaming%20Analytics%20into%20BigQuery%20Challenge%20Lab/arc106.sh
 
 sudo chmod +x arc106.sh
 
@@ -26,6 +26,5 @@ sudo chmod +x arc106.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

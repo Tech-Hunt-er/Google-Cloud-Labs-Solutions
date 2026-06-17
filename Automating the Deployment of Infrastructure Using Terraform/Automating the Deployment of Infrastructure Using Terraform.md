@@ -7,11 +7,11 @@
 export ZONE=
 ```
 ```
-curl -LO https://raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Automating%20the%20Deployment%20of%20Infrastructure%20Using%20Terraform/cloudwalabanda.sh
+curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Automating%20the%20Deployment%20of%20Infrastructure%20Using%20Terraform/Tech Hunter.sh
 
-sudo chmod +x cloudwalabanda.sh
+sudo chmod +x Tech Hunter.sh
 
-./cloudwalabanda.sh
+./Tech Hunter.sh
 ```
 
 ### Congratulations 🎉 for completing the Lab !
@@ -20,6 +20,5 @@ sudo chmod +x cloudwalabanda.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

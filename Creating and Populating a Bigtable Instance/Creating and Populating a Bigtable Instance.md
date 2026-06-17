@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Creating%20and%20Populating%20a%20Bigtable%20Instance/gsp1054.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Creating%20and%20Populating%20a%20Bigtable%20Instance/gsp1054.sh
 
 sudo chmod +x gsp1054.sh
 
@@ -25,6 +25,5 @@ sudo chmod +x gsp1054.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

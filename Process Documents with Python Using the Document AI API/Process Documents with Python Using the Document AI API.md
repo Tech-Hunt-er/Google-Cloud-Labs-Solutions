@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Process%20Documents%20with%20Python%20Using%20the%20Document%20AI%20API/gsp925-1.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Process%20Documents%20with%20Python%20Using%20the%20Document%20AI%20API/gsp925-1.sh
 
 sudo chmod +x gsp925-1.sh
 
@@ -17,7 +17,7 @@ sudo chmod +x gsp925-1.sh
 * Run the following commands in **Jupyter Notebook Terminal**
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Process%20Documents%20with%20Python%20Using%20the%20Document%20AI%20API/gsp925-2.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Process%20Documents%20with%20Python%20Using%20the%20Document%20AI%20API/gsp925-2.sh
 
 sudo chmod +x gsp925-2.sh
 
@@ -30,6 +30,5 @@ sudo chmod +x gsp925-2.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

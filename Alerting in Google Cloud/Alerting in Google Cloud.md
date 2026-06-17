@@ -5,7 +5,7 @@
 #### 1️⃣ Download and Execute the Script  
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Alerting%20in%20Google%20Cloud/shell.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Alerting%20in%20Google%20Cloud/shell.sh
 
 sudo chmod +x *.sh
 
@@ -19,7 +19,5 @@ sudo chmod +x *.sh
 #### *Well done!*
 
 #### 🌟 **Stay Connected for Updates:**  
-- 💬 Join the [Telegram Channel](https://t.me/cloudwalabanda)  
-- 🗣️ Participate in the [Discussion Group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

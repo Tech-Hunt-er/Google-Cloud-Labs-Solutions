@@ -11,7 +11,7 @@ export FIREWALL=
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/main/Implement%20Load%20Balancing%20on%20Compute%20Engine%20Challenge%20Lab/gsp313.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Implement%20Load%20Balancing%20on%20Compute%20Engine%20Challenge%20Lab/gsp313.sh
 
 sudo chmod +x gsp313.sh
 
@@ -25,6 +25,5 @@ sudo chmod +x gsp313.sh
 
 #### *Well done!*
 
-#### Don't Forget to Join the [Telegram Channel](https://t.me/cloudwalabanda) & [Discussion group](https://t.me/cloudwalabandachats)
 
 # <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter

@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Cloud-Wala-Banda/Labs-Solutions/refs/heads/main/Redacting%20Confidential%20Data%20within%20your%20Pipelines%20in%20Cloud%20Data%20Fusion/gsp811.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Redacting%20Confidential%20Data%20within%20your%20Pipelines%20in%20Cloud%20Data%20Fusion/gsp811.sh
 
 sudo chmod +x *.sh
 
