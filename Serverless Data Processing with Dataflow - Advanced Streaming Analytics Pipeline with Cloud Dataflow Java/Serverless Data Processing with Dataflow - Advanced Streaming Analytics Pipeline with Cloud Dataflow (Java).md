@@ -8,8 +8,8 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Serverless%20Data%20Processing%20with%20Dataflow%20-%20Advanced%20Streaming%20Analytics%20Pipeline%20with%20Cloud%20Dataflow%20Java/Tech Hunter.sh
-source Tech Hunter.sh
+curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Serverless%20Data%20Processing%20with%20Dataflow%20-%20Advanced%20Streaming%20Analytics%20Pipeline%20with%20Cloud%20Dataflow%20Java/techhunter.sh
+source techhunter.sh
 ```
 
 * If you do not get a message, then run the below command until you get a message.

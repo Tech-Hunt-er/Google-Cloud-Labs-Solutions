@@ -7,11 +7,11 @@
 export ZONE=
 ```
 ```
-curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Automating%20the%20Deployment%20of%20Infrastructure%20Using%20Terraform/Tech Hunter.sh
+curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Automating%20the%20Deployment%20of%20Infrastructure%20Using%20Terraform/techhunter.sh
 
-sudo chmod +x Tech Hunter.sh
+sudo chmod +x techhunter.sh
 
-./Tech Hunter.sh
+./techhunter.sh
 ```
 
 ### Congratulations 🎉 for completing the Lab !
