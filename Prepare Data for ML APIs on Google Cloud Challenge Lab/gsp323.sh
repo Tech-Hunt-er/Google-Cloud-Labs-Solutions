@@ -9,10 +9,8 @@ BLUE_TEXT=$'\033[0;94m'
 MAGENTA_TEXT=$'\033[0;95m'
 CYAN_TEXT=$'\033[0;96m'
 WHITE_TEXT=$'\033[0;97m'
-
 NO_COLOR=$'\033[0m'
 RESET_FORMAT=$'\033[0m'
-
 BOLD_TEXT=$'\033[1m'
 UNDERLINE_TEXT=$'\033[4m'
 
@@ -20,12 +18,11 @@ clear
 
 # Welcome message
 echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}      SUBSCRIBE Tech Hunter- INITIATING EXECUTION...  ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}          SUBSCRIBE Tech Hunter- INITIATING EXECUTION...          ${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
 echo
 
 echo -e "${CYAN_TEXT}${BOLD_TEXT}--- GCP LAB CONFIGURATION ---${RESET_FORMAT}"
-
 export PROJECT_ID=$(gcloud config get-value project)
 
 read -p "$(echo -e ${YELLOW_TEXT}"Enter REGION Name: "${RESET_FORMAT})" REGION
@@ -33,6 +30,7 @@ read -p "$(echo -e ${YELLOW_TEXT}"Enter BigQuery DATASET Name: "${RESET_FORMAT})
 read -p "$(echo -e ${YELLOW_TEXT}"Enter BigQuery TABLE Name: "${RESET_FORMAT})" TABLE
 read -p "$(echo -e ${MAGENTA_TEXT}"Enter Task 3 Output URI: "${RESET_FORMAT})" TASK3_OUTPUT
 read -p "$(echo -e ${MAGENTA_TEXT}"Enter Task 4 Output URI: "${RESET_FORMAT})" TASK4_OUTPUT
+
 export BUCKET="${PROJECT_ID}-marking"
 export TEMP_LOCATION="gs://${BUCKET}/temp"
 export BQ_TEMP="gs://${BUCKET}/bigquery_temp"
@@ -41,7 +39,6 @@ echo -e "\n${GREEN_TEXT}${BOLD_TEXT}Configuration complete. Starting tasks...${R
 
 # --- TASK 1: Dataflow ---
 echo -e "\n${YELLOW_TEXT}${BOLD_TEXT}Starting Task 1: Dataflow...${RESET_FORMAT}"
-
 # Create resources
 bq mk $DATASET 2>/dev/null || echo "Dataset exists"
 gsutil mb -l $REGION gs://$BUCKET 2>/dev/null || echo "Bucket exists"
@@ -53,12 +50,12 @@ gcloud dataflow jobs run batch-job-task1 \
   --worker-machine-type e2-standard-2 \
   --staging-location $TEMP_LOCATION \
   --parameters \
-javascriptTextTransformFunctionName=transform,\
-JSONPath=gs://spls/gsp323/lab.schema,\
-javascriptTextTransformGcsPath=gs://spls/gsp323/lab.js,\
-inputFilePattern=gs://spls/gsp323/lab.csv,\
-outputTable=$PROJECT_ID:$DATASET.$TABLE,\
-bigQueryLoadingTemporaryDirectory=$BQ_TEMP
+    javascriptTextTransformFunctionName=transform,\
+    JSONPath=gs://spls/gsp323/lab.schema,\
+    javascriptTextTransformGcsPath=gs://spls/gsp323/lab.js,\
+    inputFilePattern=gs://spls/gsp323/lab.csv,\
+    outputTable=$PROJECT_ID:$DATASET.$TABLE,\
+    bigQueryLoadingTemporaryDirectory=$BQ_TEMP
 
 # --- TASK 2: Dataproc ---
 echo -e "\n${MAGENTA_TEXT}${BOLD_TEXT}Starting Task 2: Dataproc Cluster Creation...${RESET_FORMAT}"
@@ -104,20 +101,20 @@ echo -e "\n${YELLOW_TEXT}${BOLD_TEXT}Starting Task 3: Speech-to-Text...${RESET_F
 gcloud services enable apikeys.googleapis.com
 gcloud services enable speech.googleapis.com
 
-# Create API key
-gcloud alpha services api-keys create --display-name="ml-api-key"
+# Create API key with mandatory target restriction
+gcloud alpha services api-keys create --display-name="ml-api-key" --api-target=service=speech.googleapis.com
 
 echo -e "${CYAN_TEXT}Waiting for API Key propagation...${RESET_FORMAT}"
 sleep 30
 
-# Get only ONE API key (fix for multiple keys issue)
+# Find and get the API Key using correct uppercase displayName filter
 KEY_NAME=$(gcloud alpha services api-keys list \
---format="value(name)" \
---filter="displayName=ml-api-key" \
---limit=1)
+    --format="value(name)" \
+    --filter="displayName=ml-api-key" \
+    --limit=1)
 
 API_KEY=$(gcloud alpha services api-keys get-key-string "$KEY_NAME" \
---format="value(keyString)")
+    --format="value(keyString)")
 
 # Create request
 cat > request.json <<EOF
@@ -134,23 +131,22 @@ EOF
 
 # Call Speech-to-Text API
 curl -s -X POST -H "Content-Type: application/json" \
---data-binary @request.json \
-"https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" \
-> result_task3.json
+    --data-binary @request.json \
+    "https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" \
+    > result_task3.json
 
-# Upload result with correct content-type
-gsutil -h "Content-Type: application/json" cp result_task3.json $TASK3_OUTPUT
+# Upload result with correct content-type using modern gcloud storage syntax
+gcloud storage cp --content-type="application/json" result_task3.json $TASK3_OUTPUT
 
 # --- TASK 4: Natural Language API ---
 echo -e "\n${YELLOW_TEXT}${BOLD_TEXT}Starting Task 4: Natural Language...${RESET_FORMAT}"
 
 gcloud ml language analyze-entities --content="Old Norse texts portray Odin as one-eyed and long-bearded, frequently wielding a spear named Gungnir and wearing a cloak and a broad hat." > result_task4.json
-
-gsutil -h "Content-Type: application/json" cp result_task4.json $TASK4_OUTPUT
+gcloud storage cp --content-type="application/json" result_task4.json $TASK4_OUTPUT
 
 echo
 echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}              LAB COMPLETED SUCCESSFULLY!              ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}               LAB COMPLETED SUCCESSFULLY!             ${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
 echo
 echo "${RED_TEXT}${BOLD_TEXT}${UNDERLINE_TEXT}https://www.youtube.com/@tech_hunter_rapid${RESET_FORMAT}"
