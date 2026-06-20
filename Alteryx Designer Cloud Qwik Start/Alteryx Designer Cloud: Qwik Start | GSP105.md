@@ -1,4 +1,4 @@
-# A Tour of Google Cloud Hands-on Labs || [GSP282](https://www.cloudskillsboost.google/focuses/2794?parent=catalog) ||
+# A Tour of Google Cloud Hands-on Labs || [GSP105](https://www.cloudskillsboost.google/focuses/2794?parent=catalog) ||
 
 ## 🔑 Solution [here](https://youtu.be/cqxON8fzoMU)
 
