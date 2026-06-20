@@ -1,6 +1,6 @@
 # Set Up an App Dev Environment on Google Cloud: Challenge Lab || [GSP315](https://www.cloudskillsboost.google/focuses/10379?parent=catalog) ||
 
-## Solution [here](https://youtu.be/lYPt_N54QbQ)
+## Solution [here](https://youtu.be/6d3Xz97YdOM)
 
 ### Run the following Commands in CloudShell
 
