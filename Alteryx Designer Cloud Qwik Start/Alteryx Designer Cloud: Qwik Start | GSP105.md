@@ -5,9 +5,6 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-export USER_2=
-```
-```
 curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Alteryx%20Designer%20Cloud%20Qwik%20Start/GSP105.sh
 
 sudo chmod +x *.sh
