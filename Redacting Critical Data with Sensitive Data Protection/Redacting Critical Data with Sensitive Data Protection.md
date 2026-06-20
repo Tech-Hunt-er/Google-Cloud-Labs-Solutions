@@ -1,6 +1,6 @@
 # Redacting Critical Data with Sensitive Data Protection || [GSP864](https://www.cloudskillsboost.google/focuses/46234?parent=catalog) ||
 
-## Solution [here](https://youtu.be/uCU12_itV4U)
+## Solution [here](https://youtu.be/QOCe0AEqhBM)
 
 ### Run the following Commands in CloudShell
 
