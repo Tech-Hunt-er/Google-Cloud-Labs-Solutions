@@ -1,6 +1,6 @@
 # Dataflow: Qwik Start - Templates || [GSP192](https://www.cloudskillsboost.google/focuses/1101?parent=catalog) ||
 
-## Solution [here](https://youtu.be/aq9owMpKLH0)
+## Solution [here](https://youtu.be/lR7v-kEaA18)
 
 ### Run the following Commands in CloudShell
 
