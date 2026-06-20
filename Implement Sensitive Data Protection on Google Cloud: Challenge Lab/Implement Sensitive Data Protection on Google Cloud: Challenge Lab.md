@@ -1,7 +1,7 @@
 # Implement Sensitive Data Protection on Google Cloud: Challenge Lab
  || [ARC116](https://www.cloudskillsboost.google/focuses/17996?parent=catalog) ||
 
-## 💡 Solution [here](https://youtu.be/5Ae2ftnjJfM)
+## 💡 Solution [here](https://youtu.be/n5HUF22svaY)
 
 ### Run the following Commands in CloudShell
 
