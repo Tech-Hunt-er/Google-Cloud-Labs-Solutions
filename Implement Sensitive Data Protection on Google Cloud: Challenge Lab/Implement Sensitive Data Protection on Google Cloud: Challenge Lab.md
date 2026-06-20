@@ -9,7 +9,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/API%20Gateway%20Qwik%20Start/techhunter.sh
+curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Implement%20Sensitive%20Data%20Protection%20on%20Google%20Cloud%3A%20Challenge%20Lab/techhunter.sh
 
 sudo chmod +x gsp872.sh
 
