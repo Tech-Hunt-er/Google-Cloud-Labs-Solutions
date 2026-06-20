@@ -1,4 +1,4 @@
-# A Tour of Google Cloud Hands-on Labs || [GSP105](https://www.cloudskillsboost.google/focuses/2794?parent=catalog) ||
+# Alteryx Designer Cloud: Qwik Start | GSP105 || [GSP105](https://www.cloudskillsboost.google/focuses/2794?parent=catalog) ||
 
 ## 🔑 Solution [here](https://youtu.be/cqxON8fzoMU)
 
