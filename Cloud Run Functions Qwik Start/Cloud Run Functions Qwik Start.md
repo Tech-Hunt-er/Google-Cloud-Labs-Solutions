@@ -1,6 +1,6 @@
 # Cloud Run Functions: Qwik Start || [GSP1089](https://www.cloudskillsboost.google/focuses/49757?parent=catalog) ||
 
-## 🔑 Solution [here](https://youtu.be/4m9uHdxE9vY)
+## 🔑 Solution [here](https://youtu.be/X4dDYFcX1fo)
 
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
