@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Creating%20a%20Persistent%20Disk/GSP539.sh
+curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Build%20Global%20and%20Regional%20Load%20Balancing%20Solutions/GSP539.sh
 
 sudo chmod +x GSP539.sh
 
