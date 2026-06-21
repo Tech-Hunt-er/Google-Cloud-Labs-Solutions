@@ -1,12 +1,9 @@
-# Creating a Persistent Disk || [GSP539](https://www.cloudskillsboost.google/focuses/1753?parent=catalog) ||
+# Build Global and Regional Load Balancing Solutions: Challenge Lab || [GSP539](https://www.cloudskillsboost.google/focuses/1753?parent=catalog) ||
 
 ## Solution [here](https://youtu.be/oUnQLeuEDs8)
 
 ### Run the following Commands in CloudShell
 
-```
-export ZONE=
-```
 ```
 curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Creating%20a%20Persistent%20Disk/GSP539.sh
 
