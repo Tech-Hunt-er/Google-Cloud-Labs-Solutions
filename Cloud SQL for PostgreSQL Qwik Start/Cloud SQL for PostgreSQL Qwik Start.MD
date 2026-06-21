@@ -22,4 +22,4 @@ sudo chmod +x gsp152.sh
 #### *Well done!*
 
 
-# [Orbit of Ops](https://www.youtube.com/@Orbit of Ops)
+# [Orbit of Ops](https://www.youtube.com/@OrbitofOps)
