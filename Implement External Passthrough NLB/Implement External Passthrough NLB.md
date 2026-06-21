@@ -6,7 +6,7 @@
 
 
 ```
-curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Creating%20a%20Persistent%20Disk/GSP658.sh
+curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Implement%20External%20Passthrough%20NLB/GSP658.sh
 
 sudo chmod +x GSP658.sh
 
