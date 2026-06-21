@@ -9,7 +9,7 @@ curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/he
 
 sudo chmod +x *.sh
 
-./gsp155.sh
+./GSP155.sh
 ```
 
 ### 🎉 You Did It! Lab Successfully Completed
