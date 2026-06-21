@@ -1,4 +1,4 @@
-# Create and Manage Cloud Resources: Challenge Lab || [GSP313](https://www.cloudskillsboost.google/focuses/10258?parent=catalog) ||
+# Create and Manage Cloud Resources: Challenge Lab || [GSP](https://www.cloudskillsboost.google/focuses/10258?parent=catalog) ||
 
 ## Solution [here](https://youtu.be/X9qYc_62-ac)
 
