@@ -6,7 +6,7 @@
 
 
 ```
-curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Creating%20a%20Persistent%20Disk/gsp004.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Creating%20a%20Persistent%20Disk/gsp004.sh](https://raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Implement%20Regional%20Internal%20Proxy%20NLB/GSP636.sh
 
 sudo chmod +x GSP636.sh
 
