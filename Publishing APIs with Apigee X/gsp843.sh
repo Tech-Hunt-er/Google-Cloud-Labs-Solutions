@@ -159,7 +159,7 @@ curl -X POST "https://apigee.googleapis.com/v1/organizations/$DEVSHELL_PROJECT_I
 
 # Step 8: Download OpenAPI specification
 echo "${MAGENTA}${BOLD}Downloading OpenAPI Specification${RESET}"
-curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Labs-Solutions/refs/heads/main/Publishing%20APIs%20with%20Apigee%20X/simplebank-spec.yaml
+curl -LO https://raw.githubusercontent.com/Orbit-of-Ops/Labs-Solutions/refs/heads/main/Publishing%20APIs%20with%20Apigee%20X/simplebank-spec.yaml
 
 # Step 9: Update OpenAPI spec with correct URL
 echo "${BLUE}${BOLD}Updating OpenAPI Specification with API URL${RESET}"

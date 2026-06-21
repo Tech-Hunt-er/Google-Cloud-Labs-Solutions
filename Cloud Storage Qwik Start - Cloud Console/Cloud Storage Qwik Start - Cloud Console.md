@@ -7,7 +7,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Cloud%20Storage%20Qwik%20Start%20-%20Cloud%20Console/gsp073.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Cloud%20Storage%20Qwik%20Start%20-%20Cloud%20Console/gsp073.sh
 
 sudo chmod +x gsp073.sh
 
@@ -20,4 +20,4 @@ sudo chmod +x gsp073.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

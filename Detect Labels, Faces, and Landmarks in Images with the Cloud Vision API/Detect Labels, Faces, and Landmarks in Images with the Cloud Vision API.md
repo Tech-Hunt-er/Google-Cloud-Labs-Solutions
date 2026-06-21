@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Detect%20Labels%2C%20Faces%2C%20and%20Landmarks%20in%20Images%20with%20the%20Cloud%20Vision%20API/gsp037.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Detect%20Labels%2C%20Faces%2C%20and%20Landmarks%20in%20Images%20with%20the%20Cloud%20Vision%20API/gsp037.sh
 
 sudo chmod +x gsp037.sh
 
@@ -19,4 +19,4 @@ sudo chmod +x gsp037.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

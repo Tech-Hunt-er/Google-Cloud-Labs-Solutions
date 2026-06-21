@@ -8,9 +8,9 @@
 
 2. In the `General` tab, scroll down to the `Signature` section and click `Create New`.
 
-3. Give this signature `Tech Hunter` name, then click `Create`.
+3. Give this signature `Orbit of Ops` name, then click `Create`.
 
-4. In the Signature defaults section, use the dropdown menu under `For New Emails Use` and select `Tech Hunter`.
+4. In the Signature defaults section, use the dropdown menu under `For New Emails Use` and select `Orbit of Ops`.
 
 * Paste the following
 
@@ -96,7 +96,7 @@ Comments
 
 2. Select `App` > `Blank app`.
 
-3. For `App name`, type `Tech Hunter` to name your app.
+3. For `App name`, type `Orbit of Ops` to name your app.
 
 4. For `Category`, select `Education & Training` from the list.
 
@@ -109,4 +109,4 @@ Comments
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

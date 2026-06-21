@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Cloud%20SQL%20for%20PostgreSQL%20Qwik%20Start/gsp152.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Cloud%20SQL%20for%20PostgreSQL%20Qwik%20Start/gsp152.sh
 
 sudo chmod +x gsp152.sh
 
@@ -22,4 +22,4 @@ sudo chmod +x gsp152.sh
 #### *Well done!*
 
 
-# [Tech Hunter](https://www.youtube.com/@Tech Hunter)
+# [Orbit of Ops](https://www.youtube.com/@Orbit of Ops)

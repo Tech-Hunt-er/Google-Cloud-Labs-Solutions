@@ -7,7 +7,7 @@
 ### Run the following Commands in Terminal
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Introduction%20to%20Computer%20Vision%20with%20TensorFlow/gsp631.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Introduction%20to%20Computer%20Vision%20with%20TensorFlow/gsp631.sh
 
 sudo chmod +x gsp631.sh
 
@@ -21,4 +21,4 @@ sudo chmod +x gsp631.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

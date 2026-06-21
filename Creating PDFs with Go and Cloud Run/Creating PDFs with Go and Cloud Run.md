@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Creating%20PDFs%20with%20Go%20and%20Cloud%20Run/gsp762.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Creating%20PDFs%20with%20Go%20and%20Cloud%20Run/gsp762.sh
 
 sudo chmod +x gsp762.sh
 
@@ -22,4 +22,4 @@ sudo chmod +x gsp762.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

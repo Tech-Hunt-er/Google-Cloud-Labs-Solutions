@@ -5,7 +5,7 @@
 ### 🚀 **Execute the following commands in Cloud Shell:**
 
 ```bash
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Migrate%20Existing%20Prometheus%20Monitoring%20Workloads%20to%20Google%20Cloud/gsp1025.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Migrate%20Existing%20Prometheus%20Monitoring%20Workloads%20to%20Google%20Cloud/gsp1025.sh
 
 sudo chmod +x gsp1025.sh
 
@@ -19,4 +19,4 @@ sudo chmod +x gsp1025.sh
 #### *Your journey is just beginning—keep reaching for the stars! 🚀*  
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

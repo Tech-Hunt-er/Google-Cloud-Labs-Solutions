@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Google%20Kubernetes%20Engine%20Security%20Binary%20Authorization/gsp479.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Google%20Kubernetes%20Engine%20Security%20Binary%20Authorization/gsp479.sh
 
 sudo chmod +x gsp479.sh
 
@@ -22,4 +22,4 @@ sudo chmod +x gsp479.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

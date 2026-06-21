@@ -8,7 +8,7 @@ export ZONE_1=
 export ZONE_2=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Virtual%20Private%20Networks%20VPN/VPN.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Virtual%20Private%20Networks%20VPN/VPN.sh
 
 sudo chmod +x VPN.sh
 
@@ -21,4 +21,4 @@ sudo chmod +x VPN.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

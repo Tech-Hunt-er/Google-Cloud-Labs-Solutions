@@ -66,7 +66,7 @@ export REGION=$(gcloud compute project-info describe \
 cat > email-channel.json <<EOF_END
 {
   "type": "email",
-  "displayName": "techhunter",
+  "displayName": "orbitofops",
   "description": "Awesome",
   "labels": {
     "email_address": "$USER_EMAIL"

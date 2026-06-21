@@ -8,7 +8,7 @@
 export KEY=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Classify%20Text%20into%20Categories%20with%20the%20Natural%20Language%20API/gsp063.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Classify%20Text%20into%20Categories%20with%20the%20Natural%20Language%20API/gsp063.sh
 
 sudo chmod +x gsp063.sh
 
@@ -22,4 +22,4 @@ sudo chmod +x gsp063.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

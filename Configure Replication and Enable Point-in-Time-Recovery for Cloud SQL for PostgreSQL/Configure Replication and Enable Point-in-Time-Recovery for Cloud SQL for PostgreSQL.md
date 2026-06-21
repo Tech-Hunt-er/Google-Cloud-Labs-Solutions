@@ -47,7 +47,7 @@ SELECT COUNT(*) FROM distribution_centers;
 \q
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Configure%20Replication%20and%20Enable%20Point-in-Time-Recovery%20for%20Cloud%20SQL%20for%20PostgreSQL/gsp922.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Configure%20Replication%20and%20Enable%20Point-in-Time-Recovery%20for%20Cloud%20SQL%20for%20PostgreSQL/gsp922.sh
 
 sudo chmod +x *.sh
 
@@ -71,4 +71,4 @@ SELECT COUNT(*) FROM distribution_centers;
 Your hard work and determination paid off! 💻
 You've successfully completed the lab. **Way to go!** 🚀
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

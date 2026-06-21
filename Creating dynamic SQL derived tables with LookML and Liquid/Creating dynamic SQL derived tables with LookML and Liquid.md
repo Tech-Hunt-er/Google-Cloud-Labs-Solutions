@@ -227,4 +227,4 @@ view: user_facts {
 Your hard work and determination paid off! 💻  
 You've successfully completed the lab. Way to go! 🚀  
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

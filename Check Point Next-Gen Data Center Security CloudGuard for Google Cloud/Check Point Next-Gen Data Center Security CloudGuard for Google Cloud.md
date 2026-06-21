@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Check%20Point%20Next-Gen%20Data%20Center%20Security%20CloudGuard%20for%20Google%20Cloud/gsp818.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Check%20Point%20Next-Gen%20Data%20Center%20Security%20CloudGuard%20for%20Google%20Cloud/gsp818.sh
 
 sudo chmod +x gsp818.sh
 
@@ -22,4 +22,4 @@ sudo chmod +x gsp818.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

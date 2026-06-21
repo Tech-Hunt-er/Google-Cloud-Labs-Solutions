@@ -31,11 +31,11 @@ pip3 install --upgrade pip
 pip install -U pylint --user
 pip install -r requirements.txt
 
-wget https://raw.githubusercontent.com/Tech-Hunt-er/Labs-Solutions/refs/heads/main/Introduction%20to%20Computer%20Vision%20with%20TensorFlow/model.ipynb
+wget https://raw.githubusercontent.com/Orbit-of-Ops/Labs-Solutions/refs/heads/main/Introduction%20to%20Computer%20Vision%20with%20TensorFlow/model.ipynb
 
-wget https://raw.githubusercontent.com/Tech-Hunt-er/Labs-Solutions/refs/heads/main/Introduction%20to%20Computer%20Vision%20with%20TensorFlow/callback_model.ipynb
+wget https://raw.githubusercontent.com/Orbit-of-Ops/Labs-Solutions/refs/heads/main/Introduction%20to%20Computer%20Vision%20with%20TensorFlow/callback_model.ipynb
 
-wget https://raw.githubusercontent.com/Tech-Hunt-er/Labs-Solutions/refs/heads/main/Introduction%20to%20Computer%20Vision%20with%20TensorFlow/updated_model.ipynb
+wget https://raw.githubusercontent.com/Orbit-of-Ops/Labs-Solutions/refs/heads/main/Introduction%20to%20Computer%20Vision%20with%20TensorFlow/updated_model.ipynb
 
 rm gsp631.sh
 

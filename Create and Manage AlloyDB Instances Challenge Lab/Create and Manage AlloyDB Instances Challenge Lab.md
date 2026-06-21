@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Create%20and%20Manage%20AlloyDB%20Instances%20Challenge%20Lab/gsp395.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Create%20and%20Manage%20AlloyDB%20Instances%20Challenge%20Lab/gsp395.sh
 
 sudo chmod +x gsp395.sh
 
@@ -85,4 +85,4 @@ INSERT INTO departments VALUES (60, 'IT', 103, 1400);
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

@@ -5,7 +5,7 @@
 #### 1️⃣ Download and Execute the Script  
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Set%20Up%20Network%20and%20Application%20Load%20Balancers/gsp007.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Set%20Up%20Network%20and%20Application%20Load%20Balancers/gsp007.sh
 
 sudo chmod +x *.sh
 
@@ -20,4 +20,4 @@ sudo chmod +x *.sh
 
 #### 📢 **Join the GCP Learning Community:**  
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

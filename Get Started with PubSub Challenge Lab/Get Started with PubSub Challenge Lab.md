@@ -13,7 +13,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Get%20Started%20with%20PubSub%20Challenge%20Lab/form_1.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Get%20Started%20with%20PubSub%20Challenge%20Lab/form_1.sh
 
 sudo chmod +x form_1.sh
 
@@ -37,7 +37,7 @@ sudo chmod +x form_1.sh
 export LOCATION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Get%20Started%20with%20PubSub%20Challenge%20Lab/form_2.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Get%20Started%20with%20PubSub%20Challenge%20Lab/form_2.sh
 
 sudo chmod +x form_2.sh
 
@@ -60,7 +60,7 @@ sudo chmod +x form_2.sh
 export LOCATION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Get%20Started%20with%20PubSub%20Challenge%20Lab/form_3.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Get%20Started%20with%20PubSub%20Challenge%20Lab/form_3.sh
 
 sudo chmod +x form_3.sh
 
@@ -77,4 +77,4 @@ sudo chmod +x form_3.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

@@ -7,7 +7,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Introduction%20to%20SQL%20for%20BigQuery%20and%20Cloud%20SQL/gsp281.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Introduction%20to%20SQL%20for%20BigQuery%20and%20Cloud%20SQL/gsp281.sh
 
 sudo chmod +x gsp281.sh
 
@@ -21,4 +21,4 @@ sudo chmod +x gsp281.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

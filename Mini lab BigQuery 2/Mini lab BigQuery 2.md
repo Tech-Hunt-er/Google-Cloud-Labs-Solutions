@@ -5,7 +5,7 @@
 ### 🚀 Run the following commands in **Cloud Shell**:
 
 ```bash
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Mini%20lab%20BigQuery%202/shell.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Mini%20lab%20BigQuery%202/shell.sh
 
 sudo chmod +x shell.sh
 
@@ -19,4 +19,4 @@ sudo chmod +x shell.sh
 #### *Keep up the momentum—big things are on the horizon!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

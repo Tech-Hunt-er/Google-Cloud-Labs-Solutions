@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Create%20an%20Internal%20Load%20Balancer/gsp216.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Create%20an%20Internal%20Load%20Balancer/gsp216.sh
 
 sudo chmod +x *.sh
 
@@ -20,4 +20,4 @@ sudo chmod +x *.sh
 
 #### 🌐 **Stay Connected with the Community:**  
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

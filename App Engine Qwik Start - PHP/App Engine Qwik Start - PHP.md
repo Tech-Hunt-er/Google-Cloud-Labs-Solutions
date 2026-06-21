@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/App%20Engine%20Qwik%20Start%20-%20PHP/gsp069.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/App%20Engine%20Qwik%20Start%20-%20PHP/gsp069.sh
 
 sudo chmod +x gsp069.sh
 
@@ -19,4 +19,4 @@ sudo chmod +x gsp069.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

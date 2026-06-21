@@ -7,7 +7,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Deploy%2C%20Scale%2C%20and%20Update%20Your%20Website%20on%20Google%20Kubernetes%20Engine/gsp663.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Deploy%2C%20Scale%2C%20and%20Update%20Your%20Website%20on%20Google%20Kubernetes%20Engine/gsp663.sh
 
 sudo chmod +x gsp663.sh
 
@@ -21,4 +21,4 @@ sudo chmod +x gsp663.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

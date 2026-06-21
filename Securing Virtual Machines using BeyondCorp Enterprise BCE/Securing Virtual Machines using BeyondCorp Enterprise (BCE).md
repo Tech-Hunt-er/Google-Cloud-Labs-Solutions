@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Securing%20Virtual%20Machines%20using%20BeyondCorp%20Enterprise%20BCE/gsp1036.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Securing%20Virtual%20Machines%20using%20BeyondCorp%20Enterprise%20BCE/gsp1036.sh
 
 sudo chmod +x gsp1036.sh
 
@@ -22,4 +22,4 @@ sudo chmod +x gsp1036.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

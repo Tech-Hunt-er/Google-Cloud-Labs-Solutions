@@ -5,13 +5,13 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Deploying%20a%20Python%20Flask%20Web%20Application%20to%20App%20Engine%20Flexible/gsp023.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Deploying%20a%20Python%20Flask%20Web%20Application%20to%20App%20Engine%20Flexible/gsp023.sh
 
 sudo chmod +x gsp023.sh
 
 ./gsp023.sh
 ```
-* Download Image from [here](https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Deploying%20a%20Python%20Flask%20Web%20Application%20to%20App%20Engine%20Flexible/Sundar.jpg)
+* Download Image from [here](https://raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Deploying%20a%20Python%20Flask%20Web%20Application%20to%20App%20Engine%20Flexible/Sundar.jpg)
 
 ### Congratulations 🎉 for completing the Lab !
 
@@ -20,4 +20,4 @@ sudo chmod +x gsp023.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

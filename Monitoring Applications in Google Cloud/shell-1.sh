@@ -77,7 +77,7 @@ gcloud app create --region=$REGION
 
 gcloud app deploy --version=one --quiet
 
-gcloud compute instances create techhunter \
+gcloud compute instances create orbitofops \
     --zone=us-south1-b \
     --machine-type=e2-medium
 

@@ -8,7 +8,7 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Tag%20and%20Discover%20BigLake%20Data%20Challenge%20Lab/arc123.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Tag%20and%20Discover%20BigLake%20Data%20Challenge%20Lab/arc123.sh
 
 sudo chmod +x arc123.sh
 
@@ -22,4 +22,4 @@ sudo chmod +x arc123.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

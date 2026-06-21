@@ -9,7 +9,7 @@ export ZONE_1=
 export ZONE_2=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/VPC%20Networking%20Cloud%20HA-VPN/gsp619.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/VPC%20Networking%20Cloud%20HA-VPN/gsp619.sh
 
 sudo chmod +x gsp619.sh
 
@@ -23,4 +23,4 @@ sudo chmod +x gsp619.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

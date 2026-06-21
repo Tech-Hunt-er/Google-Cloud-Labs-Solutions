@@ -115,7 +115,7 @@ echo "${BLUE}${BOLD}Creating Email Notification Channel${RESET}"
 cat > email-channel.json <<EOF_END
 {
   "type": "email",
-  "displayName": "techhunter",
+  "displayName": "orbitofops",
   "description": "Awesome",
   "labels": {
     "email_address": "$USER_EMAIL"

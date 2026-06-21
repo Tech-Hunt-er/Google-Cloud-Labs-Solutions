@@ -13,7 +13,7 @@ export INTERVAL=
 export SERVICE_NAME=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Manage%20Kubernetes%20in%20Google%20Cloud%20Challenge%20Lab/gsp510.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Manage%20Kubernetes%20in%20Google%20Cloud%20Challenge%20Lab/gsp510.sh
 
 sudo chmod +x gsp510.sh
 
@@ -27,4 +27,4 @@ sudo chmod +x gsp510.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

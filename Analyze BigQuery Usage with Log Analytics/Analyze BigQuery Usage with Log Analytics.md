@@ -7,7 +7,7 @@
 * Go to [Logs Storage](https://console.cloud.google.com/logs/storage?project=)
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Analyze%20BigQuery%20Usage%20with%20Log%20Analytics/gsp1250.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Analyze%20BigQuery%20Usage%20with%20Log%20Analytics/gsp1250.sh
 
 sudo chmod +x *.sh
 
@@ -19,4 +19,4 @@ sudo chmod +x *.sh
 Your hard work and determination paid off! 💻  
 You've successfully completed the lab. **Way to go!** 🚀
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

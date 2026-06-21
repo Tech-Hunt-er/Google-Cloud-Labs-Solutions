@@ -35,7 +35,7 @@ git clone https://github.com/Deleplace/pet-theory.git
 
 cd pet-theory/lab03
 
-curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Labs-Solutions/refs/heads/main/Creating%20PDFs%20with%20Go%20and%20Cloud%20Run/server.go
+curl -LO https://raw.githubusercontent.com/Orbit-of-Ops/Labs-Solutions/refs/heads/main/Creating%20PDFs%20with%20Go%20and%20Cloud%20Run/server.go
 
 go build -o server
 

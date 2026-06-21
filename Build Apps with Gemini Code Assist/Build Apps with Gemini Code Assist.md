@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20Apps%20with%20Gemini%20Code%20Assist/shell.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20Apps%20with%20Gemini%20Code%20Assist/shell.sh
 
 sudo chmod +x *.sh
 
@@ -15,7 +15,7 @@ sudo chmod +x *.sh
 ### ⚙️ Execute the Following Commands in Workstations Terminal
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20Apps%20with%20Gemini%20Code%20Assist/code-assist.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20Apps%20with%20Gemini%20Code%20Assist/code-assist.sh
 
 sudo chmod +x *.sh
 
@@ -28,4 +28,4 @@ sudo chmod +x *.sh
 Your hard work and determination paid off! 💻  
 You've successfully completed the lab. **Way to go!** 🚀
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

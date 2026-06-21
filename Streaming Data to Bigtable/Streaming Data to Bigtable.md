@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Streaming%20Data%20to%20Bigtable/gsp1055-1.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Streaming%20Data%20to%20Bigtable/gsp1055-1.sh
 
 sudo chmod +x gsp1055-1.sh
 
@@ -18,7 +18,7 @@ sudo chmod +x gsp1055-1.sh
 ### Run the following Commands in `2nd` CloudShell tab
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Streaming%20Data%20to%20Bigtable/gsp1055-2.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Streaming%20Data%20to%20Bigtable/gsp1055-2.sh
 
 sudo chmod +x gsp1055-2.sh
 
@@ -37,4 +37,4 @@ gcloud bigtable instances delete sandiego --quiet
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

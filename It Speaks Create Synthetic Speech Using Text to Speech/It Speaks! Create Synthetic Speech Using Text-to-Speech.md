@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/It%20Speaks%20Create%20Synthetic%20Speech%20Using%20Text%20to%20Speech/gsp222.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/It%20Speaks%20Create%20Synthetic%20Speech%20Using%20Text%20to%20Speech/gsp222.sh
 
 sudo chmod +x gsp222.sh
 
@@ -19,4 +19,4 @@ sudo chmod +x gsp222.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

@@ -8,7 +8,7 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Connect%20an%20App%20to%20a%20Cloud%20SQL%20for%20PostgreSQL%20Instance/gsp919.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Connect%20an%20App%20to%20a%20Cloud%20SQL%20for%20PostgreSQL%20Instance/gsp919.sh
 
 sudo chmod +x gsp919.sh
 
@@ -27,4 +27,4 @@ supersecret!
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

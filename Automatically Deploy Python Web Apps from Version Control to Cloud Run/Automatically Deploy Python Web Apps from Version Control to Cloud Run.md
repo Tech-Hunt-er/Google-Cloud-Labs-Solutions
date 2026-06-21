@@ -15,7 +15,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Automatically%20Deploy%20Python%20Web%20Apps%20from%20Version%20Control%20to%20Cloud%20Run/gsp1204-1.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Automatically%20Deploy%20Python%20Web%20Apps%20from%20Version%20Control%20to%20Cloud%20Run/gsp1204-1.sh
 
 sudo chmod +x gsp1204-1.sh
 
@@ -27,7 +27,7 @@ sudo chmod +x gsp1204-1.sh
 ### Run again the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Automatically%20Deploy%20Python%20Web%20Apps%20from%20Version%20Control%20to%20Cloud%20Run/gsp1204-2.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Automatically%20Deploy%20Python%20Web%20Apps%20from%20Version%20Control%20to%20Cloud%20Run/gsp1204-2.sh
 
 sudo chmod +x gsp1204-2.sh
 
@@ -41,4 +41,4 @@ sudo chmod +x gsp1204-2.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

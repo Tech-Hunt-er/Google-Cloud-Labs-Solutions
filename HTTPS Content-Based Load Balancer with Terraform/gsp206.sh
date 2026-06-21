@@ -65,8 +65,8 @@ rm -rf variables.tf
 
 # Step 5: Download the Terraform files
 echo "${BLUE}${BOLD}Downloading Terraform files...${RESET}"
-wget https://raw.githubusercontent.com/Tech-Hunt-er/Labs-Solutions/main/HTTPS%20Content-Based%20Load%20Balancer%20with%20Terraform/variables.tf
-wget https://raw.githubusercontent.com/Tech-Hunt-er/Labs-Solutions/main/HTTPS%20Content-Based%20Load%20Balancer%20with%20Terraform/main.tf
+wget https://raw.githubusercontent.com/Orbit-of-Ops/Labs-Solutions/main/HTTPS%20Content-Based%20Load%20Balancer%20with%20Terraform/variables.tf
+wget https://raw.githubusercontent.com/Orbit-of-Ops/Labs-Solutions/main/HTTPS%20Content-Based%20Load%20Balancer%20with%20Terraform/main.tf
 
 # Step 6: Update the Terraform files with the region variables
 echo "${MAGENTA}${BOLD}Updating Terraform files with region variables...${RESET}"

@@ -5,7 +5,7 @@
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Getting%20Started%20with%20BigQuery%20GIS%20for%20Data%20Analysts/gsp866.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Getting%20Started%20with%20BigQuery%20GIS%20for%20Data%20Analysts/gsp866.sh
 
 sudo chmod +x *.sh
 
@@ -29,4 +29,4 @@ WHERE num_bikes_available > 30
 Your hard work and determination paid off! 💻
 You've successfully completed the lab. **Way to go!** 🚀
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

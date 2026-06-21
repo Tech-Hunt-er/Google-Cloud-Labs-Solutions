@@ -28,7 +28,7 @@ echo "${BG_MAGENTA}${BOLD}Starting Execution${RESET}"
 cat > email-channel.json <<EOF_END
 {
   "type": "email",
-  "displayName": "techhunter",
+  "displayName": "orbitofops",
   "description": "Awesome",
   "labels": {
     "email_address": "$USER_EMAIL"

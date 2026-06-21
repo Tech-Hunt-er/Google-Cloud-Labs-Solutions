@@ -5,7 +5,7 @@
 ### Execute the following Commands in CloudShell
 
 ```
-curl -LO https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Loading%20Your%20Own%20Data%20into%20BigQuery/gsp865.sh
+curl -LO https://raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Loading%20Your%20Own%20Data%20into%20BigQuery/gsp865.sh
 
 sudo chmod +x *.sh
 
@@ -21,4 +21,4 @@ Keep up the fantastic work — you're on the right path! 🚀
 
 👉 Don't forget to join our growing community:  
 
-### <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+### <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

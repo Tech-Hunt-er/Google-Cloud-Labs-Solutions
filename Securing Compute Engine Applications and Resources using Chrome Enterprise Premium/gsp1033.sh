@@ -342,7 +342,7 @@ function random_question() {
         "Have you subscribed to the YouTube channel yet? [Y/N]"
         "Did you hit the subscribe button on our YouTube channel? [Y/N]"
         "Are you part of our growing community on YouTube? [Y/N]"
-        "Did you join the fun by subscribing to Tech Hunter? [Y/N]"
+        "Did you join the fun by subscribing to Orbit of Ops? [Y/N]"
         "Have you clicked the subscribe button for new tutorials? [Y/N]"
         "Are you a subscriber to our YouTube channel? [Y/N]"
         "Want to stay updated with our latest content? Subscribe now! [Y/N]"
@@ -398,7 +398,7 @@ case "${CHOICE^^}" in
         ;;
     N)
         random_subscribe_message
-        echo -e "${BOLD}${CYAN}https://www.youtube.com/@techhunter${RESET}"
+        echo -e "${BOLD}${CYAN}https://www.youtube.com/@orbitofops${RESET}"
         ;;
     *)
         echo -e "${BOLD}${RED}Invalid choice! Please enter Y or N.${RESET}"

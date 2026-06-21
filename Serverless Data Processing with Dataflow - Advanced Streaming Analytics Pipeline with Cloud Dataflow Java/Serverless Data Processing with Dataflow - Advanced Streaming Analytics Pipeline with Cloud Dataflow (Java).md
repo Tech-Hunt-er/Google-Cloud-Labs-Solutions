@@ -8,8 +8,8 @@
 export REGION=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Serverless%20Data%20Processing%20with%20Dataflow%20-%20Advanced%20Streaming%20Analytics%20Pipeline%20with%20Cloud%20Dataflow%20Java/techhunter.sh
-source techhunter.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Serverless%20Data%20Processing%20with%20Dataflow%20-%20Advanced%20Streaming%20Analytics%20Pipeline%20with%20Cloud%20Dataflow%20Java/orbitofops.sh
+source orbitofops.sh
 ```
 
 * If you do not get a message, then run the below command until you get a message.
@@ -25,4 +25,4 @@ gsutil cat $BUCKET/*/*
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

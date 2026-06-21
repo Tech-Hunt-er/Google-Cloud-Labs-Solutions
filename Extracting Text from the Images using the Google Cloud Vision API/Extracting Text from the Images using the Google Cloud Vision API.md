@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Extracting%20Text%20from%20the%20Images%20using%20the%20Google%20Cloud%20Vision%20API/shell.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Extracting%20Text%20from%20the%20Images%20using%20the%20Google%20Cloud%20Vision%20API/shell.sh
 
 sudo chmod +x shell.sh
 
@@ -19,4 +19,4 @@ sudo chmod +x shell.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

@@ -9,7 +9,7 @@
 ```
 rm vertex-challenge-lab-v1.0.0.ipynb
 pip3 install -U -r requirements.txt --user
-wget https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20and%20Deploy%20Machine%20Learning%20Solutions%20with%20Vertex%20AI%20Challenge%20Lab/vertex-challenge-lab-v1.0.0.ipynb
+wget https://raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Build%20and%20Deploy%20Machine%20Learning%20Solutions%20with%20Vertex%20AI%20Challenge%20Lab/vertex-challenge-lab-v1.0.0.ipynb
 ```
 3. In the **File Browser** on the left, click on the **vertex-challenge-lab-v1.0.0.ipynb** file.
 
@@ -24,4 +24,4 @@ wget https://raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/
 #### *Outstanding work! Your commitment has made this accomplishment possible.*  
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter 
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops 

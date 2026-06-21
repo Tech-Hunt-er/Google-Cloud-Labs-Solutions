@@ -52,7 +52,7 @@ sleep 60
 cat > email-channel.json <<EOF_END
 {
   "type": "email",
-  "displayName": "techhunter",
+  "displayName": "orbitofops",
   "description": "Awesome",
   "labels": {
     "email_address": "$USER_EMAIL"
@@ -72,7 +72,7 @@ email_channel_id=$(echo "$email_channel_info" | grep -oP 'name: \K[^ ]+' | head 
 
 cat > stopped-vm-alert-policy.json <<EOF_END
 {
-  "displayName": "Tech Hunter",
+  "displayName": "Orbit of Ops",
   "userLabels": {},
   "conditions": [
     {

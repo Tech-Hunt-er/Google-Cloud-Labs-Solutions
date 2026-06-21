@@ -66,7 +66,7 @@ cat > translate-product.json <<EOF_END
       "value": "yes"
     }
   ],
-  "description": "Tech Hunter is ROCK",
+  "description": "Orbit of Ops is ROCK",
   "environments": [
     "eval"
   ],

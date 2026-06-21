@@ -99,7 +99,7 @@ gcloud logging metrics create $METRIC \
 cat > email-channel.json <<EOF_END
 {
   "type": "email",
-  "displayName": "techhunter",
+  "displayName": "orbitofops",
   "description": "Awesome",
   "labels": {
     "email_address": "$USER_EMAIL"
@@ -112,9 +112,9 @@ gcloud beta monitoring channels create --channel-content-from-file="email-channe
 email_channel_info=$(gcloud beta monitoring channels list)
 email_channel_id=$(echo "$email_channel_info" | grep -oP 'name: \K[^ ]+' | head -n 1)
 
-cat > techhunter.json <<EOF_END
+cat > orbitofops.json <<EOF_END
 {
-  "displayName": "techhunter",
+  "displayName": "orbitofops",
   "userLabels": {},
   "conditions": [
     {
@@ -152,7 +152,7 @@ cat > techhunter.json <<EOF_END
 EOF_END
 
 # Create the alert policy
-gcloud alpha monitoring policies create --policy-from-file=techhunter.json
+gcloud alpha monitoring policies create --policy-from-file=orbitofops.json
 
 echo "${CYAN}${BOLD}Click here: "${RESET}""${BLUE}${BOLD}""https://console.cloud.google.com/monitoring/dashboards?project=$DEVSHELL_PROJECT_ID"""${RESET}"
 

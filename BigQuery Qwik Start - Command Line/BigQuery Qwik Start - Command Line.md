@@ -4,7 +4,7 @@
 
 ### Run the following Commands in CloudShell
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/BigQuery%20Qwik%20Start%20-%20Command%20Line/gsp071.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/BigQuery%20Qwik%20Start%20-%20Command%20Line/gsp071.sh
 
 sudo chmod +x gsp071.sh
 
@@ -18,4 +18,4 @@ sudo chmod +x gsp071.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

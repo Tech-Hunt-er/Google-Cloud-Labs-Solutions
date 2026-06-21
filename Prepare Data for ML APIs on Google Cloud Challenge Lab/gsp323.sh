@@ -18,7 +18,7 @@ clear
 
 # Welcome message
 echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}          SUBSCRIBE Tech Hunter- INITIATING EXECUTION...          ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}          SUBSCRIBE Orbit of Ops- INITIATING EXECUTION...          ${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
 echo
 

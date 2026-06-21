@@ -69,8 +69,8 @@ $PROJECT_NUMBER-compute@developer.gserviceaccount.com \
 
 # Step 4: Configure Git user details
 echo "${BOLD}${YELLOW}Setting up Git configuration...${RESET}"
-git config --global user.email "techhunter@gmail.com"
-git config --global user.name "techhunter"
+git config --global user.email "orbitofops@gmail.com"
+git config --global user.name "orbitofops"
 
 # Step 5: Clone the repository
 echo "${BOLD}${MAGENTA}Cloning the software-delivery-workshop repository...${RESET}"

@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Securing%20Virtual%20Machines%20using%20Chrome%20Enterprise%20Premium/gsp1036.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Securing%20Virtual%20Machines%20using%20Chrome%20Enterprise%20Premium/gsp1036.sh
 
 sudo chmod +x gsp1036.sh
 
@@ -19,4 +19,4 @@ sudo chmod +x gsp1036.sh
 #### *Keep striving for greatness!*  
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

@@ -27,7 +27,7 @@ export PROJECT_ID=$(gcloud info --format='value(config.project)')
 gsutil mb -l us gs://$DEVSHELL_PROJECT_ID
 
 cat > sample.txt <<EOF_END
-Awesome Lab BY Tech Hunter
+Awesome Lab BY Orbit of Ops
 EOF_END
 
 gsutil cp sample.txt gs://$DEVSHELL_PROJECT_ID

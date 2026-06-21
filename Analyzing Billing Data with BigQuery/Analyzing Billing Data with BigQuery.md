@@ -5,7 +5,7 @@
 ### Run the following Commands in CloudShell
 
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Analyzing%20Billing%20Data%20with%20BigQuery/gsp621.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Analyzing%20Billing%20Data%20with%20BigQuery/gsp621.sh
 
 sudo chmod +x gsp621.sh
 
@@ -28,4 +28,4 @@ SELECT CONCAT(service.description, ' : ',sku.description) as Line_Item, Count(*)
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

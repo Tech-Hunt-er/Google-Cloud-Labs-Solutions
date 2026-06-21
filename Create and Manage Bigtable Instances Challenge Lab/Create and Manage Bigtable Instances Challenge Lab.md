@@ -10,7 +10,7 @@ export ZONE=
 export ZONE2=
 ```
 ```
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/main/Create%20and%20Manage%20Bigtable%20Instances%20Challenge%20Lab/gsp380.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Create%20and%20Manage%20Bigtable%20Instances%20Challenge%20Lab/gsp380.sh
 
 sudo chmod +x gsp380.sh
 
@@ -26,4 +26,4 @@ sudo chmod +x gsp380.sh
 #### *Well done!*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops

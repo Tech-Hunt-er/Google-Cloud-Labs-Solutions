@@ -5,7 +5,7 @@
 ### 🚀 **Execute the following commands in Cloud Shell:**
 
 ```bash
-curl -LO raw.githubusercontent.com/Tech-Hunt-er/Google-Cloud-Labs-Solutions/refs/heads/main/Publishing%20APIs%20with%20Apigee%20X/gsp843.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Publishing%20APIs%20with%20Apigee%20X/gsp843.sh
 
 sudo chmod +x gsp843.sh
 
@@ -52,4 +52,4 @@ https://storage.googleapis.com/cloud-training/api-dev-quest/dev-portal/piggy-ban
 #### *Keep pushing forward—great things await! 🚀*
 
 
-# <img src="../logo.png" alt="Tech Hunter Logo" width="45" align="center"> Tech Hunter
+# <img src="../logo.png" alt="Orbit of Ops Logo" width="45" align="center"> Orbit of Ops
