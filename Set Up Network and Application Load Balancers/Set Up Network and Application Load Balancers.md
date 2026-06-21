@@ -1,4 +1,4 @@
-# Set Up Network and Application Load Balancers |[GSP155] ||
+# Set Up Application Load Balancers |[GSP155] ||
 
 ## 🗝️ Solution [here](https://youtu.be/AkeamF3rtaE)
 
