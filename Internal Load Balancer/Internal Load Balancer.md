@@ -1,6 +1,6 @@
 # Internal Load Balancer || [GSP041](https://www.cloudskillsboost.google/focuses/1910?parent=catalog) ||
 
-## Solution [here](https://youtu.be/refjyguVMYQ)
+## Solution [here](https://youtu.be/V3Zzb_QQ7Po)
 
 ### Run the following Commands in CloudShell
 
