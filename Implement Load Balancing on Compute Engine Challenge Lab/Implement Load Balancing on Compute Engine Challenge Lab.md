@@ -4,12 +4,7 @@
 
 ### Run the following Commands in CloudShell
 
-### Assign Veriables
-```
-export INSTANCE=
-export FIREWALL=
-export ZONE=
-```
+
 ```
 curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Implement%20Load%20Balancing%20on%20Compute%20Engine%20Challenge%20Lab/gsp313.sh
 
