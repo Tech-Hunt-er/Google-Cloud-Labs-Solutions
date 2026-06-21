@@ -1,6 +1,6 @@
 # Set Up Application Load Balancers |[GSP155] ||
 
-## 🗝️ Solution [here](https://youtu.be/AkeamF3rtaE)
+## 🗝️ Solution [here](https://youtu.be/aRMs0IiY2dY)
 
 #### 1️⃣ Download and Execute the Script  
 
