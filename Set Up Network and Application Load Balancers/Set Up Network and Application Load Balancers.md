@@ -1,4 +1,4 @@
-# Set Up Network and Application Load Balancers || [GSP007](https://www.cloudskillsboost.google/focuses/12007?parent=catalog) ||
+# Set Up Network and Application Load Balancers |[GSP155] | [GSP007](https://www.cloudskillsboost.google/focuses/12007?parent=catalog) ||
 
 ## 🗝️ Solution [here](https://youtu.be/AkeamF3rtaE)
 
