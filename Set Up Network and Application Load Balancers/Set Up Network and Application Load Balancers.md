@@ -1,15 +1,15 @@
-# Set Up Network and Application Load Balancers || [GSP007](https://www.cloudskillsboost.google/focuses/12007?parent=catalog) ||
+# Set Up Application Load Balancers |[GSP155] ||
 
-## 🗝️ Solution [here](https://youtu.be/AkeamF3rtaE)
+## 🗝️ Solution [here](https://youtu.be/aRMs0IiY2dY)
 
 #### 1️⃣ Download and Execute the Script  
 
 ```
-curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/refs/heads/main/Set%20Up%20Network%20and%20Application%20Load%20Balancers/gsp007.sh
+curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Set%20Up%20Network%20and%20Application%20Load%20Balancers/GSP155.sh
 
 sudo chmod +x *.sh
 
-./gsp007.sh
+./GSP155.sh
 ```
 
 ### 🎉 You Did It! Lab Successfully Completed
