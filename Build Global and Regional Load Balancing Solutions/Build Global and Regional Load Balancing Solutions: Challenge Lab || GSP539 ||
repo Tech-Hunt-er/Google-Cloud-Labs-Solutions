@@ -1,4 +1,4 @@
-# Creating a Persistent Disk || [GSP004](https://www.cloudskillsboost.google/focuses/1753?parent=catalog) ||
+# Creating a Persistent Disk || [GSP539](https://www.cloudskillsboost.google/focuses/1753?parent=catalog) ||
 
 ## Solution [here](https://youtu.be/oUnQLeuEDs8)
 
@@ -8,11 +8,11 @@
 export ZONE=
 ```
 ```
-curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Creating%20a%20Persistent%20Disk/gsp004.sh
+curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Creating%20a%20Persistent%20Disk/GSP539.sh
 
-sudo chmod +x gsp004.sh
+sudo chmod +x GSP539.sh
 
-./gsp004.sh
+./GSP539.sh
 ```
 
 ### Congratulations 🎉 for completing the Lab !
