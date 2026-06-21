@@ -1,6 +1,6 @@
 # Implement Load Balancing on Compute Engine: Challenge Lab || [GSP313](https://www.cloudskillsboost.google/focuses/10258?parent=catalog) ||
 
-## Solution [here](https://youtu.be/Mdt29aRVa6s)
+## Solution [here](https://youtu.be/xr6HtbKmfcs)
 
 ### Run the following Commands in CloudShell
 
