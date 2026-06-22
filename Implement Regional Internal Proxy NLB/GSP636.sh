@@ -245,17 +245,17 @@ read -p "${YELLOW_TEXT}Press Enter to continue...${RESET_FORMAT}"
 
 # ─── TASK 5: CLIENT VM ───────────────────────────────────────────────
 # Orbit of Ops: client VM must be inside lb-network to reach internal LB VIP
-echo "${ORANGE_TEXT}${BOLD_TEXT}[TASK 5] Creating client VM... | Orbit of Ops${RESET_FORMAT}"
+echo "${ORANGE_TEXT}${BOLD_TEXT}[TASK 5] Creating client VM in ${ZONE_C} as per lab instructions... | Orbit of Ops${RESET_FORMAT}"
 
 gcloud compute instances create client-vm \
-  --zone=${ZONE_A} \
+  --zone=${ZONE_C} \
   --network=lb-network \
   --subnet=backend-subnet \
   --tags=allow-ssh \
   --description="Orbit of Ops - internal client VM to test GSP636 NLB" \
   --quiet
 
-echo "${GREEN_TEXT}  ✔ client-vm created in ${ZONE_A}${RESET_FORMAT}"
+echo "${GREEN_TEXT}  ✔ client-vm created in ${ZONE_C}${RESET_FORMAT}"
 echo ""
 
 # ─── WAIT FOR BACKENDS ───────────────────────────────────────────────
