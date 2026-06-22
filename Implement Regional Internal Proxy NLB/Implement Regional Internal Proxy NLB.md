@@ -1,6 +1,6 @@
 # Implement Regional Internal Proxy NLB || [GSP636](https://www.cloudskillsboost.google/focuses/1753?parent=catalog) ||
 
-## Solution [here](https://youtu.be/oUnQLeuEDs8)
+## Solution [here](https://youtu.be/muQ8PrH-J4s)
 
 ### Run the following Commands in CloudShell
 
