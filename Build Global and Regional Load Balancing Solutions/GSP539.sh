@@ -1,74 +1,53 @@
+#!/bin/bash
+
+# Define color variables
+BLACK_TEXT=$'\033[0;90m'
+RED_TEXT=$'\033[0;91m'
+GREEN_TEXT=$'\033[0;92m'
+YELLOW_TEXT=$'\033[0;93m'
+BLUE_TEXT=$'\033[0;94m'
+MAGENTA_TEXT=$'\033[0;95m'
+CYAN_TEXT=$'\033[0;96m'
+WHITE_TEXT=$'\033[0;97m'
+ORANGE_TEXT=$'\033[38;5;208m'     
+
+# Define text formatting variables
+BOLD_TEXT=$'\033[1m'
+UNDERLINE_TEXT=$'\033[4m'
+RESET_FORMAT=$'\033[0m'
+
 clear
 
-#!/bin/bash
-# Define color variables
-BLACK=`tput setaf 0`
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
+# Orbit of Ops Welcome message 
+echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}              WELCOME TO THE ORBIT OF OPS GUIDE                   ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}           GSP539: Global and Regional Load Balancing             ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
+echo
 
-BG_GREEN=`tput setab 2`
-BG_BLACK=`tput setab 0`
-
-BOLD=`tput bold`
-RESET=`tput sgr0`
-
-#----------------------------------------------------START--------------------------------------------------#
-
-echo "${CYAN}${BOLD}======================================================================${RESET}"
-echo "${CYAN}${BOLD}                     🚀  ORBIT OF OPS  🚀                            ${RESET}"
-echo "${CYAN}${BOLD}======================================================================${RESET}"
-echo "${WHITE}${BOLD} Challenge Lab: ${YELLOW}GSP539${RESET}"
-echo "${WHITE}${BOLD} Status:        ${YELLOW}Executing Full Fresh Session Deployment${RESET}"
-echo "${CYAN}${BOLD}----------------------------------------------------------------------${RESET}"
-echo ""
-
-# Region Input Prompts
-echo "${YELLOW}${BOLD}Please check your Qwiklabs dashboard for your assigned regions.${RESET}"
-read -p "${WHITE}${BOLD}Enter REGION_A (e.g., us-east1): ${RESET}" REGION_A
-read -p "${WHITE}${BOLD}Enter REGION_B (e.g., us-west1): ${RESET}" REGION_B
+# Variable Collection
+read -p "${YELLOW_TEXT}${BOLD_TEXT}Enter REGION_A (e.g., us-central1): ${RESET_FORMAT}" REGION_A
+read -p "${YELLOW_TEXT}${BOLD_TEXT}Enter REGION_B (e.g., us-east4): ${RESET_FORMAT}" REGION_B
 
 echo "export REGION_A=$REGION_A" >> ~/.bashrc
 echo "export REGION_B=$REGION_B" >> ~/.bashrc
 source ~/.bashrc
 
-echo ""
-echo "${YELLOW}Resolving Zones and Project ID...${RESET}"
-export PROJECT_ID=$(gcloud config get-value project)
-export ZONE_A=$(gcloud compute zones list --filter="region:$REGION_A" --format="value(name)" | head -n 1)
-export ZONE_B=$(gcloud compute zones list --filter="region:$REGION_B" --format="value(name)" | head -n 1)
+echo -e "\n${CYAN_TEXT}=======================================================${RESET_FORMAT}"
+echo -e "${CYAN_TEXT} TASK 1: REGIONAL INTERNAL PROXY NLB                   ${RESET_FORMAT}"
+echo -e "${CYAN_TEXT}=======================================================${RESET_FORMAT}"
 
-echo "${GREEN}${BOLD}✔ Project ID:${RESET} ${WHITE}$PROJECT_ID${RESET}"
-echo "${GREEN}${BOLD}✔ Region A Linked:${RESET} ${WHITE}$REGION_A ($ZONE_A)${RESET}"
-echo "${GREEN}${BOLD}✔ Region B Linked:${RESET} ${WHITE}$REGION_B ($ZONE_B)${RESET}"
-echo "${CYAN}${BOLD}----------------------------------------------------------------------${RESET}"
-echo ""
-
-# Ensure SSH keys exist for the validation steps
-mkdir -p ~/.ssh
-ssh-keygen -t rsa -f ~/.ssh/google_compute_engine -N "" -q <<< y >/dev/null 2>&1 || true
-
-# =========================================================================================
-# TASK 1: Regional Internal Proxy NLB
-# =========================================================================================
-echo "${MAGENTA}${BOLD}[1/5] ORBIT OF OPS 🚀 | Deploying Internal Proxy NLB...${RESET}"
-
-echo "${WHITE}Creating Internal Regional MIG (mig-proxy-internal)...${RESET}"
-# Using explicit URI path to bypass gcloud regional template bugs
+echo "${ORANGE_TEXT}Creating Regional MIG for Internal Proxy...${RESET_FORMAT}"
 gcloud compute instance-groups managed create mig-proxy-internal \
     --region=$REGION_B \
-    --template=projects/$PROJECT_ID/regions/$REGION_B/instanceTemplates/template-proxy-internal \
+    --template=template-proxy-internal \
     --size=1
-    
+
 gcloud compute instance-groups managed set-named-ports mig-proxy-internal \
     --region=$REGION_B \
     --named-ports=tcp80:80
 
-echo "${WHITE}Configuring Internal Firewall Rules...${RESET}"
+echo "${ORANGE_TEXT}Creating Firewall Rules...${RESET_FORMAT}"
 gcloud compute firewall-rules create fw-allow-hc-proxy-internal \
   --network=lb-network \
   --action=ALLOW \
@@ -85,19 +64,18 @@ gcloud compute firewall-rules create fw-allow-proxy-subnet-internal \
   --target-tags=tag-proxy-internal \
   --rules=tcp:80
 
-echo "${WHITE}Reserving Internal VIP Address...${RESET}"
-# Using strictly hardcoded subnet and singular --address-type
-gcloud compute addresses create ip-internal-proxy \
-    --region=$REGION_B \
-    --subnet=lb-backend-subnet-region-b \
-    --address-type=INTERNAL \
-    --purpose=SHARED_LOADBALANCER_VIP
-
-echo "${WHITE}Configuring Regional Backend & Target TCP Proxy...${RESET}"
+echo "${ORANGE_TEXT}Creating Health Check...${RESET_FORMAT}"
 gcloud compute health-checks create tcp hc-internal-proxy \
     --region=$REGION_B \
     --port=80
 
+echo "${ORANGE_TEXT}Reserving Internal Static IP...${RESET_FORMAT}"
+gcloud compute addresses create ip-internal-proxy \
+    --region=$REGION_B \
+    --subnet=lb-backend-subnet-region-b \
+    --purpose=SHARED_LOADBALANCER_VIP
+
+echo "${ORANGE_TEXT}Creating Backend Service...${RESET_FORMAT}"
 gcloud compute backend-services create internal-proxy-backend \
     --load-balancing-scheme=INTERNAL_MANAGED \
     --protocol=TCP \
@@ -105,14 +83,16 @@ gcloud compute backend-services create internal-proxy-backend \
     --health-checks=hc-internal-proxy \
     --health-checks-region=$REGION_B
 
+echo "${ORANGE_TEXT}Attaching MIG to Backend Service (Region fixed)...${RESET_FORMAT}"
 gcloud compute backend-services add-backend internal-proxy-backend \
     --instance-group=mig-proxy-internal \
     --instance-group-region=$REGION_B \
     --region=$REGION_B
 
+echo "${ORANGE_TEXT}Configuring Internal Frontend (Target Proxy & Forwarding Rule)...${RESET_FORMAT}"
 gcloud compute target-tcp-proxies create target-proxy-internal \
-    --backend-service=internal-proxy-backend \
-    --region=$REGION_B
+    --region=$REGION_B \
+    --backend-service=internal-proxy-backend
 
 gcloud compute forwarding-rules create rule-internal-proxy \
     --region=$REGION_B \
@@ -121,31 +101,42 @@ gcloud compute forwarding-rules create rule-internal-proxy \
     --subnet=lb-backend-subnet-region-b \
     --address=ip-internal-proxy \
     --target-tcp-proxy=target-proxy-internal \
-    --target-tcp-proxy-region=$REGION_B \
     --ports=110
 
-echo "${WHITE}Spinning up Client VM for validation...${RESET}"
+echo "${ORANGE_TEXT}Creating Client VM for testing...${RESET_FORMAT}"
 gcloud compute instances create vm-client-internal \
-   --zone=$ZONE_B \
+   --zone=${REGION_B}-b \
    --machine-type=e2-micro \
    --network=lb-network \
    --subnet=lb-backend-subnet-region-b \
    --tags=allow-ssh
-echo ""
 
-# =========================================================================================
-# TASK 2: Global External ALB
-# =========================================================================================
-echo "${BLUE}${BOLD}[2/5] ORBIT OF OPS 🚀 | Deploying Global External ALB...${RESET}"
 
-echo "${WHITE}Creating Global MIG A and MIG B...${RESET}"
-gcloud compute instance-groups managed create mig-alb-api-a --template=template-alb-api --size=1 --region=$REGION_A
-gcloud compute instance-groups managed set-named-ports mig-alb-api-a --named-ports=http80:80 --region=$REGION_A
+echo -e "\n${CYAN_TEXT}=======================================================${RESET_FORMAT}"
+echo -e "${CYAN_TEXT} TASK 2: GLOBAL EXTERNAL APPLICATION LOAD BALANCER     ${RESET_FORMAT}"
+echo -e "${CYAN_TEXT}=======================================================${RESET_FORMAT}"
 
-gcloud compute instance-groups managed create mig-alb-api-b --template=template-alb-api --size=1 --region=$REGION_B
-gcloud compute instance-groups managed set-named-ports mig-alb-api-b --named-ports=http80:80 --region=$REGION_B
+echo -e "${ORANGE_TEXT}Creating MIG A...${RESET_FORMAT}"
+gcloud compute instance-groups managed create mig-alb-api-a \
+    --template=template-alb-api \
+    --size=1 \
+    --region=$REGION_A
 
-echo "${WHITE}Creating Global ALB Firewall & Health Checks...${RESET}"
+gcloud compute instance-groups managed set-named-ports mig-alb-api-a \
+    --named-ports=http80:80 \
+    --region=$REGION_A
+
+echo -e "${ORANGE_TEXT}Creating MIG B...${RESET_FORMAT}"
+gcloud compute instance-groups managed create mig-alb-api-b \
+    --template=template-alb-api \
+    --size=1 \
+    --region=$REGION_B
+
+gcloud compute instance-groups managed set-named-ports mig-alb-api-b \
+    --named-ports=http80:80 \
+    --region=$REGION_B
+
+echo -e "${ORANGE_TEXT}Creating Global Firewall Rule...${RESET_FORMAT}"
 gcloud compute firewall-rules create fw-allow-health-check-and-proxy \
     --network=default \
     --direction=INGRESS \
@@ -154,15 +145,19 @@ gcloud compute firewall-rules create fw-allow-health-check-and-proxy \
     --source-ranges=130.211.0.0/22,35.191.0.0/16 \
     --target-tags=tag-alb-api
 
-gcloud compute health-checks create http http-check-alb --global --port=80
+echo -e "${ORANGE_TEXT}Creating Global Health Check...${RESET_FORMAT}"
+gcloud compute health-checks create http http-check-alb \
+    --global \
+    --port=80
 
-echo "${WHITE}Mapping Global Backend Services (Rate mode active)...${RESET}"
+echo -e "${ORANGE_TEXT}Creating Global Backend Service...${RESET_FORMAT}"
 gcloud compute backend-services create service-alb-global \
     --global \
     --protocol=HTTP \
     --health-checks=http-check-alb \
     --port-name=http80
 
+echo -e "${ORANGE_TEXT}Adding Backends with Rate Limiting...${RESET_FORMAT}"
 gcloud compute backend-services add-backend service-alb-global \
     --global \
     --instance-group=mig-alb-api-a \
@@ -177,74 +172,95 @@ gcloud compute backend-services add-backend service-alb-global \
     --balancing-mode=RATE \
     --max-rate-per-instance=1
 
-echo "${WHITE}Generating Self-Signed SSL Certificates...${RESET}"
-openssl genrsa -out key.pem 2048 2>/dev/null
-openssl req -new -x509 -key key.pem -out cert.pem -days 1 -subj "/CN=example.com" 2>/dev/null
-gcloud compute ssl-certificates create cert-self-signed --certificate=cert.pem --private-key=key.pem --global
+echo -e "${ORANGE_TEXT}Generating Self-Signed SSL Certificate...${RESET_FORMAT}"
+openssl genrsa -out key.pem 2048
 
-echo "${WHITE}Building Proxy, URL Map & HTTPS Forwarding Rule...${RESET}"
-gcloud compute addresses create ip-alb-global --global
-gcloud compute url-maps create url-map-alb --default-service=service-alb-global
-gcloud compute target-https-proxies create https-proxy-alb --url-map=url-map-alb --ssl-certificates=cert-self-signed
+openssl req -new -x509 \
+    -key key.pem \
+    -out cert.pem \
+    -days 1 \
+    -subj "/CN=example.com"
+
+gcloud compute ssl-certificates create cert-self-signed \
+    --certificate=cert.pem \
+    --private-key=key.pem \
+    --global
+
+echo -e "${ORANGE_TEXT}Reserving Global External IP...${RESET_FORMAT}"
+gcloud compute addresses create ip-alb-global \
+    --global
+
+echo -e "${ORANGE_TEXT}Configuring Global Frontend (URL Map, Proxy, Forwarding Rule)...${RESET_FORMAT}"
+gcloud compute url-maps create url-map-alb \
+    --default-service=service-alb-global
+
+gcloud compute target-https-proxies create https-proxy-alb \
+    --url-map=url-map-alb \
+    --ssl-certificates=cert-self-signed
+
 gcloud compute forwarding-rules create https-forwarding-rule \
     --global \
     --target-https-proxy=https-proxy-alb \
     --ports=443 \
     --address=ip-alb-global
-echo ""
 
-# =========================================================================================
-# TASK 3: Health Sync & Automated Validation
-# =========================================================================================
-echo "${YELLOW}${BOLD}[3/5] ORBIT OF OPS 🚀 | Synchronizing Infrastructure Health...${RESET}"
-echo "${CYAN}Waiting 60 seconds for Envoy Proxies and Google Edge to initialize backends...${RESET}"
-sleep 60
 
-echo "${RED}${BOLD}[4/5] ORBIT OF OPS 🚀 | Executing Task 1 Validation & Task 3 Failover Simulation...${RESET}"
+echo -e "\n${CYAN_TEXT}=======================================================${RESET_FORMAT}"
+echo -e "${CYAN_TEXT} TASK 3: TESTING & VALIDATION                          ${RESET_FORMAT}"
+echo -e "${CYAN_TEXT}=======================================================${RESET_FORMAT}"
 
-# Validate Task 1 (Internal NLB)
-LB_IP_INTERNAL=$(gcloud compute addresses describe ip-internal-proxy --region=$REGION_B --format="value(address)")
-echo "${CYAN}Executing test curl to internal Load Balancer ($LB_IP_INTERNAL:110) from client VM...${RESET}"
-gcloud compute ssh vm-client-internal --zone=$ZONE_B --quiet --command="curl -s -m 5 http://$LB_IP_INTERNAL:110"
-echo "${GREEN}${BOLD}✔ Internal Traffic Verified & Logged!${RESET}"
-echo ""
+echo -e "${MAGENTA_TEXT}Waiting 90 seconds for health checks and backends to initialize...${RESET_FORMAT}"
+sleep 90
 
-# Execute Task 3 (Failover)
-echo "${WHITE}Stopping Nginx on MIG-A to simulate backend failure...${RESET}"
-INSTANCE_A=$(gcloud compute instances list --filter="name~'^mig-alb-api-a'" --format="value(name)" | head -1)
-ZONE_INSTANCE_A=$(gcloud compute instances list --filter="name=$INSTANCE_A" --format="value(zone.basename())")
+# Output Internal Load Balancer IP for reference
+LB_IP_INTERNAL=$(gcloud compute addresses describe ip-internal-proxy \
+    --region=$REGION_B \
+    --format="value(address)")
+echo "${GREEN_TEXT}Internal Load Balancer IP is ready: $LB_IP_INTERNAL${RESET_FORMAT}"
 
-gcloud compute ssh "$INSTANCE_A" \
-    --zone="$ZONE_INSTANCE_A" \
+echo -e "${MAGENTA_TEXT}Initiating Failover Test...${RESET_FORMAT}"
+
+# Create SSH key automatically if needed
+mkdir -p ~/.ssh
+ssh-keygen -t rsa -f ~/.ssh/google_compute_engine -N "" -q <<< y >/dev/null 2>&1 || true
+
+LB_IP_GLOBAL=$(gcloud compute addresses describe ip-alb-global \
+  --global \
+   --quiet \
+  --format="get(address)")
+
+INSTANCE=$(gcloud compute instances list \
+  --filter="name~'^mig-alb-api-a'" \
+  --format="value(name)" | head -1)
+
+ZONE=$(gcloud compute instances list \
+  --filter="name=$INSTANCE" \
+  --format="value(zone.basename())")
+
+(
+  sleep 10
+  gcloud compute ssh "$INSTANCE" \
+    --zone="$ZONE" \
     --quiet \
     --command="sudo systemctl stop nginx"
-    
-echo "${GREEN}${BOLD}✔ Nginx Shutdown Enforced on $INSTANCE_A!${RESET}"
-echo ""
 
-echo "${MAGENTA}${BOLD}[5/5] ORBIT OF OPS 🚀 | Running Global Distribution Checks...${RESET}"
-LB_IP=$(gcloud compute addresses describe ip-alb-global --global --quiet --format="get(address)")
-echo "${WHITE}Pinging HTTPS Load Balancer ($LB_IP)...${RESET}"
-timeout 15 bash -c '
+  echo ""
+  echo "===== Nginx stopped on $INSTANCE to simulate failure ====="
+) &
+
+timeout 40 bash -c '
 while true; do
-  curl -k -s https://'"$LB_IP"' | grep "Hello from" || echo "Waiting for backend synchronization..."
-  sleep 2
+  curl -k -s https://'"$LB_IP_GLOBAL"' | grep "Hello from"
+  sleep 0.5
 done
 '
-echo ""
 
-# Beautiful Completion Message
-echo "${BG_GREEN}${BLACK}${BOLD}======================================================================${RESET}"
-echo "${BG_GREEN}${BLACK}${BOLD}           🚀 ORBIT OF OPS | ARCHITECTURE DEPLOYMENT SUCCESSFUL 🚀    ${RESET}"
-echo "${BG_GREEN}${BLACK}${BOLD}======================================================================${RESET}"
-echo ""
-echo "${GREEN}${BOLD}✓ TASK 1:${RESET} ${WHITE}Internal IP, Network MIGs, and Client SSH Validation Passed.${RESET}"
-echo "${GREEN}${BOLD}✓ TASK 2:${RESET} ${WHITE}Global Application Load Balancer Configured with SSL.${RESET}"
-echo "${GREEN}${BOLD}✓ TASK 3:${RESET} ${WHITE}Failover Simulation Complete. Regional Distribution active.${RESET}"
-echo ""
-echo "${BLUE}${BOLD}----------------------------------------------------------------------${RESET}"
-echo "${WHITE}The lab is 100% complete! You can now securely hit 'Check My Progress'${RESET}"
-echo "${WHITE}for all 3 tasks in the Qwiklabs dashboard.${RESET}"
-echo "${CYAN}${BOLD} Thank you for choosing Orbit Of Ops!                                 ${RESET}"
-echo "${CYAN}${BOLD} Don't forget to like this video and subscribe to stay updated!        ${RESET}"
-echo "${BLUE}${BOLD}======================================================================${RESET}"
+echo
+echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}              LAB COMPLETED SUCCESSFULLY!              ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
+echo
+echo "${RED_TEXT}${BOLD_TEXT}${UNDERLINE_TEXT}https://www.youtube.com/@OrbitOfOps${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}Please subscribe to Orbit of Ops for more cloud automation guides!${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}Don't forget to Like, Share and Subscribe!${RESET_FORMAT}"
+echo
