@@ -13,6 +13,18 @@ sudo chmod +x GSP636.sh
 ./GSP636.sh
 ```
 
+If Task 5 is failed run below Commands
+
+```
+curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Implement%20Regional%20Internal%20Proxy%20NLB/GSP6361.sh
+
+sudo chmod +x GSP6361.sh
+
+./GSP6361.sh
+```
+
+
+
 ### Congratulations 🎉 for completing the Lab !
 
 ##### *You Have Successfully Demonstrated Your Skills And Determination.*
