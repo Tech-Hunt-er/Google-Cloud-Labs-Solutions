@@ -1,6 +1,6 @@
 # IAM Custom Roles || [GSP190](https://www.cloudskillsboost.google/focuses/1035?parent=catalog) ||
 
-## Solution [here](https://youtu.be/iMHyxpz_1bw)
+## Solution [here](https://youtu.be/Pl6DJ6PfNRE)
 
 ### Run the following Commands in CloudShell
 
