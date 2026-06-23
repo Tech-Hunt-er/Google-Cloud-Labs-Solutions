@@ -33,6 +33,8 @@ echo "export REGION_A=$REGION_A" >> ~/.bashrc
 echo "export REGION_B=$REGION_B" >> ~/.bashrc
 source ~/.bashrc
 
+PROJECT_ID=$(gcloud config get-value project)
+
 echo -e "\n${CYAN_TEXT}=======================================================${RESET_FORMAT}"
 echo -e "${CYAN_TEXT} TASK 1: REGIONAL INTERNAL PROXY NLB                   ${RESET_FORMAT}"
 echo -e "${CYAN_TEXT}=======================================================${RESET_FORMAT}"
@@ -40,7 +42,7 @@ echo -e "${CYAN_TEXT}=======================================================${RE
 echo "${ORANGE_TEXT}Creating Regional MIG for Internal Proxy...${RESET_FORMAT}"
 gcloud compute instance-groups managed create mig-proxy-internal \
     --region=$REGION_B \
-    --template=template-proxy-internal \
+    --template=projects/$PROJECT_ID/regions/$REGION_B/instanceTemplates/template-proxy-internal \
     --size=1
 
 gcloud compute instance-groups managed set-named-ports mig-proxy-internal \
@@ -83,7 +85,7 @@ gcloud compute backend-services create internal-proxy-backend \
     --health-checks=hc-internal-proxy \
     --health-checks-region=$REGION_B
 
-echo "${ORANGE_TEXT}Attaching MIG to Backend Service (Region fixed)...${RESET_FORMAT}"
+echo "${ORANGE_TEXT}Attaching MIG to Backend Service...${RESET_FORMAT}"
 gcloud compute backend-services add-backend internal-proxy-backend \
     --instance-group=mig-proxy-internal \
     --instance-group-region=$REGION_B \
@@ -101,11 +103,12 @@ gcloud compute forwarding-rules create rule-internal-proxy \
     --subnet=lb-backend-subnet-region-b \
     --address=ip-internal-proxy \
     --target-tcp-proxy=target-proxy-internal \
+    --target-tcp-proxy-region=$REGION_B \
     --ports=110
 
-echo "${ORANGE_TEXT}Creating Client VM for testing...${RESET_FORMAT}"
+echo "${ORANGE_TEXT}Creating Client VM for testing (Zone C to avoid resource exhaustion)...${RESET_FORMAT}"
 gcloud compute instances create vm-client-internal \
-   --zone=${REGION_B}-b \
+   --zone=${REGION_B}-c \
    --machine-type=e2-micro \
    --network=lb-network \
    --subnet=lb-backend-subnet-region-b \
@@ -229,13 +232,10 @@ LB_IP_GLOBAL=$(gcloud compute addresses describe ip-alb-global \
    --quiet \
   --format="get(address)")
 
-INSTANCE=$(gcloud compute instances list \
-  --filter="name~'^mig-alb-api-a'" \
-  --format="value(name)" | head -1)
-
-ZONE=$(gcloud compute instances list \
-  --filter="name=$INSTANCE" \
-  --format="value(zone.basename())")
+# Native Multi-Variable Assignment via gcloud mapping engine
+read -r INSTANCE ZONE <<< $(gcloud compute instances list \
+    --filter="name:mig-alb-api-a" \
+    --format="value(name,zone.basename())" | head -n 1)
 
 (
   sleep 10
@@ -245,7 +245,7 @@ ZONE=$(gcloud compute instances list \
     --command="sudo systemctl stop nginx"
 
   echo ""
-  echo "===== Nginx stopped on $INSTANCE to simulate failure ====="
+  echo "===== Nginx stopped on $INSTANCE in $ZONE to simulate failure ====="
 ) &
 
 timeout 40 bash -c '
