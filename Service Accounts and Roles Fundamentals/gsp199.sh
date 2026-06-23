@@ -1,219 +1,390 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # =========================================================
-# ORBIT OF OPS 🚀 | PIPELINE DEPLOYMENT MATRIX FOR GSP199
+# ORBIT OF OPS 🚀 | GSP199 MASTER AUTOMATION SCRIPT
+# =========================================================
+# Lab: Service Accounts and Roles: Fundamentals
+# Scope:
+#   ➜ Create and bind IAM service accounts
+#   ➜ Create Compute Engine VM with BigQuery service account
+#   ➜ Install Python BigQuery libraries inside venv
+#   ➜ Run BigQuery public dataset query automatically
+#
+# YouTube: https://www.youtube.com/@OrbitOfOps
 # =========================================================
 
-# Enforce zero-prompt automated control
+set -Eeuo pipefail
+
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+export DEBIAN_FRONTEND=noninteractive
 
-# =========================================================
-# SYSTEM COLORS AND LIGHT CONFIGS
-# =========================================================
-BLACK_TEXT=$'\033[0;90m'
-RED_TEXT=$'\033[0;91m'
-GREEN_TEXT=$'\033[0;92m'
-YELLOW_TEXT=$'\033[0;93m'
-BLUE_TEXT=$'\033[0;94m'
-MAGENTA_TEXT=$'\033[0;95m'
-CYAN_TEXT=$'\033[0;96m'
-WHITE_TEXT=$'\033[0;97m'
-ORANGE_TEXT=$'\033[38;5;208m'
-RESET_FORMAT=$'\033[0m'
-BOLD_TEXT=$'\033[1m'
-UNDERLINE_TEXT=$'\033[4m'
-
-clear
-
-# =========================================================
-# BRANDING FOOTER ENGINE
-# =========================================================
-orbit_footer() {
-    echo
-    echo "${CYAN_TEXT}${BOLD_TEXT}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET_FORMAT}"
-    echo "${ORANGE_TEXT}${BOLD_TEXT} 💫 Join the Mission: Subscribe to Orbit of Ops${RESET_FORMAT}"
-    echo "${CYAN_TEXT}${UNDERLINE_TEXT} https://www.youtube.com/@OrbitOfOps${RESET_FORMAT}"
-    echo "${CYAN_TEXT}${BOLD_TEXT}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET_FORMAT}"
-    echo
-}
-
-# =========================================================
-# PIPELINE WELCOME BANNER
-# =========================================================
-echo
-echo "${CYAN_TEXT}${BOLD_TEXT}┌────────────────────────────────────────────────────────┐${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}│                                                        │${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}│      🌟   ORBIT OF OPS: TELEMETRY AUTOMATION   🌟       │${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}│                                                        │${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}└────────────────────────────────────────────────────────┘${RESET_FORMAT}"
-echo
-
-echo "${WHITE_TEXT}${BOLD_TEXT}📦 Lab Architecture Delivery Scope:${RESET_FORMAT}"
-echo "${WHITE_TEXT}   ➜ Create & bind isolated IAM Service Accounts${RESET_FORMAT}"
-echo "${WHITE_TEXT}   ➜ Build a Compute Engine Instance attached to custom scopes${RESET_FORMAT}"
-echo "${WHITE_TEXT}   ➜ Run automated queries against BigQuery Public Datasets${RESET_FORMAT}"
-echo
-
-orbit_footer
-
-# =========================================================
-# WORKSPACE METADATA RESOLUTION
-# =========================================================
-echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 1: WORKSPACE RESOLUTION & IDENTITY AUDIT ===${RESET_FORMAT}"
-echo
-
-echo "${YELLOW_TEXT}${BOLD_TEXT}🔍 Auditing active environment identities...${RESET_FORMAT}"
-gcloud auth list
-
-echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}🛰️ Resolving dynamic configuration maps...${RESET_FORMAT}"
-
-export PROJECT_ID=$(gcloud config get-value project)
-
-# Dynamically fetch the allowed zone from the project's backend metadata
-export ZONE=$(gcloud compute project-info describe --format="value(commonInstanceMetadata.items[google-compute-default-zone])")
-export REGION=$(gcloud compute project-info describe --format="value(commonInstanceMetadata.items[google-compute-default-region])")
-
-# Fallback in case metadata is empty
-if [ -z "$ZONE" ]; then
-    export ZONE=$(gcloud config get-value compute/zone)
-    export REGION=$(gcloud config get-value compute/region)
+# -------------------- COLORS --------------------
+if [[ -t 1 ]]; then
+  RED=$'\033[0;91m'
+  GREEN=$'\033[0;92m'
+  YELLOW=$'\033[0;93m'
+  BLUE=$'\033[0;94m'
+  CYAN=$'\033[0;96m'
+  ORANGE=$'\033[38;5;208m'
+  WHITE=$'\033[0;97m'
+  BOLD=$'\033[1m'
+  UNDERLINE=$'\033[4m'
+  RESET=$'\033[0m'
+else
+  RED=""
+  GREEN=""
+  YELLOW=""
+  BLUE=""
+  CYAN=""
+  ORANGE=""
+  WHITE=""
+  BOLD=""
+  UNDERLINE=""
+  RESET=""
 fi
 
-gcloud config set compute/region $REGION --quiet
-gcloud config set compute/zone $ZONE --quiet
+# -------------------- BRANDING --------------------
+orbit_banner() {
+  clear || true
+  echo
+  echo "${CYAN}${BOLD}┌────────────────────────────────────────────────────────┐${RESET}"
+  echo "${CYAN}${BOLD}│                                                        │${RESET}"
+  echo "${CYAN}${BOLD}│        🌟 ORBIT OF OPS: GSP199 AUTOMATION 🌟           │${RESET}"
+  echo "${CYAN}${BOLD}│                                                        │${RESET}"
+  echo "${CYAN}${BOLD}└────────────────────────────────────────────────────────┘${RESET}"
+  echo
+  echo "${WHITE}${BOLD}📦 Delivery Scope:${RESET}"
+  echo "${WHITE}   ➜ IAM Service Accounts${RESET}"
+  echo "${WHITE}   ➜ Compute Engine Instance${RESET}"
+  echo "${WHITE}   ➜ BigQuery Public Dataset Query${RESET}"
+  echo
+}
 
-echo
-echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Targeted Project ID: ${RESET_FORMAT}${CYAN_TEXT}$PROJECT_ID${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Authorized Region:   ${RESET_FORMAT}${CYAN_TEXT}$REGION${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Authorized Zone:     ${RESET_FORMAT}${CYAN_TEXT}$ZONE${RESET_FORMAT}"
-echo
+orbit_footer() {
+  echo
+  echo "${CYAN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
+  echo "${ORANGE}${BOLD} 💫 Join the Mission: Subscribe to Orbit of Ops${RESET}"
+  echo "${CYAN}${UNDERLINE} https://www.youtube.com/@OrbitOfOps${RESET}"
+  echo "${CYAN}${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
+  echo
+}
 
-echo "${BLUE_TEXT}${BOLD_TEXT}⚡ Environment initialized successfully.${RESET_FORMAT}"
+log_stage() {
+  echo
+  echo "${GREEN}${BOLD}=== $1 ===${RESET}"
+  echo
+}
+
+log_info() {
+  echo "${BLUE}${BOLD}➜ $1${RESET}"
+}
+
+log_success() {
+  echo "${GREEN}${BOLD}✅ $1${RESET}"
+}
+
+log_warn() {
+  echo "${YELLOW}${BOLD}⚠️  $1${RESET}"
+}
+
+log_error() {
+  echo "${RED}${BOLD}❌ $1${RESET}"
+}
+
+fail() {
+  log_error "$1"
+  exit 1
+}
+
+trap 'log_error "Script failed near line $LINENO. Check the message above."' ERR
+
+# -------------------- CONSTANTS --------------------
+VM_NAME="bigquery-instance"
+SA1_NAME="my-sa-123"
+BQ_SA_NAME="bigquery-qwiklab"
+
+orbit_banner
 orbit_footer
 
-# =========================================================
-# IAM SERVICE ACCOUNT ORCHESTRATION
-# =========================================================
-echo
-echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 2: IDENTITY & ACCESS POLICY IMPLEMENTATION ===${RESET_FORMAT}"
-echo
+# -------------------- PROJECT CHECK --------------------
+log_stage "STAGE 1: PROJECT AND IDENTITY CHECK"
 
-echo "${YELLOW_TEXT}${BOLD_TEXT}👤 Generating service account identity: my-sa-123...${RESET_FORMAT}"
-gcloud iam service-accounts create my-sa-123 \
-    --display-name="my service account" \
+PROJECT_ID="$(gcloud config get-value project 2>/dev/null || true)"
+
+if [[ -z "$PROJECT_ID" || "$PROJECT_ID" == "(unset)" ]]; then
+  fail "Project ID not found. Open Qwiklabs Cloud Shell after starting the lab."
+fi
+
+SA1_EMAIL="${SA1_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+BQ_SA_EMAIL="${BQ_SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+
+log_info "Project ID: $PROJECT_ID"
+log_info "Checking active account..."
+gcloud auth list
+
+log_info "Enabling required APIs if allowed..."
+gcloud services enable compute.googleapis.com iam.googleapis.com bigquery.googleapis.com --quiet >/dev/null 2>&1 || true
+
+log_success "Environment check completed."
+
+# -------------------- HELPER FUNCTIONS --------------------
+clean_value() {
+  local v="${1:-}"
+  if [[ "$v" == "(unset)" || "$v" == "None" ]]; then
+    echo ""
+  else
+    echo "$v"
+  fi
+}
+
+region_from_zone() {
+  echo "$1" | sed 's/-[a-z]$//'
+}
+
+ZONE_CANDIDATES=""
+
+add_zone() {
+  local z="${1:-}"
+  if [[ -n "$z" ]]; then
+    if ! echo "$ZONE_CANDIDATES" | tr ' ' '\n' | grep -qx "$z"; then
+      ZONE_CANDIDATES="$ZONE_CANDIDATES $z"
+    fi
+  fi
+}
+
+add_region_zones() {
+  local r="${1:-}"
+  if [[ -n "$r" ]]; then
+    add_zone "${r}-a"
+    add_zone "${r}-b"
+    add_zone "${r}-c"
+  fi
+}
+
+find_existing_vm_zone() {
+  gcloud compute instances list \
+    --filter="name=(${VM_NAME})" \
+    --format="value(zone)" 2>/dev/null | head -n 1 | awk -F/ '{print $NF}'
+}
+
+# -------------------- DYNAMIC ZONE RESOLUTION --------------------
+log_stage "STAGE 2: DYNAMIC REGION AND ZONE RESOLUTION"
+
+META_ZONE="$(gcloud compute project-info describe --format="value(commonInstanceMetadata.items[google-compute-default-zone])" 2>/dev/null || true)"
+META_REGION="$(gcloud compute project-info describe --format="value(commonInstanceMetadata.items[google-compute-default-region])" 2>/dev/null || true)"
+CONFIG_ZONE="$(gcloud config get-value compute/zone 2>/dev/null || true)"
+CONFIG_REGION="$(gcloud config get-value compute/region 2>/dev/null || true)"
+EXISTING_VM_ZONE="$(find_existing_vm_zone || true)"
+
+META_ZONE="$(clean_value "$META_ZONE")"
+META_REGION="$(clean_value "$META_REGION")"
+CONFIG_ZONE="$(clean_value "$CONFIG_ZONE")"
+CONFIG_REGION="$(clean_value "$CONFIG_REGION")"
+EXISTING_VM_ZONE="$(clean_value "$EXISTING_VM_ZONE")"
+
+# Priority order
+add_zone "$EXISTING_VM_ZONE"
+add_zone "$META_ZONE"
+add_zone "$CONFIG_ZONE"
+add_region_zones "$META_REGION"
+add_region_zones "$CONFIG_REGION"
+
+# Official GSP199 fallback zones
+add_zone "europe-west4-a"
+add_zone "europe-west4-b"
+add_zone "europe-west4-c"
+
+log_info "Zone candidates:$ZONE_CANDIDATES"
+
+if [[ -z "$ZONE_CANDIDATES" ]]; then
+  fail "No zone candidates found."
+fi
+
+log_success "Zone resolution completed."
+
+# -------------------- IAM SERVICE ACCOUNTS --------------------
+log_stage "STAGE 3: IAM SERVICE ACCOUNT SETUP"
+
+log_info "Creating service account: $SA1_NAME"
+
+if gcloud iam service-accounts describe "$SA1_EMAIL" >/dev/null 2>&1; then
+  log_warn "$SA1_NAME already exists. Skipping creation."
+else
+  gcloud iam service-accounts create "$SA1_NAME" \
+    --display-name "my service account" \
     --quiet
+fi
 
-echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}🔑 Attaching comprehensive project Editor mapping...${RESET_FORMAT}"
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member="serviceAccount:my-sa-123@$PROJECT_ID.iam.gserviceaccount.com" \
-    --role="roles/editor" \
+log_info "Binding Editor role to $SA1_NAME..."
+gcloud projects add-iam-policy-binding "$PROJECT_ID" \
+  --member "serviceAccount:${SA1_EMAIL}" \
+  --role "roles/editor" \
+  --quiet >/dev/null
+
+log_info "Creating service account: $BQ_SA_NAME"
+
+if gcloud iam service-accounts describe "$BQ_SA_EMAIL" >/dev/null 2>&1; then
+  log_warn "$BQ_SA_NAME already exists. Skipping creation."
+else
+  gcloud iam service-accounts create "$BQ_SA_NAME" \
+    --display-name "bigquery-qwiklab" \
     --quiet
+fi
 
-echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}👤 Generating analytical gateway token: bigquery-qwiklab...${RESET_FORMAT}"
-gcloud iam service-accounts create bigquery-qwiklab \
-    --display-name="bigquery-qwiklab" \
-    --quiet
+log_info "Binding BigQuery Data Viewer role..."
+gcloud projects add-iam-policy-binding "$PROJECT_ID" \
+  --member "serviceAccount:${BQ_SA_EMAIL}" \
+  --role "roles/bigquery.dataViewer" \
+  --quiet >/dev/null
 
-echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}🔑 Assigning strict data viewer permissions...${RESET_FORMAT}"
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member="serviceAccount:bigquery-qwiklab@$PROJECT_ID.iam.gserviceaccount.com" \
-    --role="roles/bigquery.dataViewer" \
-    --quiet
+log_info "Binding BigQuery User role..."
+gcloud projects add-iam-policy-binding "$PROJECT_ID" \
+  --member "serviceAccount:${BQ_SA_EMAIL}" \
+  --role "roles/bigquery.user" \
+  --quiet >/dev/null
 
-echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}🔑 Assigning structural analytical execution scopes...${RESET_FORMAT}"
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member="serviceAccount:bigquery-qwiklab@$PROJECT_ID.iam.gserviceaccount.com" \
-    --role="roles/bigquery.user" \
-    --quiet
+log_info "Waiting for IAM propagation..."
+sleep 15
 
+log_success "IAM setup completed."
 orbit_footer
 
-# =========================================================
-# CORE VIRTUAL NODE PROVISIONING
-# =========================================================
-echo
-echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 3: INFRASTRUCTURE CLUSTER BUILD ===${RESET_FORMAT}"
-echo
+# -------------------- VM CREATION OR REUSE --------------------
+log_stage "STAGE 4: COMPUTE ENGINE INSTANCE BUILD"
 
-echo "${YELLOW_TEXT}${BOLD_TEXT}💻 Building analytical runtime host (bigquery-instance)...${RESET_FORMAT}"
-gcloud compute instances create bigquery-instance \
-    --project=$PROJECT_ID \
-    --zone=$ZONE \
-    --machine-type=e2-medium \
-    --image-family=debian-12 \
-    --image-project=debian-cloud \
-    --service-account=bigquery-qwiklab@$PROJECT_ID.iam.gserviceaccount.com \
-    --scopes=https://www.googleapis.com/auth/bigquery \
-    --quiet
+VM_ZONE="$(find_existing_vm_zone || true)"
+VM_ZONE="$(clean_value "$VM_ZONE")"
 
+if [[ -n "$VM_ZONE" ]]; then
+  REGION="$(region_from_zone "$VM_ZONE")"
+
+  log_warn "VM $VM_NAME already exists in $VM_ZONE. Reusing it."
+
+  gcloud config set compute/region "$REGION" --quiet >/dev/null
+  gcloud config set compute/zone "$VM_ZONE" --quiet >/dev/null
+
+  VM_STATUS="$(gcloud compute instances describe "$VM_NAME" \
+    --zone "$VM_ZONE" \
+    --format="value(status)" 2>/dev/null || true)"
+
+  if [[ "$VM_STATUS" != "RUNNING" ]]; then
+    log_info "Starting existing VM..."
+    gcloud compute instances start "$VM_NAME" \
+      --zone "$VM_ZONE" \
+      --quiet
+  fi
+
+else
+  VM_ZONE=""
+
+  for TRY_ZONE in $ZONE_CANDIDATES; do
+    TRY_REGION="$(region_from_zone "$TRY_ZONE")"
+
+    echo
+    log_info "Trying VM creation in zone: $TRY_ZONE"
+
+    gcloud config set compute/region "$TRY_REGION" --quiet >/dev/null
+    gcloud config set compute/zone "$TRY_ZONE" --quiet >/dev/null
+
+    if gcloud compute instances create "$VM_NAME" \
+      --project "$PROJECT_ID" \
+      --zone "$TRY_ZONE" \
+      --machine-type "e2-medium" \
+      --image-family "debian-12" \
+      --image-project "debian-cloud" \
+      --service-account "$BQ_SA_EMAIL" \
+      --scopes "https://www.googleapis.com/auth/bigquery" \
+      --quiet; then
+
+      VM_ZONE="$TRY_ZONE"
+      log_success "VM created successfully in $VM_ZONE"
+      break
+    else
+      log_warn "Zone $TRY_ZONE failed. Trying next candidate..."
+    fi
+  done
+
+  if [[ -z "$VM_ZONE" ]]; then
+    fail "VM could not be created in any candidate zone. Check lab region/zone."
+  fi
+fi
+
+REGION="$(region_from_zone "$VM_ZONE")"
+gcloud config set compute/region "$REGION" --quiet >/dev/null
+gcloud config set compute/zone "$VM_ZONE" --quiet >/dev/null
+
+log_success "Using VM zone: $VM_ZONE"
 orbit_footer
 
-# =========================================================
-# NETWORK AND KERNEL STACK SPINNER
-# =========================================================
-echo
-echo "${BLUE_TEXT}${BOLD_TEXT}⏳ Syncing runtime architecture & waiting for network stack...${RESET_FORMAT}"
+# -------------------- SSH READINESS --------------------
+log_stage "STAGE 5: SSH READINESS CHECK"
 
-spinner="/-\|"
-messages=(
-"Configuring network routing interfaces..."
-"Validating host instance availability matrix..."
-"Catch the next space launch: Subscribe to Orbit of Ops 💫"
-"Mounting downstream virtualization dependencies..."
-)
+mkdir -p "$HOME/.ssh"
+ssh-keygen -t rsa -f "$HOME/.ssh/google_compute_engine" -N "" -q <<< y >/dev/null 2>&1 || true
 
-for i in {1..20}; do
-    msg=${messages[$((i % ${#messages[@]}))]}
-    printf "\r${CYAN_TEXT}${BOLD_TEXT}[${spinner:i%4:1}] $msg${RESET_FORMAT}"
-    sleep 1
+for i in {1..18}; do
+  if gcloud compute ssh "$VM_NAME" \
+    --zone "$VM_ZONE" \
+    --project "$PROJECT_ID" \
+    --quiet \
+    --ssh-flag="-o StrictHostKeyChecking=no" \
+    --command "echo SSH_READY" >/tmp/orbit_gsp199_ssh_check.log 2>&1; then
+
+    log_success "SSH is ready."
+    break
+  fi
+
+  log_warn "SSH not ready yet. Retry $i/18..."
+  sleep 10
+
+  if [[ "$i" == "18" ]]; then
+    cat /tmp/orbit_gsp199_ssh_check.log || true
+    fail "SSH did not become ready."
+  fi
 done
-printf "\n"
 
-# =========================================================
-# COMPILING LOGICAL WORKLOAD SCRIPT (LOCAL INTERPRETATION)
-# =========================================================
+# -------------------- REMOTE WORKLOAD --------------------
+log_stage "STAGE 6: REMOTE BIGQUERY WORKLOAD COMPILATION"
+
+cat > orbit_gsp199_remote_task.sh <<REMOTE_EOF
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+export DEBIAN_FRONTEND=noninteractive
+
+cd "\$HOME"
+
 echo
-echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 4: COMPILING REMOTE TARGET TASK EXECUTION ===${RESET_FORMAT}"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo " 🚀 Orbit of Ops Remote Runtime Started"
+echo " 👉 https://www.youtube.com/@OrbitOfOps"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo
 
-# Bakes the explicit project ID strings locally to avoid SSH escaping string errors
-cat > cp_disk.sh << EOF
-#!/bin/bash
-cd \$HOME
-
-echo "Updating operating system mirror trees..."
+echo "Updating package lists..."
 sudo apt-get update -y
 
-echo "Provisioning standard compiler layers and isolation components..."
-sudo apt-get install -y python3 python3-pip python3.11-venv git
+echo "Installing Python, pip, venv, and git..."
+sudo apt-get install -y python3 python3-pip python3.11-venv python3-full git
 
-echo "Isolating processing memory context using native Virtualenv..."
-python3 -m venv myvenv
-source myvenv/bin/activate
+echo "Creating clean Python virtual environment..."
+rm -rf "\$HOME/myvenv"
+python3 -m venv "\$HOME/myvenv"
 
-echo "Upgrading pip execution packages..."
-pip install --upgrade pip
+echo "Upgrading pip inside virtual environment..."
+"\$HOME/myvenv/bin/python" -m pip install --upgrade pip
 
-echo "Mounting specialized BigQuery data analysis frameworks..."
-pip install google-cloud-bigquery pyarrow pandas db-dtypes
+echo "Installing BigQuery libraries inside virtual environment..."
+"\$HOME/myvenv/bin/python" -m pip install --no-cache-dir google-cloud-bigquery pyarrow pandas db-dtypes
 
-echo
-echo "💫 Powered by Orbit of Ops Automation Matrix"
-echo "👉 Join the operations center: https://www.youtube.com/@OrbitOfOps"
-echo
+echo "Creating query.py..."
 
-echo "Writing processing file directly to user home directory..."
-cat > query.py << 'PYEOF'
+cat > "\$HOME/query.py" <<PY_EOF
 from google.auth import compute_engine
 from google.cloud import bigquery
 
 credentials = compute_engine.Credentials(
-    service_account_email='bigquery-qwiklab@${PROJECT_ID}.iam.gserviceaccount.com'
+    service_account_email="${BQ_SA_EMAIL}"
 )
 
 query = '''
@@ -229,69 +400,54 @@ GROUP BY
 '''
 
 client = bigquery.Client(
-    project='${PROJECT_ID}',
+    project="${PROJECT_ID}",
     credentials=credentials
 )
 
-print("\n💫 Orbit of Ops: Dynamic Data Output Engine")
-print("👉 Platform Hub: https://www.youtube.com/@OrbitOfOps\n")
-print("Requesting public record subsets from BigQuery...\n")
+print(client.query(query).to_dataframe())
+PY_EOF
 
-df = client.query(query).to_dataframe()
-print(df.to_string(index=False))
-PYEOF
-
-echo "Launching targeted query execution stream..."
 echo
-python3 query.py
-EOF
+echo "Running BigQuery query..."
+"\$HOME/myvenv/bin/python" "\$HOME/query.py"
 
-# =========================================================
-# FILE INJECTION BLOCK
-# =========================================================
 echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}📤 Transmitting operational task code blocks to instance target...${RESET_FORMAT}"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo " ✅ Orbit of Ops Remote Runtime Completed"
+echo " 👉 https://www.youtube.com/@OrbitOfOps"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo
+
+REMOTE_EOF
+
+log_info "Copying remote script to VM..."
+
+gcloud compute scp orbit_gsp199_remote_task.sh "$VM_NAME:/tmp/orbit_gsp199_remote_task.sh" \
+  --zone "$VM_ZONE" \
+  --project "$PROJECT_ID" \
+  --quiet
+
+log_info "Executing remote script on VM..."
+
+gcloud compute ssh "$VM_NAME" \
+  --zone "$VM_ZONE" \
+  --project "$PROJECT_ID" \
+  --quiet \
+  --ssh-flag="-o StrictHostKeyChecking=no" \
+  --command "chmod +x /tmp/orbit_gsp199_remote_task.sh && /tmp/orbit_gsp199_remote_task.sh"
+
+# -------------------- FINAL --------------------
+log_stage "MISSION STATUS"
+
+log_success "GSP199 automation completed successfully."
+log_success "Now click both Check my progress buttons in Qwiklabs."
+
+rm -f orbit_gsp199_remote_task.sh
+
+echo
+echo "${GREEN}${BOLD}┌────────────────────────────────────────────────────────┐${RESET}"
+echo "${GREEN}${BOLD}│        MISSION ACCOMPLISHED: GSP199 COMPLETED          │${RESET}"
+echo "${GREEN}${BOLD}└────────────────────────────────────────────────────────┘${RESET}"
+
 orbit_footer
 
-# Generate system keys quietly if they do not exist
-mkdir -p ~/.ssh
-ssh-keygen -t rsa -f ~/.ssh/google_compute_engine -N "" -q <<< y >/dev/null 2>&1 || true
-
-gcloud compute scp cp_disk.sh bigquery-instance:/tmp \
-    --project=$PROJECT_ID \
-    --zone=$ZONE \
-    --quiet
-
-# =========================================================
-# INSTANCE SHELL ENVELOPE EXECUTION
-# =========================================================
-echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}🚀 Awakening remote workspace terminal environments...${RESET_FORMAT}"
-orbit_footer
-
-gcloud compute ssh bigquery-instance \
-    --project=$PROJECT_ID \
-    --zone=$ZONE \
-    --quiet \
-    --command="chmod +x /tmp/cp_disk.sh && /tmp/cp_disk.sh"
-
-# =========================================================
-# SUCCESS STATUS INTERFACE TERMINATION
-# =========================================================
-echo
-echo "${GREEN_TEXT}${BOLD_TEXT}┌────────────────────────────────────────────────────────┐${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}│          MISSION ACCOMPLISHED: MATRIX DISPATCHED       │${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}└────────────────────────────────────────────────────────┘${RESET_FORMAT}"
-echo
-
-# System directory trace file sanitization block
-cd
-for file in *; do
-    if [[ "$file" == gsp* || "$file" == arc* || "$file" == shell* || "$file" == cp_disk.sh ]]; then
-        if [[ -f "$file" ]]; then
-            rm "$file"
-        fi
-    fi
-done
-
-orbit_footer
