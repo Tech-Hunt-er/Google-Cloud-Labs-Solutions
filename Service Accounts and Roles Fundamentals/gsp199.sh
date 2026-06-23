@@ -66,21 +66,27 @@ echo "${YELLOW_TEXT}${BOLD_TEXT}🔍 Auditing active environment identities...${
 gcloud auth list
 
 echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}🛰️ Resolving default configuration maps...${RESET_FORMAT}"
+echo "${YELLOW_TEXT}${BOLD_TEXT}🛰️ Resolving dynamic configuration maps...${RESET_FORMAT}"
 
 export PROJECT_ID=$(gcloud config get-value project)
 
-# Force-align the explicit lab requirement coordinates
-export REGION="us-west3"
-export ZONE="us-west3-c"
+# Dynamically fetch the allowed zone from the project's backend metadata
+export ZONE=$(gcloud compute project-info describe --format="value(commonInstanceMetadata.items[google-compute-default-zone])")
+export REGION=$(gcloud compute project-info describe --format="value(commonInstanceMetadata.items[google-compute-default-region])")
+
+# Fallback in case metadata is empty
+if [ -z "$ZONE" ]; then
+    export ZONE=$(gcloud config get-value compute/zone)
+    export REGION=$(gcloud config get-value compute/region)
+fi
 
 gcloud config set compute/region $REGION --quiet
 gcloud config set compute/zone $ZONE --quiet
 
 echo
 echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Targeted Project ID: ${RESET_FORMAT}${CYAN_TEXT}$PROJECT_ID${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Configured Region:   ${RESET_FORMAT}${CYAN_TEXT}$REGION${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Configured Zone:     ${RESET_FORMAT}${CYAN_TEXT}$ZONE${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Authorized Region:   ${RESET_FORMAT}${CYAN_TEXT}$REGION${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Authorized Zone:     ${RESET_FORMAT}${CYAN_TEXT}$ZONE${RESET_FORMAT}"
 echo
 
 echo "${BLUE_TEXT}${BOLD_TEXT}⚡ Environment initialized successfully.${RESET_FORMAT}"
@@ -142,8 +148,7 @@ gcloud compute instances create bigquery-instance \
     --image-family=debian-12 \
     --image-project=debian-cloud \
     --service-account=bigquery-qwiklab@$PROJECT_ID.iam.gserviceaccount.com \
-    --scopes=https://www.googleapis.com/auth/cloud-platform \
-    --metadata=serial-port-enable=TRUE \
+    --scopes=https://www.googleapis.com/auth/bigquery \
     --quiet
 
 orbit_footer
@@ -170,20 +175,22 @@ done
 printf "\n"
 
 # =========================================================
-# COMPILING LOGICAL WORKLOAD SCRIPT
+# COMPILING LOGICAL WORKLOAD SCRIPT (LOCAL INTERPRETATION)
 # =========================================================
 echo
 echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 4: COMPILING REMOTE TARGET TASK EXECUTION ===${RESET_FORMAT}"
 echo
 
-cat > cp_disk.sh << 'EOF'
+# Bakes the explicit project ID strings locally to avoid SSH escaping string errors
+cat > cp_disk.sh << EOF
 #!/bin/bash
+cd \$HOME
 
 echo "Updating operating system mirror trees..."
 sudo apt-get update -y
 
 echo "Provisioning standard compiler layers and isolation components..."
-sudo apt-get install -y python3 python3-pip python3-venv git
+sudo apt-get install -y python3 python3-pip python3.11-venv git
 
 echo "Isolating processing memory context using native Virtualenv..."
 python3 -m venv myvenv
@@ -200,13 +207,13 @@ echo "💫 Powered by Orbit of Ops Automation Matrix"
 echo "👉 Join the operations center: https://www.youtube.com/@OrbitOfOps"
 echo
 
-echo "Writing processing file: query.py..."
+echo "Writing processing file directly to user home directory..."
 cat > query.py << 'PYEOF'
 from google.auth import compute_engine
 from google.cloud import bigquery
 
 credentials = compute_engine.Credentials(
-    service_account_email='YOUR_SERVICE_ACCOUNT'
+    service_account_email='bigquery-qwiklab@${PROJECT_ID}.iam.gserviceaccount.com'
 )
 
 query = '''
@@ -222,7 +229,7 @@ GROUP BY
 '''
 
 client = bigquery.Client(
-    project='PROJECT_ID',
+    project='${PROJECT_ID}',
     credentials=credentials
 )
 
@@ -233,10 +240,6 @@ print("Requesting public record subsets from BigQuery...\n")
 df = client.query(query).to_dataframe()
 print(df.to_string(index=False))
 PYEOF
-
-# Dynamic internal variable substitution mapping
-sed -i "s/PROJECT_ID/$(gcloud config get-value project)/g" query.py
-sed -i "s/YOUR_SERVICE_ACCOUNT/bigquery-qwiklab@$(gcloud config get-value project).iam.gserviceaccount.com/g" query.py
 
 echo "Launching targeted query execution stream..."
 echo
@@ -284,7 +287,7 @@ echo
 # System directory trace file sanitization block
 cd
 for file in *; do
-    if [[ "$file" == gsp* || "$file" == arc* || "$file" == shell* ]]; then
+    if [[ "$file" == gsp* || "$file" == arc* || "$file" == shell* || "$file" == cp_disk.sh ]]; then
         if [[ -f "$file" ]]; then
             rm "$file"
         fi
