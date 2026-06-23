@@ -1,56 +1,67 @@
 #!/bin/bash
+
+# ==============================================================================
+# Orbit of Ops - Automated Cloud Lab Setup
+# ==============================================================================
+
 # Define color variables
+BLACK_TEXT=$'\033[0;90m'
+RED_TEXT=$'\033[0;91m'
+GREEN_TEXT=$'\033[0;92m'
+YELLOW_TEXT=$'\033[0;93m'
+BLUE_TEXT=$'\033[0;94m'
+MAGENTA_TEXT=$'\033[0;95m'
+CYAN_TEXT=$'\033[0;96m'
+WHITE_TEXT=$'\033[0;97m'
+ORANGE_TEXT=$'\033[38;5;208m'     
+RESET_FORMAT=$'\033[0m'
+BOLD_TEXT=$'\033[1m'
+UNDERLINE_TEXT=$'\033[4m'
 
-BLACK=`tput setaf 0`
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
+clear
 
-BG_BLACK=`tput setab 0`
-BG_RED=`tput setab 1`
-BG_GREEN=`tput setab 2`
-BG_YELLOW=`tput setab 3`
-BG_BLUE=`tput setab 4`
-BG_MAGENTA=`tput setab 5`
-BG_CYAN=`tput setab 6`
-BG_WHITE=`tput setab 7`
+# Welcome message in Orbit of Ops branding
+echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}                 WELCOME TO ORBIT OF OPS${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}          Elevating your Cloud & DevOps Journey!${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
+echo
 
-BOLD=`tput bold`
-RESET=`tput sgr0`
-#----------------------------------------------------start--------------------------------------------------#
+echo "${YELLOW_TEXT}${BOLD_TEXT}🚀 Getting Lab Credentials & Initializing...${RESET_FORMAT}"
 
-echo "${BG_MAGENTA}${BOLD}Starting Execution${RESET}"
-
- export ZONE=$(gcloud compute project-info describe \
+export DEVSHELL_PROJECT_ID=$(gcloud config get-value project)
+export ZONE=$(gcloud compute project-info describe \
 --format="value(commonInstanceMetadata.items[google-compute-default-zone])")
 
+# ------------------------------------------------------------------------------
+# Phase 1: IAM & Compute Setup (Executed on lab-vm)
+# ------------------------------------------------------------------------------
 cat > prepare_disk.sh <<'EOF_END'
 
 gcloud auth login --quiet
 
-export PROJECT_ID=$(gcloud config get-value project)
-
+export DEVSHELL_PROJECT_ID=$(gcloud config get-value project)
 export ZONE=$(gcloud compute project-info describe \
 --format="value(commonInstanceMetadata.items[google-compute-default-zone])")
 
+echo "--> Creating 'devops' service account..."
 gcloud iam service-accounts create devops --display-name devops
-
 sleep 45
-
-gcloud iam service-accounts list  --filter "displayName=devops"
 
 SA=$(gcloud iam service-accounts list --format="value(email)" --filter "displayName=devops")
 
-gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SA --role=roles/iam.serviceAccountUser
+echo "--> Binding IAM roles to 'devops' account..."
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member serviceAccount:$SA --role=roles/iam.serviceAccountUser
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member serviceAccount:$SA --role=roles/compute.instanceAdmin
 
-gcloud projects add-iam-policy-binding $PROJECT_ID --member serviceAccount:$SA --role=roles/compute.instanceAdmin
+echo "--> Creating 'vm-2' compute instance..."
+gcloud compute instances create vm-2 \
+--machine-type=e2-micro \
+--service-account=$SA \
+--zone=$ZONE \
+--scopes=https://www.googleapis.com/auth/compute
 
-gcloud compute instances create vm-2 --machine-type e2-micro --service-account $SA --zone $ZONE --scopes "https://www.googleapis.com/auth/compute"
-
+echo "--> Defining custom 'My Company Admin' role..."
 cat > role-definition.yaml <<EOF
 title: "My Company Admin"
 description: "My custom role description."
@@ -60,71 +71,102 @@ includedPermissions:
 - cloudsql.instances.get
 EOF
 
-gcloud iam roles create editor --project $PROJECT_ID \
---file role-definition.yaml
+gcloud iam roles create editor --project $DEVSHELL_PROJECT_ID --file role-definition.yaml
 
+echo "--> Creating 'bigquery-qwiklab' service account..."
 gcloud iam service-accounts create bigquery-qwiklab --display-name bigquery-qwiklab
+sleep 15
 
-SA=$(gcloud iam service-accounts list --format="value(email)" --filter "displayName=bigquery-qwiklab")
+SA_BQ=$(gcloud iam service-accounts list --format="value(email)" --filter "displayName=bigquery-qwiklab")
 
-gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:$SA --role=roles/bigquery.dataViewer
+echo "--> Binding IAM roles to 'bigquery-qwiklab' account..."
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SA_BQ --role=roles/bigquery.dataViewer
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SA_BQ --role=roles/bigquery.user
 
-gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:$SA --role=roles/bigquery.user
+echo "--> Creating 'bigquery-instance' compute instance..."
+gcloud compute instances create bigquery-instance \
+--service-account=$SA_BQ \
+--scopes=https://www.googleapis.com/auth/cloud-platform \
+--zone=$ZONE
 
-gcloud compute instances create bigquery-instance --service-account=$SA --scopes=https://www.googleapis.com/auth/bigquery --zone=$ZONE
 EOF_END
 
+echo "${GREEN_TEXT}Executing Phase 1 script on lab-vm...${RESET_FORMAT}"
 gcloud compute scp prepare_disk.sh lab-vm:/tmp --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet
-
 gcloud compute ssh lab-vm --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet --command="bash /tmp/prepare_disk.sh"
 
 sleep 30
 
+# ------------------------------------------------------------------------------
+# Phase 2: Python & BigQuery Setup (Executed on bigquery-instance)
+# ------------------------------------------------------------------------------
+echo
+echo "${YELLOW_TEXT}${BOLD_TEXT}🚀 Preparing BigQuery environment...${RESET_FORMAT}"
+
 cat > prepare_disk.sh <<'EOF_END'
+echo "--> Installing Python dependencies..."
 sudo apt-get update
 sudo apt install python3 -y
 sudo apt-get install -y git python3-pip
 sudo apt install python3.11-venv -y
-python3 -m venv create myvenv
+
+python3 -m venv myvenv
 source myvenv/bin/activate
-pip3 install --upgrade pip
-pip3 install google-cloud-bigquery
-pip3 install pyarrow
-pip3 install pandas
-pip3 install db-dtypes
-pip3 install --upgrade google-cloud
+pip install --upgrade pip
+pip install google-cloud-bigquery pandas pyarrow db-dtypes google-auth
 
+export ZONE=$(gcloud compute project-info describe \
+--format="value(commonInstanceMetadata.items[google-compute-default-zone])")
 export PROJECT_ID=$(gcloud config get-value project)
-export SA_EMAIL=$(curl -s "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email" -H "Metadata-Flavor: Google")
+export SA_EMAIL=$(gcloud config get-value account 2>/dev/null || curl -s "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email" -H "Metadata-Flavor: Google")
 
-echo "
+echo "--> Authenticated as: $SA_EMAIL"
+echo "--> Creating BigQuery Python script..."
+
+cat > query.py <<EOF
 from google.auth import compute_engine
 from google.cloud import bigquery
-credentials = compute_engine.Credentials(
-service_account_email='$SA_EMAIL')
+
+credentials = compute_engine.Credentials()
+
 query = '''
 SELECT name, SUM(number) as total_people
-FROM "bigquery-public-data.usa_names.usa_1910_2013"
+FROM \`bigquery-public-data.usa_names.usa_1910_2013\`
 WHERE state = 'TX'
 GROUP BY name, state
 ORDER BY total_people DESC
 LIMIT 20
 '''
+
 client = bigquery.Client(
-  project='$PROJECT_ID',
-  credentials=credentials)
+    project='$PROJECT_ID',
+    credentials=credentials
+)
+
 print(client.query(query).to_dataframe())
-" > query.py
+EOF
 
 sleep 10
 
-python3 query.py
+echo "--> Executing BigQuery script..."
+source myvenv/bin/activate
+python query.py
 EOF_END
 
+echo "${GREEN_TEXT}Executing Phase 2 script on bigquery-instance...${RESET_FORMAT}"
 gcloud compute scp prepare_disk.sh bigquery-instance:/tmp --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet
-
 gcloud compute ssh bigquery-instance --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet --command="bash /tmp/prepare_disk.sh"
 
-echo "${BG_RED}${BOLD}Congratulations For Completing The Lab !!!${RESET}"
-
-#-----------------------------------------------------end----------------------------------------------------------#
+# ------------------------------------------------------------------------------
+# Completion Banner
+# ------------------------------------------------------------------------------
+echo
+echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}              LAB COMPLETED SUCCESSFULLY!              ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}=======================================================${RESET_FORMAT}"
+echo
+echo "${BLUE_TEXT}${BOLD_TEXT}🚀 Keep exploring the Orbit of Ops!${RESET_FORMAT}"
+echo "${RED_TEXT}${BOLD_TEXT}${UNDERLINE_TEXT}https://www.youtube.com/@orbitofops${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}Please Subscribe to the channel for more Cloud & DevOps videos!${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}Don't forget to Like, Share and Subscribe!${RESET_FORMAT}"
+echo
