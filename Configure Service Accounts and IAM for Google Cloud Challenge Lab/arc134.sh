@@ -30,8 +30,12 @@ echo
 echo "${YELLOW_TEXT}${BOLD_TEXT}🚀 Getting Lab Credentials & Initializing...${RESET_FORMAT}"
 
 export DEVSHELL_PROJECT_ID=$(gcloud config get-value project)
-export ZONE=$(gcloud compute project-info describe \
---format="value(commonInstanceMetadata.items[google-compute-default-zone])")
+# Explicitly hardcoding zone as per lab instructions to prevent default zone mismatches
+export ZONE="us-east1-c" 
+export REGION="us-east1"
+
+gcloud config set compute/region $REGION
+gcloud config set compute/zone $ZONE
 
 # ------------------------------------------------------------------------------
 # Phase 1: IAM & Compute Setup (Executed on lab-vm)
@@ -41,12 +45,11 @@ cat > prepare_disk.sh <<'EOF_END'
 gcloud auth login --quiet
 
 export DEVSHELL_PROJECT_ID=$(gcloud config get-value project)
-export ZONE=$(gcloud compute project-info describe \
---format="value(commonInstanceMetadata.items[google-compute-default-zone])")
+export ZONE="us-east1-c"
 
 echo "--> Creating 'devops' service account..."
 gcloud iam service-accounts create devops --display-name devops
-sleep 45
+sleep 15
 
 SA=$(gcloud iam service-accounts list --format="value(email)" --filter "displayName=devops")
 
@@ -83,8 +86,9 @@ echo "--> Binding IAM roles to 'bigquery-qwiklab' account..."
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SA_BQ --role=roles/bigquery.dataViewer
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID --member=serviceAccount:$SA_BQ --role=roles/bigquery.user
 
-echo "--> Creating 'bigquery-instance' compute instance..."
+echo "--> Creating 'bigquery-instance' compute instance (using e2-micro to avoid resource exhaustion)..."
 gcloud compute instances create bigquery-instance \
+--machine-type=e2-micro \
 --service-account=$SA_BQ \
 --scopes=https://www.googleapis.com/auth/cloud-platform \
 --zone=$ZONE
@@ -101,33 +105,33 @@ sleep 30
 # Phase 2: Python & BigQuery Setup (Executed on bigquery-instance)
 # ------------------------------------------------------------------------------
 echo
-echo "${YELLOW_TEXT}${BOLD_TEXT}🚀 Preparing BigQuery environment...${RESET_FORMAT}"
+echo "${YELLOW_TEXT}${BOLD_TEXT}🚀 Preparing BigQuery environment on bigquery-instance...${RESET_FORMAT}"
 
 cat > prepare_disk.sh <<'EOF_END'
 echo "--> Installing Python dependencies..."
 sudo apt-get update
 sudo apt install python3 -y
-sudo apt-get install -y git python3-pip
-sudo apt install python3.11-venv -y
+sudo apt-get install -y git python3-pip python3.11-venv
 
 python3 -m venv myvenv
 source myvenv/bin/activate
 pip install --upgrade pip
 pip install google-cloud-bigquery pandas pyarrow db-dtypes google-auth
 
-export ZONE=$(gcloud compute project-info describe \
---format="value(commonInstanceMetadata.items[google-compute-default-zone])")
 export PROJECT_ID=$(gcloud config get-value project)
 export SA_EMAIL=$(gcloud config get-value account 2>/dev/null || curl -s "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email" -H "Metadata-Flavor: Google")
 
 echo "--> Authenticated as: $SA_EMAIL"
 echo "--> Creating BigQuery Python script..."
 
+# Matching the exact python code block requested by the lab instructions
 cat > query.py <<EOF
 from google.auth import compute_engine
 from google.cloud import bigquery
 
-credentials = compute_engine.Credentials()
+credentials = compute_engine.Credentials(
+    service_account_email='$SA_EMAIL'
+)
 
 query = '''
 SELECT name, SUM(number) as total_people
@@ -146,7 +150,7 @@ client = bigquery.Client(
 print(client.query(query).to_dataframe())
 EOF
 
-sleep 10
+sleep 5
 
 echo "--> Executing BigQuery script..."
 source myvenv/bin/activate
