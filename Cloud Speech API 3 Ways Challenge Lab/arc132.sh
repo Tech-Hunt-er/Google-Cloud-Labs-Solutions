@@ -3,7 +3,7 @@ set -Eeuo pipefail
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
 # ==========================================================
-# ORBIT OF OPS - ARC132 CLOUD SPEECH LAB FALLBACK AUTOPILOT
+# ORBIT OF OPS - ARC132 CLOUD SPEECH LAB MENU AUTOPILOT
 # Fixes: API key --api-target error + empty API_KEY false success
 # ==========================================================
 
@@ -12,6 +12,7 @@ GREEN=$'\033[0;92m'
 YELLOW=$'\033[0;93m'
 BLUE=$'\033[0;94m'
 CYAN=$'\033[0;96m'
+WHITE=$'\033[0;97m'
 ORANGE=$'\033[38;5;208m'
 BOLD=$'\033[1m'
 RESET=$'\033[0m'
@@ -186,15 +187,67 @@ TASK_4_FILE="$(resolve_var task_4_file "translated_response.txt")"
 TASK_5_SENTENCE="$(resolve_var task_5_sentence "")"
 TASK_5_FILE="$(resolve_var task_5_file "detected_response.txt")"
 
+show_current_values(){
+  echo
+  echo "${CYAN}${BOLD}╔════════════════ CURRENT DETECTED / DEFAULT LAB VALUES ════════════════╗${RESET}"
+  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 2 API response file:" "${TASK_2_FILE_NAME}"
+  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 3 request file:" "${TASK_3_REQUEST_FILE}"
+  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 3 response file:" "${TASK_3_RESPONSE_FILE}"
+  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 4 sentence:" "${TASK_4_SENTENCE:-<missing - required>}"
+  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 4 response file:" "${TASK_4_FILE}"
+  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 5 sentence:" "${TASK_5_SENTENCE:-<missing - required>}"
+  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 5 response file:" "${TASK_5_FILE}"
+  echo "${CYAN}${BOLD}╚════════════════════════════════════════════════════════════════════════╝${RESET}"
+  echo
+}
+
+edit_values_one_by_one(){
+  echo
+  warn "Edit mode started. Press Enter on any line to keep the shown value."
+  ask_with_default TASK_2_FILE_NAME "Task 2 API response file name. Do NOT use synthesize-text.json here" "${TASK_2_FILE_NAME}"
+  ask_with_default TASK_3_REQUEST_FILE "Task 3 request file name" "${TASK_3_REQUEST_FILE}"
+  ask_with_default TASK_3_RESPONSE_FILE "Task 3 response file name" "${TASK_3_RESPONSE_FILE}"
+
+  if [[ -n "${TASK_4_SENTENCE}" ]]; then
+    ask_with_default TASK_4_SENTENCE "Task 4 sentence to translate" "${TASK_4_SENTENCE}"
+  else
+    ask_required TASK_4_SENTENCE "Task 4 sentence to translate"
+  fi
+
+  ask_with_default TASK_4_FILE "Task 4 response file name" "${TASK_4_FILE}"
+
+  if [[ -n "${TASK_5_SENTENCE}" ]]; then
+    ask_with_default TASK_5_SENTENCE "Task 5 sentence to detect" "${TASK_5_SENTENCE}"
+  else
+    ask_required TASK_5_SENTENCE "Task 5 sentence to detect"
+  fi
+
+  ask_with_default TASK_5_FILE "Task 5 response file name" "${TASK_5_FILE}"
+}
+
+show_current_values
+echo "${GREEN}${BOLD}Press C to continue with these values.${RESET}"
+echo "${YELLOW}${BOLD}Press any other key to edit values one by one.${RESET}"
+read -r -n 1 -p "Your choice: " VALUE_MODE
 echo
-warn "If your lab page shows different exact file names, enter those. Otherwise press Enter."
-ask_with_default TASK_2_FILE_NAME "Task 2 API response file name. Do NOT use synthesize-text.json here" "${TASK_2_FILE_NAME}"
-ask_with_default TASK_3_REQUEST_FILE "Task 3 request file name" "${TASK_3_REQUEST_FILE}"
-ask_with_default TASK_3_RESPONSE_FILE "Task 3 response file name" "${TASK_3_RESPONSE_FILE}"
-ask_required TASK_4_SENTENCE "Task 4 sentence to translate"
-ask_with_default TASK_4_FILE "Task 4 response file name" "${TASK_4_FILE}"
-ask_required TASK_5_SENTENCE "Task 5 sentence to detect"
-ask_with_default TASK_5_FILE "Task 5 response file name" "${TASK_5_FILE}"
+
+case "${VALUE_MODE}" in
+  C|c)
+    info "Continuing with shown values."
+    ;;
+  *)
+    edit_values_one_by_one
+    show_current_values
+    ;;
+esac
+
+# Even if user selected Continue, required sentences must not stay blank.
+if [[ -z "${TASK_4_SENTENCE}" || -z "${TASK_5_SENTENCE}" ]]; then
+  echo
+  warn "Some required sentence values are missing, so only missing values will be requested."
+  [[ -z "${TASK_4_SENTENCE}" ]] && ask_required TASK_4_SENTENCE "Task 4 sentence to translate"
+  [[ -z "${TASK_5_SENTENCE}" ]] && ask_required TASK_5_SENTENCE "Task 5 sentence to detect"
+fi
 
 if [[ "${TASK_2_FILE_NAME}" == "synthesize-text.json" ]]; then
   fail "Task 2 response file cannot be synthesize-text.json because that is the request file. Use synthesize-text.txt unless your lab says otherwise."
