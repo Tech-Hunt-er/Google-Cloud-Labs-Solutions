@@ -29,8 +29,8 @@ Open **Google Cloud Shell**.
 ## Step 2: Run the command below in Cloud Shell
 
 ```bash
-curl -LO https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/main/gsp647_01_cloudshell_copy_to_centos_clean_V3.sh
-curl -LO https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO_NAME/main/gsp647_02_run_inside_centos_clean_V3.sh
+curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Configuring%20IAM%20Permissions%20with%20gcloud/gsp647_01_cloudshell_copy_to_centos_clean_V3.sh
+curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Configuring%20IAM%20Permissions%20with%20gcloud/gsp647_02_run_inside_centos_clean_V3.sh
 ```
 
 ## Step 3: Run Script 01 in Cloud Shell
