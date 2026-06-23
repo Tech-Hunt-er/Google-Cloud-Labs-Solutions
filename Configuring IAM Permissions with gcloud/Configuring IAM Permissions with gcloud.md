@@ -4,15 +4,6 @@
 
 This guide explains how to run the GSP647 lab automation using two scripts hosted on GitHub.
 
-## Files Required
-
-Upload these two shell scripts to your GitHub repository:
-
-```text
-gsp647_01_cloudshell_copy_to_centos_clean_V3.sh
-gsp647_02_run_inside_centos_clean_V3.sh
-```
----
 
 ## Important Notes
 
