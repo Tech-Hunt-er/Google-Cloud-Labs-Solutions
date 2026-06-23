@@ -1,6 +1,6 @@
 # Configuring IAM Permissions with gcloud || [GSP647](https://www.cloudskillsboost.google/focuses/7678?parent=catalog) ||
 
-## 🔑 Solution [here](https://youtu.be/e5uGvyCrFTw)
+## 🔑 Solution [here](https://youtu.be/HfmuRbcHGgc)
 
 This guide explains how to run the GSP647 lab automation using two scripts hosted on GitHub.
 
