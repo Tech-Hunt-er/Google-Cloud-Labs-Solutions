@@ -3,7 +3,7 @@ set -Eeuo pipefail
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 
 # ==========================================================
-# ORBIT OF OPS - ARC132 CLOUD SPEECH LAB MENU AUTOPILOT
+# ORBIT OF OPS - ARC132 CLOUD SPEECH LAB MANUAL TEXT AUTOPILOT
 # Fixes: API key --api-target error + empty API_KEY false success
 # ==========================================================
 
@@ -182,10 +182,13 @@ ok "venv active."
 TASK_2_FILE_NAME="$(resolve_var task_2_file_name "synthesize-text.txt")"
 TASK_3_REQUEST_FILE="$(resolve_var task_3_request_file "request.json")"
 TASK_3_RESPONSE_FILE="$(resolve_var task_3_response_file "response.json")"
-TASK_4_SENTENCE="$(resolve_var task_4_sentence "")"
 TASK_4_FILE="$(resolve_var task_4_file "translated_response.txt")"
-TASK_5_SENTENCE="$(resolve_var task_5_sentence "")"
 TASK_5_FILE="$(resolve_var task_5_file "detected_response.txt")"
+
+# Task 4 and Task 5 text values are intentionally NOT reused from env/metadata.
+# They change from lab to lab, so the user must enter them manually every run.
+TASK_4_SENTENCE=""
+TASK_5_SENTENCE=""
 
 show_current_values(){
   echo
@@ -193,61 +196,70 @@ show_current_values(){
   printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 2 API response file:" "${TASK_2_FILE_NAME}"
   printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 3 request file:" "${TASK_3_REQUEST_FILE}"
   printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 3 response file:" "${TASK_3_RESPONSE_FILE}"
-  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 4 sentence:" "${TASK_4_SENTENCE:-<missing - required>}"
   printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 4 response file:" "${TASK_4_FILE}"
-  printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 5 sentence:" "${TASK_5_SENTENCE:-<missing - required>}"
   printf "${WHITE}${BOLD}%-34s${RESET} %s\n" "Task 5 response file:" "${TASK_5_FILE}"
+  printf "${YELLOW}${BOLD}%-34s${RESET} %s\n" "Task 4 sentence:" "Will be asked manually"
+  printf "${YELLOW}${BOLD}%-34s${RESET} %s\n" "Task 5 sentence:" "Will be asked manually"
   echo "${CYAN}${BOLD}╚════════════════════════════════════════════════════════════════════════╝${RESET}"
   echo
 }
 
-edit_values_one_by_one(){
+edit_file_values_one_by_one(){
   echo
-  warn "Edit mode started. Press Enter on any line to keep the shown value."
+  warn "File edit mode started. Press Enter on any line to keep the shown value."
   ask_with_default TASK_2_FILE_NAME "Task 2 API response file name. Do NOT use synthesize-text.json here" "${TASK_2_FILE_NAME}"
   ask_with_default TASK_3_REQUEST_FILE "Task 3 request file name" "${TASK_3_REQUEST_FILE}"
   ask_with_default TASK_3_RESPONSE_FILE "Task 3 response file name" "${TASK_3_RESPONSE_FILE}"
-
-  if [[ -n "${TASK_4_SENTENCE}" ]]; then
-    ask_with_default TASK_4_SENTENCE "Task 4 sentence to translate" "${TASK_4_SENTENCE}"
-  else
-    ask_required TASK_4_SENTENCE "Task 4 sentence to translate"
-  fi
-
   ask_with_default TASK_4_FILE "Task 4 response file name" "${TASK_4_FILE}"
-
-  if [[ -n "${TASK_5_SENTENCE}" ]]; then
-    ask_with_default TASK_5_SENTENCE "Task 5 sentence to detect" "${TASK_5_SENTENCE}"
-  else
-    ask_required TASK_5_SENTENCE "Task 5 sentence to detect"
-  fi
-
   ask_with_default TASK_5_FILE "Task 5 response file name" "${TASK_5_FILE}"
 }
 
+ask_task_sentences_every_time(){
+  echo
+  echo "${MAGENTA}${BOLD}╔════════════════ TASK 4 & TASK 5 TEXT INPUT REQUIRED ════════════════╗${RESET}"
+  echo "${YELLOW}These two message/sentence values are lab-specific and can be different every time.${RESET}"
+  echo "${YELLOW}Enter them exactly as shown in your lab instructions page.${RESET}"
+  echo "${MAGENTA}${BOLD}╚══════════════════════════════════════════════════════════════════════╝${RESET}"
+  echo
+
+  ask_required TASK_4_SENTENCE "Task 4 sentence to translate"
+  ask_required TASK_5_SENTENCE "Task 5 sentence to detect"
+
+  if [[ "${TASK_4_SENTENCE}" == "${TASK_5_SENTENCE}" ]]; then
+    warn "Task 4 and Task 5 sentences are exactly the same. Usually they are different in the lab."
+    read -r -n 1 -p "Press C to continue anyway, or press any other key to re-enter both sentences: " SAME_CONFIRM
+    echo
+    case "${SAME_CONFIRM}" in
+      C|c)
+        info "Continuing with same Task 4 and Task 5 sentence values as requested."
+        ;;
+      *)
+        TASK_4_SENTENCE=""
+        TASK_5_SENTENCE=""
+        ask_required TASK_4_SENTENCE "Task 4 sentence to translate"
+        ask_required TASK_5_SENTENCE "Task 5 sentence to detect"
+        ;;
+    esac
+  fi
+}
+
 show_current_values
-echo "${GREEN}${BOLD}Press C to continue with these values.${RESET}"
-echo "${YELLOW}${BOLD}Press any other key to edit values one by one.${RESET}"
+echo "${GREEN}${BOLD}Press C to continue with these file names.${RESET}"
+echo "${YELLOW}${BOLD}Press any other key to edit file names one by one.${RESET}"
 read -r -n 1 -p "Your choice: " VALUE_MODE
 echo
 
 case "${VALUE_MODE}" in
   C|c)
-    info "Continuing with shown values."
+    info "Continuing with shown file names."
     ;;
   *)
-    edit_values_one_by_one
+    edit_file_values_one_by_one
     show_current_values
     ;;
 esac
 
-# Even if user selected Continue, required sentences must not stay blank.
-if [[ -z "${TASK_4_SENTENCE}" || -z "${TASK_5_SENTENCE}" ]]; then
-  echo
-  warn "Some required sentence values are missing, so only missing values will be requested."
-  [[ -z "${TASK_4_SENTENCE}" ]] && ask_required TASK_4_SENTENCE "Task 4 sentence to translate"
-  [[ -z "${TASK_5_SENTENCE}" ]] && ask_required TASK_5_SENTENCE "Task 5 sentence to detect"
-fi
+ask_task_sentences_every_time
 
 if [[ "${TASK_2_FILE_NAME}" == "synthesize-text.json" ]]; then
   fail "Task 2 response file cannot be synthesize-text.json because that is the request file. Use synthesize-text.txt unless your lab says otherwise."
