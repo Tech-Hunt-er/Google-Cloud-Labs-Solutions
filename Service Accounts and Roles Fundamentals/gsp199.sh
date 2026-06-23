@@ -1,203 +1,290 @@
+#!/bin/bash
+
+# =========================================================
+# ORBIT OF OPS 🚀 | FULLY AUTOMATED GOOGLE CLOUD SOLUTION
+# =========================================================
+
+# Disable all interactive prompts automatically
+export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+
+# =========================================================
+# VISUAL STYLING ENGINE (COLORS & FORMATS)
+# =========================================================
+BLACK_TEXT=$'\033[0;90m'
+RED_TEXT=$'\033[0;91m'
+GREEN_TEXT=$'\033[0;92m'
+YELLOW_TEXT=$'\033[0;93m'
+BLUE_TEXT=$'\033[0;94m'
+MAGENTA_TEXT=$'\033[0;95m'
+CYAN_TEXT=$'\033[0;96m'
+WHITE_TEXT=$'\033[0;97m'
+ORANGE_TEXT=$'\033[38;5;208m'
+RESET_FORMAT=$'\033[0m'
+BOLD_TEXT=$'\033[1m'
+UNDERLINE_TEXT=$'\033[4m'
+
 clear
 
-#!/bin/bash
-# Define color variables
+# =========================================================
+# SYSTEM SERVICE BRANDING FUNCTIONS
+# =========================================================
+orbit_footer() {
+    echo
+    echo "${CYAN_TEXT}${BOLD_TEXT}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET_FORMAT}"
+    echo "${ORANGE_TEXT}${BOLD_TEXT} 💫 Join the Mission: Subscribe to Orbit of Ops${RESET_FORMAT}"
+    echo "${CYAN_TEXT}${UNDERLINE_TEXT} https://www.youtube.com/@OrbitOfOps${RESET_FORMAT}"
+    echo "${CYAN_TEXT}${BOLD_TEXT}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET_FORMAT}"
+    echo
+}
 
-BLACK=`tput setaf 0`
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
+# =========================================================
+# MISSION INITIALIZATION BANNER
+# =========================================================
+echo
+echo "${CYAN_TEXT}${BOLD_TEXT}┌────────────────────────────────────────────────────────┐${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}│                                                        │${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}│        🌟   ORBIT OF OPS: AUTOMATION PIPELINE   🌟      │${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}│                                                        │${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}└────────────────────────────────────────────────────────┘${RESET_FORMAT}"
+echo
 
-BG_BLACK=`tput setab 0`
-BG_RED=`tput setab 1`
-BG_GREEN=`tput setab 2`
-BG_YELLOW=`tput setab 3`
-BG_BLUE=`tput setab 4`
-BG_MAGENTA=`tput setab 5`
-BG_CYAN=`tput setab 6`
-BG_WHITE=`tput setab 7`
+echo "${WHITE_TEXT}${BOLD_TEXT}📦 Pipeline Scope & Deliverables:${RESET_FORMAT}"
+echo "${WHITE_TEXT}   ➜ Secure BigQuery Integration via Compute Engine${RESET_FORMAT}"
+echo "${WHITE_TEXT}   ➜ Least-Privilege IAM Service Accounts Configuration${RESET_FORMAT}"
+echo "${WHITE_TEXT}   ➜ Remote Python Client Library Orchestration${RESET_FORMAT}"
+echo
 
-BOLD=`tput bold`
-RESET=`tput sgr0`
+orbit_footer
 
-# Array of color codes excluding black and white
-TEXT_COLORS=($RED $GREEN $YELLOW $BLUE $MAGENTA $CYAN)
-BG_COLORS=($BG_RED $BG_GREEN $BG_YELLOW $BG_BLUE $BG_MAGENTA $BG_CYAN)
+# =========================================================
+# GROUND CONTROL CONFIGURATION
+# =========================================================
+echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 1: PARSING PLATFORM META-DATA ===${RESET_FORMAT}"
+echo
 
-# Pick random colors
-RANDOM_TEXT_COLOR=${TEXT_COLORS[$RANDOM % ${#TEXT_COLORS[@]}]}
-RANDOM_BG_COLOR=${BG_COLORS[$RANDOM % ${#BG_COLORS[@]}]}
+echo "${YELLOW_TEXT}${BOLD_TEXT}🔍 Auditing active Google Cloud identities...${RESET_FORMAT}"
+gcloud auth list
 
-#----------------------------------------------------start--------------------------------------------------#
+echo
+echo "${YELLOW_TEXT}${BOLD_TEXT}🛰️ Resolving spatial regional telemetry...${RESET_FORMAT}"
 
-echo "${RANDOM_BG_COLOR}${RANDOM_TEXT_COLOR}${BOLD}Starting Execution${RESET}"
+export DEVSHELL_PROJECT_ID=$(gcloud config get-value project)
+export PROJECT_ID=$DEVSHELL_PROJECT_ID
 
 export ZONE=$(gcloud compute project-info describe \
 --format="value(commonInstanceMetadata.items[google-compute-default-zone])")
 
-gcloud iam service-accounts create my-sa-123 --display-name "my service account"
+export REGION=$(gcloud compute project-info describe \
+--format="value(commonInstanceMetadata.items[google-compute-default-region])")
 
-sleep 10
+# Sync local parameters to active workspace environment
+gcloud config set compute/zone $ZONE --quiet
+gcloud config set compute/region $REGION --quiet
 
+echo
+echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Targeted Project: ${RESET_FORMAT}${CYAN_TEXT}$PROJECT_ID${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Active Region:   ${RESET_FORMAT}${CYAN_TEXT}$REGION${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}🛸 Target Zone:     ${RESET_FORMAT}${CYAN_TEXT}$ZONE${RESET_FORMAT}"
+echo
+
+echo "${BLUE_TEXT}${BOLD_TEXT}⚡ Ground Control environment initialized successfully.${RESET_FORMAT}"
+
+orbit_footer
+
+# =========================================================
+# SERVICE ACCOUNT SETUP
+# =========================================================
+echo
+echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 2: IDENTITY & ACCESS CONFIGURATION ===${RESET_FORMAT}"
+echo
+
+echo "${YELLOW_TEXT}${BOLD_TEXT}👤 Generating platform service account: my-sa-123...${RESET_FORMAT}"
+gcloud iam service-accounts create my-sa-123 \
+    --display-name="My Service Account" \
+    --quiet
+
+echo
+echo "${YELLOW_TEXT}${BOLD_TEXT}🔑 Attaching structural Editor IAM bindings...${RESET_FORMAT}"
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-    --member serviceAccount:my-sa-123@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com --role roles/editor
+    --member="serviceAccount:my-sa-123@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/editor" \
+    --quiet
 
+echo
+echo "${YELLOW_TEXT}${BOLD_TEXT}👤 Generating dedicated data gateway: bigquery-qwiklab...${RESET_FORMAT}"
 gcloud iam service-accounts create bigquery-qwiklab \
-  --description="Service account for BigQuery Qwiklabs" \
-  --display-name="bigquery-qwiklab"
+    --display-name="bigquery-qwiklab" \
+    --quiet
 
-sleep 10
+echo
+echo "${YELLOW_TEXT}${BOLD_TEXT}🔑 Attaching fine-grained BigQuery scope bindings...${RESET_FORMAT}"
+gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
+    --member="serviceAccount:bigquery-qwiklab@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/bigquery.dataViewer" \
+    --quiet
 
 gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-  --member="serviceAccount:bigquery-qwiklab@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com" \
-  --role="roles/bigquery.dataViewer"
+    --member="serviceAccount:bigquery-qwiklab@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/bigquery.user" \
+    --quiet
 
-gcloud projects add-iam-policy-binding $DEVSHELL_PROJECT_ID \
-  --member="serviceAccount:bigquery-qwiklab@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com" \
-  --role="roles/bigquery.user"
+orbit_footer
 
+# =========================================================
+# COMPUTE INSTANCE DEPLOYMENT
+# =========================================================
+echo
+echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 3: INFRASTRUCTURE DEPLOYMENT ===${RESET_FORMAT}"
+echo
+
+echo "${YELLOW_TEXT}${BOLD_TEXT}💻 Building secure runtime node (bigquery-instance)...${RESET_FORMAT}"
 gcloud compute instances create bigquery-instance \
-  --project=$DEVSHELL_PROJECT_ID \
-  --zone=$ZONE \
-  --machine-type=e2-medium \
-  --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=default \
-  --metadata=enable-oslogin=true \
-  --maintenance-policy=MIGRATE \
-  --provisioning-model=STANDARD \
-  --service-account=bigquery-qwiklab@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com \
-  --scopes=https://www.googleapis.com/auth/cloud-platform \
-  --create-disk=auto-delete=yes,boot=yes,device-name=bigquery-instance,\
-image=projects/debian-cloud/global/images/debian-11-bullseye-v20231010,\
-mode=rw,size=10,type=pd-balanced \
-  --no-shielded-secure-boot \
-  --shielded-vtpm \
-  --shielded-integrity-monitoring \
-  --labels=goog-ec-src=vm_add-gcloud \
-  --reservation-affinity=any
+    --project=$DEVSHELL_PROJECT_ID \
+    --zone=$ZONE \
+    --machine-type=e2-medium \
+    --image-family=debian-12 \
+    --image-project=debian-cloud \
+    --service-account=bigquery-qwiklab@$DEVSHELL_PROJECT_ID.iam.gserviceaccount.com \
+    --scopes=https://www.googleapis.com/auth/cloud-platform \
+    --quiet
 
-gcloud compute ssh bigquery-instance --zone=$ZONE --quiet --command='
-  sudo apt-get update &&
-  sudo apt-get install -y git python3-pip &&
-  pip3 install --upgrade pip &&
-  pip3 install google-cloud-bigquery pyarrow pandas db-dtypes &&
-  export PROJECT_ID=$(gcloud config get-value project) &&
-  echo "
+orbit_footer
+
+# =========================================================
+# METRIC SYNCHRONIZATION RUNTIME SPINNER
+# =========================================================
+echo
+echo "${BLUE_TEXT}${BOLD_TEXT}⏳ Syncing node telemetry & waiting for network stack...${RESET_FORMAT}"
+
+spinner="/-\|"
+messages=(
+"Validating host configurations..."
+"Structuring underlying guest OS requirements..."
+"Catch the next launch: Subscribe to Orbit of Ops 💫"
+"Mounting remote BigQuery engine modules..."
+)
+
+for i in {1..20}; do
+    msg=${messages[$((i % ${#messages[@]}))]}
+    printf "\r${CYAN_TEXT}${BOLD_TEXT}[${spinner:i%4:1}] $msg${RESET_FORMAT}"
+    sleep 1
+done
+
+printf "\n"
+
+# =========================================================
+# GENERATING AUTOMATED WORKLOAD COMPILATION
+# =========================================================
+echo
+echo "${GREEN_TEXT}${BOLD_TEXT}=== STAGE 4: WORKLOAD DELIVERY MATRIX ===${RESET_FORMAT}"
+echo
+
+cat > cp_disk.sh << 'EOF'
+#!/bin/bash
+
+echo "Refreshing regional mirror lists..."
+sudo apt-get update -y
+
+echo "Compiling execution language binaries & framework dependencies..."
+sudo apt-get install -y python3 python3-pip python3-venv git
+
+echo "Isolating workspace context via secure Python virtual sandbox..."
+python3 -m venv myvenv
+source myvenv/bin/activate
+
+echo "Upgrading base package delivery tools..."
+pip install --upgrade pip
+
+echo "Mounting structural BigQuery analytical frameworks..."
+pip install google-cloud-bigquery pyarrow pandas db-dtypes
+
+echo
+echo "💫 Powered by Orbit of Ops Automation Frameworks"
+echo "👉 Join the platform: https://www.youtube.com/@OrbitOfOps"
+echo
+
+echo "Writing structural analytics interface file (query.py)..."
+
+cat > query.py << 'PYEOF'
 from google.auth import compute_engine
 from google.cloud import bigquery
+
 credentials = compute_engine.Credentials(
-    service_account_email=\"bigquery-qwiklab@${PROJECT_ID}.iam.gserviceaccount.com\")
-query = \"\"\"
+    service_account_email='YOUR_SERVICE_ACCOUNT'
+)
+
+query = '''
 SELECT
   year,
-  COUNT(1) as num_babies
+  COUNT(1) AS num_babies
 FROM
   publicdata.samples.natality
 WHERE
   year > 2000
 GROUP BY
   year
-\"\"\"
-client = bigquery.Client(project=\"${PROJECT_ID}\", credentials=credentials)
-print(client.query(query).to_dataframe())
-" > query.py &&
-  python3 query.py
-'
+ORDER BY
+  year
+'''
 
+client = bigquery.Client(
+    project='PROJECT_ID',
+    credentials=credentials
+)
+
+print("\n💫 Orbit of Ops: Remote Workflow Output Engine")
+print("👉 Channel Resource: https://www.youtube.com/@OrbitOfOps\n")
+
+print("Executing analytical lookup on target data fields...\n")
+
+df = client.query(query).to_dataframe()
+print(df.to_string(index=False))
+PYEOF
+
+# Dynamic internal workspace adjustments
+sed -i "s/PROJECT_ID/$(gcloud config get-value project)/g" query.py
+sed -i "s/YOUR_SERVICE_ACCOUNT/bigquery-qwiklab@$(gcloud config get-value project).iam.gserviceaccount.com/g" query.py
+
+echo "Processing remote query matrix..."
 echo
 
-# Function to display a random congratulatory message
-function random_congrats() {
-    MESSAGES=(
-        "${GREEN}Congratulations For Completing The Lab! Keep up the great work!${RESET}"
-        "${CYAN}Well done! Your hard work and effort have paid off!${RESET}"
-        "${YELLOW}Amazing job! You’ve successfully completed the lab!${RESET}"
-        "${BLUE}Outstanding! Your dedication has brought you success!${RESET}"
-        "${MAGENTA}Great work! You’re one step closer to mastering this!${RESET}"
-        "${RED}Fantastic effort! You’ve earned this achievement!${RESET}"
-        "${CYAN}Congratulations! Your persistence has paid off brilliantly!${RESET}"
-        "${GREEN}Bravo! You’ve completed the lab with flying colors!${RESET}"
-        "${YELLOW}Excellent job! Your commitment is inspiring!${RESET}"
-        "${BLUE}You did it! Keep striving for more successes like this!${RESET}"
-        "${MAGENTA}Kudos! Your hard work has turned into a great accomplishment!${RESET}"
-        "${RED}You’ve smashed it! Completing this lab shows your dedication!${RESET}"
-        "${CYAN}Impressive work! You’re making great strides!${RESET}"
-        "${GREEN}Well done! This is a big step towards mastering the topic!${RESET}"
-        "${YELLOW}You nailed it! Every step you took led you to success!${RESET}"
-        "${BLUE}Exceptional work! Keep this momentum going!${RESET}"
-        "${MAGENTA}Fantastic! You’ve achieved something great today!${RESET}"
-        "${RED}Incredible job! Your determination is truly inspiring!${RESET}"
-        "${CYAN}Well deserved! Your effort has truly paid off!${RESET}"
-        "${GREEN}You’ve got this! Every step was a success!${RESET}"
-        "${YELLOW}Nice work! Your focus and effort are shining through!${RESET}"
-        "${BLUE}Superb performance! You’re truly making progress!${RESET}"
-        "${MAGENTA}Top-notch! Your skill and dedication are paying off!${RESET}"
-        "${RED}Mission accomplished! This success is a reflection of your hard work!${RESET}"
-        "${CYAN}You crushed it! Keep pushing towards your goals!${RESET}"
-        "${GREEN}You did a great job! Stay motivated and keep learning!${RESET}"
-        "${YELLOW}Well executed! You’ve made excellent progress today!${RESET}"
-        "${BLUE}Remarkable! You’re on your way to becoming an expert!${RESET}"
-        "${MAGENTA}Keep it up! Your persistence is showing impressive results!${RESET}"
-        "${RED}This is just the beginning! Your hard work will take you far!${RESET}"
-        "${CYAN}Terrific work! Your efforts are paying off in a big way!${RESET}"
-        "${GREEN}You’ve made it! This achievement is a testament to your effort!${RESET}"
-        "${YELLOW}Excellent execution! You’re well on your way to mastering the subject!${RESET}"
-        "${BLUE}Wonderful job! Your hard work has definitely paid off!${RESET}"
-        "${MAGENTA}You’re amazing! Keep up the awesome work!${RESET}"
-        "${RED}What an achievement! Your perseverance is truly admirable!${RESET}"
-        "${CYAN}Incredible effort! This is a huge milestone for you!${RESET}"
-        "${GREEN}Awesome! You’ve done something incredible today!${RESET}"
-        "${YELLOW}Great job! Keep up the excellent work and aim higher!${RESET}"
-        "${BLUE}You’ve succeeded! Your dedication is your superpower!${RESET}"
-        "${MAGENTA}Congratulations! Your hard work has brought great results!${RESET}"
-        "${RED}Fantastic work! You’ve taken a huge leap forward today!${RESET}"
-        "${CYAN}You’re on fire! Keep up the great work!${RESET}"
-        "${GREEN}Well deserved! Your efforts have led to success!${RESET}"
-        "${YELLOW}Incredible! You’ve achieved something special!${RESET}"
-        "${BLUE}Outstanding performance! You’re truly excelling!${RESET}"
-        "${MAGENTA}Terrific achievement! Keep building on this success!${RESET}"
-        "${RED}Bravo! You’ve completed the lab with excellence!${RESET}"
-        "${CYAN}Superb job! You’ve shown remarkable focus and effort!${RESET}"
-        "${GREEN}Amazing work! You’re making impressive progress!${RESET}"
-        "${YELLOW}You nailed it again! Your consistency is paying off!${RESET}"
-        "${BLUE}Incredible dedication! Keep pushing forward!${RESET}"
-        "${MAGENTA}Excellent work! Your success today is well earned!${RESET}"
-        "${RED}You’ve made it! This is a well-deserved victory!${RESET}"
-        "${CYAN}Wonderful job! Your passion and hard work are shining through!${RESET}"
-        "${GREEN}You’ve done it! Keep up the hard work and success will follow!${RESET}"
-        "${YELLOW}Great execution! You’re truly mastering this!${RESET}"
-        "${BLUE}Impressive! This is just the beginning of your journey!${RESET}"
-        "${MAGENTA}You’ve achieved something great today! Keep it up!${RESET}"
-        "${RED}You’ve made remarkable progress! This is just the start!${RESET}"
-    )
+python3 query.py
+EOF
 
-    RANDOM_INDEX=$((RANDOM % ${#MESSAGES[@]}))
-    echo -e "${BOLD}${MESSAGES[$RANDOM_INDEX]}"
-}
+# =========================================================
+# STAGE PIPELINE TRANSFERS
+# =========================================================
+echo
+echo "${YELLOW_TEXT}${BOLD_TEXT}📤 Injecting compiled execution matrices to remote instance...${RESET_FORMAT}"
 
-# Display a random congratulatory message
-random_congrats
+orbit_footer
 
-echo -e "\n"  # Adding one blank line
+gcloud compute scp cp_disk.sh bigquery-instance:/tmp \
+    --project=$DEVSHELL_PROJECT_ID \
+    --zone=$ZONE \
+    --quiet
 
-cd
+# =========================================================
+# INTERACTIVE NODE ORCHESTRATION
+# =========================================================
+echo
+echo "${YELLOW_TEXT}${BOLD_TEXT}🚀 Executing orchestration runtime parameters on target node...${RESET_FORMAT}"
 
-remove_files() {
-    # Loop through all files in the current directory
-    for file in *; do
-        # Check if the file name starts with "gsp", "arc", or "shell"
-        if [[ "$file" == gsp* || "$file" == arc* || "$file" == shell* ]]; then
-            # Check if it's a regular file (not a directory)
-            if [[ -f "$file" ]]; then
-                # Remove the file and echo the file name
-                rm "$file"
-                echo "File removed: $file"
-            fi
-        fi
-    done
-}
+orbit_footer
 
-remove_files
+gcloud compute ssh bigquery-instance \
+    --project=$DEVSHELL_PROJECT_ID \
+    --zone=$ZONE \
+    --quiet \
+    --command="chmod +x /tmp/cp_disk.sh && /tmp/cp_disk.sh"
+
+# =========================================================
+# MISSION ACCOMPLISHED DISPLAY TERMINAL
+# =========================================================
+echo
+echo "${GREEN_TEXT}${BOLD_TEXT}┌────────────────────────────────────────────────────────┐${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}│             PIPELINE EXECUTED SUCCESSFULLY             │${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}└────────────────────────────────────────────────────────┘${RESET_FORMAT}"
+echo
+
+orbit_footer
