@@ -4,13 +4,21 @@
 
 ### Run the following Commands in CloudShell
 
+### Step 1: Download and Transfer the Script (Cloud Shell)
+Run the following commands in your **Cloud Shell**. This will identify your VM's zone, download the automation script from GitHub, and securely copy it into the lab VM:
 
-```
+```bash
 export ZONE=$(gcloud compute instances list lab-vm --format 'csv[no-heading](zone)')
-gcloud compute ssh lab-vm --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet
+
+curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Cloud%20Speech%20API%203%20Ways%20Challenge%20Lab/arc132.sh
+
+gcloud compute scp arc132.sh lab-vm:~ --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet
 ```
 
 * Go to `Credentials` from [here](https://console.cloud.google.com/apis/credentials)
+
+* Set Variables & Execute (Inside VM)
+Inside your VM terminal, fill in the lab variables below and trigger the script:
 
 ```
 export API_KEY=
@@ -24,10 +32,7 @@ export task_5_file=""
 ```
 
 ```
-curl -LO raw.githubusercontent.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/main/Cloud%20Speech%20API%203%20Ways%20Challenge%20Lab/arc132.sh
-
 sudo chmod +x arc132.sh
-
 ./arc132.sh
 ```
 
