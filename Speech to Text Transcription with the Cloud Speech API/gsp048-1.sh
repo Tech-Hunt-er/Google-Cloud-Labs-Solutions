@@ -19,7 +19,7 @@ clear
 # Welcome Banner
 echo "${CYAN_TEXT}${BOLD_TEXT}╔════════════════════════════════════════════════════════╗${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}               ORBIT OF OPS - CLOUD SPEECH LAB           ${RESET_FORMAT}"
-echo "${BLUE_TEXT}${BOLD_TEXT}          Elevating your Cloud & DevOps Journey!         ${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}          Elevating your Cloud and DevOps Journey        ${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}╚════════════════════════════════════════════════════════╝${RESET_FORMAT}"
 echo
 echo "${GREEN_TEXT}${BOLD_TEXT}🚀 === INITIATING AUTOMATION SEQUENCE ===${RESET_FORMAT}"
@@ -52,13 +52,21 @@ cat > request.json <<EOF
 }
 EOF
 
-echo "--> Calling Cloud Speech API..."
-curl -s -X POST -H "Content-Type: application/json" --data-binary @request.json \
-"https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}" > result.json
-
-echo "--> Transcription Result:"
-cat result.json
-echo
+echo "--> Polling Cloud Speech API until Key propagates (this can take 1 to 4 minutes)..."
+while true; do
+    # Make the API call, save output to result.json, and capture ONLY the HTTP status code
+    HTTP_STATUS=$(curl -s -o result.json -w "%{http_code}" -X POST -H "Content-Type: application/json" --data-binary @request.json "https://speech.googleapis.com/v1/speech:recognize?key=${API_KEY}")
+    
+    if [ "$HTTP_STATUS" == "200" ]; then
+        echo -e "\n--> Success. API Key is active and transcription is saved to result.json."
+        cat result.json
+        echo
+        break
+    else
+        echo -ne "--> Key not ready yet (HTTP $HTTP_STATUS). Retrying in 10 seconds...\033[0K\r"
+        sleep 10
+    fi
+done
 EOF_END
 
 echo "${BLUE_TEXT}--> Finding VM Zone...${RESET_FORMAT}"
@@ -76,8 +84,8 @@ echo "${CYAN_TEXT}${BOLD_TEXT}╔═══════════════�
 echo "${YELLOW_TEXT}${BOLD_TEXT}   ⚠️  NOW: Check Your Score Up To Task 3 Then Process Next ⚠️  ${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}╚══════════════════════════════════════════════════════════════╝${RESET_FORMAT}"
 echo
-echo "${BLUE_TEXT}${BOLD_TEXT}🚀 Keep exploring the Orbit of Ops!${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}🚀 Keep exploring the Orbit of Ops${RESET_FORMAT}"
 echo "${RED_TEXT}${BOLD_TEXT}${UNDERLINE_TEXT}https://www.youtube.com/@orbitofops${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}Please Subscribe to the channel for more Cloud & DevOps videos!${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}Don't forget to Like, Share and Subscribe!${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}Please Subscribe to the channel for more Cloud and DevOps videos${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}Don't forget to Like, Share and Subscribe${RESET_FORMAT}"
 echo
