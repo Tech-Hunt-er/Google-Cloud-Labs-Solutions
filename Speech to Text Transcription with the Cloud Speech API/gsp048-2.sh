@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================================================================
-# Orbit of Ops - Cloud Speech API (French Audio)
+# Orbit of Ops - Cloud Speech API (Create Key & English Audio)
 # ==============================================================================
 
 # Define color variables
@@ -29,20 +29,32 @@ echo "${YELLOW_TEXT}--> Generating execution script for VM...${RESET_FORMAT}"
 
 cat > prepare_disk.sh <<'EOF_END'
 #!/bin/bash
-echo "--> Retrieving API Key 'awesome'..."
-KEY_NAME=$(gcloud alpha services api-keys list --format="value(name)" --filter "displayName=awesome")
-API_KEY=$(gcloud alpha services api-keys get-key-string $KEY_NAME --format="value(keyString)")
+echo "--> Enabling API Keys Service..."
+gcloud services enable apikeys.googleapis.com
 
-echo "--> Generating Speech-to-Text JSON request (French)..."
-rm -f request.json
+echo "--> Creating API Key 'awesome' with Speech API restrictions..."
+gcloud services api-keys create --display-name="awesome" --api-target=service=speech.googleapis.com
+
+echo "--> Retrieving API Key..."
+KEY_NAME=$(gcloud services api-keys list --format="value(name)" --filter="displayName=awesome" --limit=1)
+API_KEY=$(gcloud services api-keys get-key-string "$KEY_NAME" --format="value(keyString)")
+
+echo "--> ⏳ Waiting 45 seconds for API Key to propagate globally..."
+for i in {45..1}; do
+    echo -ne "--> Time remaining: $i seconds...\033[0K\r"
+    sleep 1
+done
+echo -e "\n--> API Key propagation complete!"
+
+echo "--> Generating Speech-to-Text JSON request (English)..."
 cat > request.json <<EOF
 {
   "config": {
       "encoding":"FLAC",
-      "languageCode": "fr"
+      "languageCode": "en-US"
   },
   "audio": {
-      "uri":"gs://cloud-samples-data/speech/corbeau_renard.flac"
+      "uri":"gs://cloud-samples-data/speech/brooklyn_bridge.flac"
   }
 }
 EOF
@@ -57,7 +69,7 @@ echo
 EOF_END
 
 echo "${BLUE_TEXT}--> Finding VM Zone...${RESET_FORMAT}"
-export ZONE=$(gcloud compute instances list linux-instance --format 'csv[no-heading](zone)')
+export ZONE=$(gcloud compute instances list --filter="name=linux-instance" --format="value(zone)")
 
 echo "${BLUE_TEXT}--> Copying script to linux-instance...${RESET_FORMAT}"
 gcloud compute scp prepare_disk.sh linux-instance:/tmp --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet
@@ -65,11 +77,11 @@ gcloud compute scp prepare_disk.sh linux-instance:/tmp --project=$DEVSHELL_PROJE
 echo "${BLUE_TEXT}--> Executing script on linux-instance...${RESET_FORMAT}"
 gcloud compute ssh linux-instance --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet --command="bash /tmp/prepare_disk.sh"
 
-# Completion Banner
+# Checkpoint Banner
 echo
-echo "${CYAN_TEXT}${BOLD_TEXT}╔════════════════════════════════════════════════════════╗${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}             ALL TASKS COMPLETED SUCCESSFULLY!            ${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}╚════════════════════════════════════════════════════════╝${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}╔══════════════════════════════════════════════════════════════╗${RESET_FORMAT}"
+echo "${YELLOW_TEXT}${BOLD_TEXT}   ⚠️  NOW: Check Your Score Up To Task 3 Then Process Next ⚠️  ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}╚══════════════════════════════════════════════════════════════╝${RESET_FORMAT}"
 echo
 echo "${BLUE_TEXT}${BOLD_TEXT}🚀 Keep exploring the Orbit of Ops!${RESET_FORMAT}"
 echo "${RED_TEXT}${BOLD_TEXT}${UNDERLINE_TEXT}https://www.youtube.com/@orbitofops${RESET_FORMAT}"
