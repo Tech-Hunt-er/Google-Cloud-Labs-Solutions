@@ -32,12 +32,12 @@ cat > prepare_disk.sh <<'EOF_END'
 echo "--> Enabling API Keys Service..."
 gcloud services enable apikeys.googleapis.com
 
-echo "--> Creating API Key 'awesome'..."
-gcloud alpha services api-keys create --display-name="awesome" 
+echo "--> Creating API Key 'awesome' with Speech API restrictions..."
+gcloud services api-keys create --display-name="awesome" --api-target=service=speech.googleapis.com
 
 echo "--> Retrieving API Key..."
-KEY_NAME=$(gcloud alpha services api-keys list --format="value(name)" --filter "displayName=awesome")
-API_KEY=$(gcloud alpha services api-keys get-key-string $KEY_NAME --format="value(keyString)")
+KEY_NAME=$(gcloud services api-keys list --format="value(name)" --filter="displayName=awesome" --limit=1)
+API_KEY=$(gcloud services api-keys get-key-string "$KEY_NAME" --format="value(keyString)")
 
 echo "--> Generating Speech-to-Text JSON request (English)..."
 cat > request.json <<EOF
@@ -62,7 +62,7 @@ echo
 EOF_END
 
 echo "${BLUE_TEXT}--> Finding VM Zone...${RESET_FORMAT}"
-export ZONE=$(gcloud compute instances list linux-instance --format 'csv[no-heading](zone)')
+export ZONE=$(gcloud compute instances list --filter="name=linux-instance" --format="value(zone)")
 
 echo "${BLUE_TEXT}--> Copying script to linux-instance...${RESET_FORMAT}"
 gcloud compute scp prepare_disk.sh linux-instance:/tmp --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet
