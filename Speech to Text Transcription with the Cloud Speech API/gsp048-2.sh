@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ==============================================================================
-# Orbit of Ops - Cloud Speech API (Create Key & English Audio)
+# Orbit of Ops - Cloud Speech API (French Audio)
 # ==============================================================================
 
 # Define color variables
@@ -19,7 +19,7 @@ clear
 # Welcome Banner
 echo "${CYAN_TEXT}${BOLD_TEXT}╔════════════════════════════════════════════════════════╗${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}               ORBIT OF OPS - CLOUD SPEECH LAB           ${RESET_FORMAT}"
-echo "${BLUE_TEXT}${BOLD_TEXT}          Elevating your Cloud & DevOps Journey!         ${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}          Elevating your Cloud and DevOps Journey        ${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}╚════════════════════════════════════════════════════════╝${RESET_FORMAT}"
 echo
 echo "${GREEN_TEXT}${BOLD_TEXT}🚀 === INITIATING AUTOMATION SEQUENCE ===${RESET_FORMAT}"
@@ -29,32 +29,20 @@ echo "${YELLOW_TEXT}--> Generating execution script for VM...${RESET_FORMAT}"
 
 cat > prepare_disk.sh <<'EOF_END'
 #!/bin/bash
-echo "--> Enabling API Keys Service..."
-gcloud services enable apikeys.googleapis.com
-
-echo "--> Creating API Key 'awesome' with Speech API restrictions..."
-gcloud services api-keys create --display-name="awesome" --api-target=service=speech.googleapis.com
-
-echo "--> Retrieving API Key..."
+echo "--> Retrieving API Key 'awesome'..."
 KEY_NAME=$(gcloud services api-keys list --format="value(name)" --filter="displayName=awesome" --limit=1)
 API_KEY=$(gcloud services api-keys get-key-string "$KEY_NAME" --format="value(keyString)")
 
-echo "--> ⏳ Waiting 45 seconds for API Key to propagate globally..."
-for i in {45..1}; do
-    echo -ne "--> Time remaining: $i seconds...\033[0K\r"
-    sleep 1
-done
-echo -e "\n--> API Key propagation complete!"
-
-echo "--> Generating Speech-to-Text JSON request (English)..."
+echo "--> Generating Speech-to-Text JSON request (French)..."
+rm -f request.json
 cat > request.json <<EOF
 {
   "config": {
       "encoding":"FLAC",
-      "languageCode": "en-US"
+      "languageCode": "fr"
   },
   "audio": {
-      "uri":"gs://cloud-samples-data/speech/brooklyn_bridge.flac"
+      "uri":"gs://cloud-samples-data/speech/corbeau_renard.flac"
   }
 }
 EOF
@@ -77,14 +65,14 @@ gcloud compute scp prepare_disk.sh linux-instance:/tmp --project=$DEVSHELL_PROJE
 echo "${BLUE_TEXT}--> Executing script on linux-instance...${RESET_FORMAT}"
 gcloud compute ssh linux-instance --project=$DEVSHELL_PROJECT_ID --zone=$ZONE --quiet --command="bash /tmp/prepare_disk.sh"
 
-# Checkpoint Banner
+# Completion Banner
 echo
-echo "${CYAN_TEXT}${BOLD_TEXT}╔══════════════════════════════════════════════════════════════╗${RESET_FORMAT}"
-echo "${YELLOW_TEXT}${BOLD_TEXT}   ⚠️  NOW: Check Your Score Up To Task 3 Then Process Next ⚠️  ${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}╚══════════════════════════════════════════════════════════════╝${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}╔════════════════════════════════════════════════════════╗${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}             ALL TASKS COMPLETED SUCCESSFULLY             ${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}╚════════════════════════════════════════════════════════╝${RESET_FORMAT}"
 echo
-echo "${BLUE_TEXT}${BOLD_TEXT}🚀 Keep exploring the Orbit of Ops!${RESET_FORMAT}"
+echo "${BLUE_TEXT}${BOLD_TEXT}🚀 Keep exploring the Orbit of Ops${RESET_FORMAT}"
 echo "${RED_TEXT}${BOLD_TEXT}${UNDERLINE_TEXT}https://www.youtube.com/@orbitofops${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}Please Subscribe to the channel for more Cloud & DevOps videos!${RESET_FORMAT}"
-echo "${CYAN_TEXT}${BOLD_TEXT}Don't forget to Like, Share and Subscribe!${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}Please Subscribe to the channel for more Cloud and DevOps videos${RESET_FORMAT}"
+echo "${CYAN_TEXT}${BOLD_TEXT}Don't forget to Like, Share and Subscribe${RESET_FORMAT}"
 echo
