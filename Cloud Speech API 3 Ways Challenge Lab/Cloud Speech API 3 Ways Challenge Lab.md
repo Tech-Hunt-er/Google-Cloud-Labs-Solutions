@@ -1,6 +1,6 @@
 # Cloud Speech API 3 Ways: Challenge Lab || [ARC132](https://www.cloudskillsboost.google/focuses/67215?parent=catalog) ||
 
-## Solution [here](https://youtu.be/eQIWNzs-0NA)
+## Solution [here](https://youtu.be/dGMkeDpM1Js)
 
 ### Run the following Commands in CloudShell
 
