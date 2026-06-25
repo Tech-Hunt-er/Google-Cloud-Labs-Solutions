@@ -25,11 +25,13 @@ while true; do
   sleep 10
 done
 
-echo -e "\n\n${GREEN_TEXT}ALB is online! Initiating Failover sequence...${RESET_FORMAT}"
+echo -e "\n\n${GREEN_TEXT}ALB is online. Initiating Failover sequence...${RESET_FORMAT}"
 mkdir -p ~/.ssh
 ssh-keygen -t rsa -f ~/.ssh/google_compute_engine -N "" -q <<< y >/dev/null 2>&1 || true
 
-read -r INSTANCE ZONE <<< $(gcloud compute instances list --filter="name~mig-alb-api-a" --format="value(name,zone.basename())" | head -n 1)
+# Bulletproof method for fetching instance variables
+INSTANCE=$(gcloud compute instances list --filter="name:mig-alb-api-a" --format="value(name)" | head -n 1)
+ZONE=$(gcloud compute instances list --filter="name:mig-alb-api-a" --format="value(zone)" | head -n 1)
 
 echo "${ORANGE_TEXT}Ensuring Nginx is running on Region A ($INSTANCE) to stabilize traffic...${RESET_FORMAT}"
 gcloud compute ssh "$INSTANCE" --zone="$ZONE" --quiet --command="sudo systemctl start nginx"
@@ -37,10 +39,10 @@ gcloud compute ssh "$INSTANCE" --zone="$ZONE" --quiet --command="sudo systemctl 
 echo "${YELLOW_TEXT}Waiting 30 seconds for traffic to balance...${RESET_FORMAT}"
 sleep 30
 
-echo "${RED_TEXT}Stopping Nginx to trigger failover!${RESET_FORMAT}"
+echo "${RED_TEXT}Stopping Nginx to trigger failover...${RESET_FORMAT}"
 gcloud compute ssh "$INSTANCE" --zone="$ZONE" --quiet --command="sudo systemctl stop nginx"
 
-echo "${CYAN_TEXT}Failover triggered! Watching traffic route to Region B...${RESET_FORMAT}"
+echo "${CYAN_TEXT}Failover triggered. Watching traffic route to Region B...${RESET_FORMAT}"
 timeout 25 bash -c '
 while true; do
   curl -k -s https://'"$LB_IP_GLOBAL"' | grep "Hello from"
@@ -50,10 +52,10 @@ done
 
 echo
 echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}   TASK 3 COMPLETE! Go click 'Check my progress' for 100/100!     ${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}   TASK 3 COMPLETE! Go click Check my progress for 100/100.       ${RESET_FORMAT}"
 echo "${CYAN_TEXT}${BOLD_TEXT}==================================================================${RESET_FORMAT}"
 echo
 echo "${RED_TEXT}${BOLD_TEXT}${UNDERLINE_TEXT}https://www.youtube.com/@OrbitOfOps${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}Please subscribe to Orbit of Ops for more cloud automation guides!${RESET_FORMAT}"
-echo "${GREEN_TEXT}${BOLD_TEXT}Don't forget to Like, Share and Subscribe!${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}Please subscribe to Orbit of Ops for more cloud automation guides.${RESET_FORMAT}"
+echo "${GREEN_TEXT}${BOLD_TEXT}Don't forget to Like, Share and Subscribe.${RESET_FORMAT}"
 echo
