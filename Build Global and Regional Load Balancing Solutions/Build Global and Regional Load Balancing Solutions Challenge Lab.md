@@ -68,10 +68,10 @@ Under the Connect column, click the SSH button next to that specific instance. A
 
 Once the terminal connects, run this exact command to stop the web server:
 
-'''
-sudo systemctl stop nginx
-'''
 
+    sudo systemctl stop nginx
+
+    
 Close the SSH window.
 
 Go back to the lab manual and click Check my progress for Task 3.
