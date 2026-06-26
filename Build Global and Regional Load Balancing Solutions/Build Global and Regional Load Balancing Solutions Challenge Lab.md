@@ -58,6 +58,24 @@ This final script verifies the Load Balancer is healthy, simulates a crash on Re
 > **Action Required:** Just sit back and watch! The script will wait for a healthy `HTTP 200 OK` status, trigger the failover, and print the resulting traffic shift to your terminal. 
 > Once it completes, click **Check my progress** for Task 3 to claim your 100/100 score.
 
+### If Task 3 fails
+
+In the Google Cloud Console, navigate to Compute Engine > VM instances.
+
+Locate the instance in Region A (based on your log, it is named mig-alb-api-a-lzcg).
+
+Under the Connect column, click the SSH button next to that specific instance. A new browser window will open.
+
+Once the terminal connects, run this exact command to stop the web server:
+
+'''
+sudo systemctl stop nginx
+'''
+
+Close the SSH window.
+
+Go back to the lab manual and click Check my progress for Task 3.
+
 ---
 
 ## 🤝 Support the Channel
