@@ -51,7 +51,7 @@ This final script verifies the Load Balancer is healthy, simulates a crash on Re
 
 *Only run this AFTER getting your points for Task 2.*
 
-    curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Build%20Global%20and%20Regional%20Load%20Balancing%20Solutions/orbit3.sh
+    curl -LO https://github.com/Orbit-of-Ops/Google-Cloud-Labs-Solutions/raw/refs/heads/main/Build%20Global%20and%20Regional%20Load%20Balancing%20Solutions/Orbit3.sh
     sudo chmod +x Orbit3.sh
     ./Orbit3.sh
 
