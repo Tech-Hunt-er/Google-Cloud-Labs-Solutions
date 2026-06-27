@@ -1,6 +1,6 @@
 # GSP539: Build Global and Regional Load Balancing Solutions - Challenge Lab
 
-[![Orbit of Ops YouTube Channel](https://img.shields.io/badge/YouTube-Orbit_of_Ops-red?logo=youtube&style=for-the-badge)](https://www.youtube.com/@OrbitOfOps)
+[![Orbit of Ops YouTube Channel](https://img.shields.io/badge/YouTube-Orbit_of_Ops-red?logo=youtube&style=for-the-badge)](https://youtu.be/pk0kqI8p1Xc)
 
 Welcome to the **Orbit of Ops** automated solution for the **Build Global and Regional Load Balancing Solutions: Challenge Lab (GSP539)**. 
 
