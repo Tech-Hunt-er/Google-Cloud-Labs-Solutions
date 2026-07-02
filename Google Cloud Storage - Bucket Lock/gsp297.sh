@@ -1,61 +1,62 @@
-BLACK=`tput setaf 0`
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
+#!/bin/bash
 
-BG_BLACK=`tput setab 0`
-BG_RED=`tput setab 1`
-BG_GREEN=`tput setab 2`
-BG_YELLOW=`tput setab 3`
-BG_BLUE=`tput setab 4`
-BG_MAGENTA=`tput setab 5`
-BG_CYAN=`tput setab 6`
-BG_WHITE=`tput setab 7`
+# ==============================================================================
+# Script:  Cloud Storage Lifecycle Management
+# Branding: Orbit of Ops | Infrastructure Automation
+# ==============================================================================
 
-BOLD=`tput bold`
-RESET=`tput sgr0`
-#----------------------------------------------------start--------------------------------------------------#
+# --- Color/Style Definitions ---
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
+CYAN=$(tput setaf 6)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+RED=$(tput setaf 1)
 
-echo "${YELLOW}${BOLD}Starting${RESET}" "${GREEN}${BOLD}Execution${RESET}"
+# --- Helper Functions ---
+log_info()    { echo -e "${CYAN}${BOLD}[ORBIT-OPS]${RESET} $1"; }
+log_success() { echo -e "${GREEN}${BOLD}[SUCCESS]${RESET} $1"; }
+log_warn()    { echo -e "${YELLOW}${BOLD}[WAITING]${RESET} $1"; }
 
+# --- Execution ---
+clear
+echo "--------------------------------------------------------"
+echo "${BOLD}     🚀 Orbit of Ops | Storage Lifecycle Lab${RESET}"
+echo "--------------------------------------------------------"
+
+log_info "Initializing project configuration..."
 export BUCKET=$(gcloud config get-value project)
 
+log_info "Creating bucket: ${YELLOW}${BUCKET}${RESET}"
 gsutil mb "gs://$BUCKET"
 
+log_warn "Applying retention policies (10s)..."
 sleep 5
-
 gsutil retention set 10s "gs://$BUCKET"
-
 gsutil retention get "gs://$BUCKET"
 
+log_info "Uploading dummy transactions..."
 gsutil cp gs://spls/gsp297/dummy_transactions "gs://$BUCKET/"
-
 gsutil ls -L "gs://$BUCKET/dummy_transactions"
 
+log_warn "Securing bucket with retention lock..."
 sleep 5
-
 gsutil retention lock "gs://$BUCKET/"
 
+log_info "Testing temporary holds..."
 gsutil retention temp set "gs://$BUCKET/dummy_transactions"
-
 gsutil rm "gs://$BUCKET/dummy_transactions"
-
 gsutil retention temp release "gs://$BUCKET/dummy_transactions"
 
+log_info "Configuring event-based holds..."
 gsutil retention event-default set "gs://$BUCKET/"
-
 gsutil cp gs://spls/gsp297/dummy_loan "gs://$BUCKET/"
-
 gsutil ls -L "gs://$BUCKET/dummy_loan"
 
+log_info "Releasing event lock..."
 gsutil retention event release "gs://$BUCKET/dummy_loan"
-
 gsutil ls -L "gs://$BUCKET/dummy_loan"
 
-echo "${RED}${BOLD}Congratulations${RESET}" "${WHITE}${BOLD}for${RESET}" "${GREEN}${BOLD}Completing the Lab !!!${RESET}"
-
-#-----------------------------------------------------end----------------------------------------------------------#
+echo "--------------------------------------------------------"
+log_success "${BOLD}Lab Completed Successfully! - Orbit of Ops${RESET}"
+echo "--------------------------------------------------------"
