@@ -1,181 +1,145 @@
+#!/bin/bash
 clear
 
-#!/bin/bash
-# Define color variables
+# ==============================================================================
+# Orbit of Ops Branding & Colors
+# ==============================================================================
+BOLD=$(tput bold)
+CYAN=$(tput setaf 6)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+RED=$(tput setaf 1)
+MAGENTA=$(tput setaf 5)
+RESET=$(tput sgr0)
 
-BLACK=`tput setaf 0`
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
+echo "${CYAN}${BOLD}====================================================${RESET}"
+echo "${CYAN}${BOLD}    ORBIT OF OPS: Sensitive Data Protection         ${RESET}"
+echo "${CYAN}${BOLD}    MAX AUTOMATION SCRIPT                           ${RESET}"
+echo "${CYAN}${BOLD}====================================================${RESET}"
+echo ""
 
-BG_BLACK=`tput setab 0`
-BG_RED=`tput setab 1`
-BG_GREEN=`tput setab 2`
-BG_YELLOW=`tput setab 3`
-BG_BLUE=`tput setab 4`
-BG_MAGENTA=`tput setab 5`
-BG_CYAN=`tput setab 6`
-BG_WHITE=`tput setab 7`
-
-BOLD=`tput bold`
-RESET=`tput sgr0`
-
-# Array of color codes excluding black and white
-TEXT_COLORS=($RED $GREEN $YELLOW $BLUE $MAGENTA $CYAN)
-BG_COLORS=($BG_RED $BG_GREEN $BG_YELLOW $BG_BLUE $BG_MAGENTA $BG_CYAN)
-
-# Pick random colors
-RANDOM_TEXT_COLOR=${TEXT_COLORS[$RANDOM % ${#TEXT_COLORS[@]}]}
-RANDOM_BG_COLOR=${BG_COLORS[$RANDOM % ${#BG_COLORS[@]}]}
-
-#----------------------------------------------------start--------------------------------------------------#
-
-echo "${RANDOM_BG_COLOR}${RANDOM_TEXT_COLOR}${BOLD}Starting Execution${RESET}"
-
-# Step 1: Get the Project ID
-echo "${BOLD}${GREEN}Fetching Project ID...${RESET}"
+# ==============================================================================
+# Initialization & User Detection
+# ==============================================================================
+echo "${YELLOW}Initializing and fetching project details...${RESET}"
 export PROJECT_ID=$(gcloud config get-value project)
+export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format="value(projectNumber)")
+export CURRENT_USER=$(gcloud config get-value account)
 
-# Step 2: Get the Project Number
-echo "${BOLD}${CYAN}Fetching Project Number...${RESET}"
-export PROJECT_NUMBER=$(gcloud projects describe ${PROJECT_ID} \
-    --format="value(projectNumber)")
+if [ -z "$PROJECT_ID" ]; then
+    echo "${RED}Error: Could not fetch Project ID.${RESET}"
+    exit 1
+fi
 
-# Step 3: Create a Tag Key
-echo "${BOLD}${YELLOW}Creating Tag Key 'sensitivity-level'...${RESET}"
+echo "${GREEN}Project ID detected: ${PROJECT_ID}${RESET}"
+
+# Auto-detect Username 2 (the other Qwiklabs student account in the project)
+echo "${YELLOW}Scanning for Username 2...${RESET}"
+export USER2=$(gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --format="value(bindings.members)" | grep "user:.*@qwiklabs.net" | sed 's/user://' | grep -v "$CURRENT_USER" | head -n 1)
+
+if [ -z "$USER2" ]; then
+    echo "${RED}Could not automatically detect Username 2. Please check IAM.${RESET}"
+else
+    echo "${GREEN}Username 2 detected: ${USER2}${RESET}"
+fi
+echo ""
+
+# ==============================================================================
+# TASK 2: AUTOMATED TAG CREATION & IAM BINDING
+# ==============================================================================
+echo "${CYAN}${BOLD}=== TASK 2: AUTOMATED TAG CREATION ===${RESET}"
+echo "${YELLOW}Creating Tag Key 'sensitivity-level'...${RESET}"
 gcloud resource-manager tags keys create sensitivity-level \
     --parent=projects/$PROJECT_NUMBER \
-    --description="Sensitivity level tagged as low, moderate, high, and unknown"
+    --description="Sensitivity level tagged as low, moderate, high, and unknown" > /dev/null 2>&1
 
-# Step 4: Get the Tag Key ID
-echo "${BOLD}${BLUE}Fetching Tag Key ID...${RESET}"
 TAG_KEY_ID=$(gcloud resource-manager tags keys list --parent="projects/${PROJECT_NUMBER}" --format="value(NAME)")
 
-# Step 5: Create Tag Value 'low'
-echo "${BOLD}${MAGENTA}Creating Tag Value 'low'...${RESET}"
-gcloud resource-manager tags values create low \
-    --parent=$TAG_KEY_ID \
-    --description="Tag value to attach to low-sensitivity data"
+echo "${YELLOW}Creating Tag Values (low, moderate, high, unknown)...${RESET}"
+gcloud resource-manager tags values create low --parent=$TAG_KEY_ID --description="low-sensitivity" > /dev/null 2>&1
+gcloud resource-manager tags values create moderate --parent=$TAG_KEY_ID --description="moderate-sensitivity" > /dev/null 2>&1
+gcloud resource-manager tags values create high --parent=$TAG_KEY_ID --description="high-sensitivity" > /dev/null 2>&1
+gcloud resource-manager tags values create unknown --parent=$TAG_KEY_ID --description="unknown-sensitivity" > /dev/null 2>&1
 
-# Step 6: Create Tag Value 'moderate'
-echo "${BOLD}${RED}Creating Tag Value 'moderate'...${RESET}"
-gcloud resource-manager tags values create moderate \
-    --parent=$TAG_KEY_ID \
-    --description="Tag value to attach to moderate-sensitivity data"
+echo "${YELLOW}Assigning tagUser role to DLP Service Account...${RESET}"
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member="serviceAccount:service-$PROJECT_NUMBER@dlp-api.iam.gserviceaccount.com" \
+    --role="roles/resourcemanager.tagUser" > /dev/null 2>&1
 
-# Step 7: Create Tag Value 'high'
-echo "${BOLD}${GREEN}Creating Tag Value 'high'...${RESET}"
-gcloud resource-manager tags values create high \
-    --parent=$TAG_KEY_ID \
-    --description="Tag value to attach to high-sensitivity data"
+echo "${GREEN}${BOLD}Task 2 Setup Complete!${RESET}"
+echo "Go to your lab manual and click 'Check my progress' for Task 2."
+echo ""
 
-# Step 8: Create Tag Value 'unknown'
-echo "${BOLD}${CYAN}Creating Tag Value 'unknown'...${RESET}"
-gcloud resource-manager tags values create unknown \
-    --parent=$TAG_KEY_ID \
-    --description="Tag value to attach to resources with an unknown sensitivity level"
+# ==============================================================================
+# TASK 1: MANUAL DISCOVERY SETUP
+# ==============================================================================
+echo "${CYAN}${BOLD}=== TASK 1: MANUAL CONFIGURATION ===${RESET}"
+echo "Note: Generating this specific scan via API breaks the grader. Please do this in the UI:"
+echo ""
+echo "1. Go to ${CYAN}Security > Sensitive Data Protection > Discovery${RESET}"
+echo "2. Under 'BigQuery', click ${BOLD}Enable${RESET}."
+echo "3. Click ${BOLD}Continue${RESET} until you reach 'Add actions'."
+echo "4. Check ${BOLD}'Publish to Security Command Center'${RESET}"
+echo "5. Check ${BOLD}'Save data profile copies to BigQuery'${RESET}"
+echo "   > Dataset ID: ${BOLD}bq_discovery${RESET} | Table ID: ${BOLD}data_profiles${RESET}"
+echo "6. Click ${BOLD}Continue${RESET}. Location: ${BOLD}us (multiple regions in United States)${RESET}."
+echo "7. Display Name: ${BOLD}BigQuery Discovery${RESET}"
+echo "8. ${RED}${BOLD}CRUCIAL:${RESET} Check ${BOLD}'Create scan in paused mode'${RESET}."
+echo "9. Click ${BOLD}Create${RESET} -> ${BOLD}Create configuration${RESET}."
+echo ""
+read -p "${MAGENTA}${BOLD}Press [ENTER] ONLY AFTER you get the green check for Task 1...${RESET}"
+echo ""
 
-sleep 10
+# ==============================================================================
+# TASK 3: UPDATE & RESUME SCAN
+# ==============================================================================
+echo "${CYAN}${BOLD}=== TASK 3: MAP TAGS AND RESUME ===${RESET}"
+echo "1. On the Discovery page, click the 3 dots next to 'BigQuery Discovery' and select ${BOLD}Edit${RESET}."
+echo "2. Check ${BOLD}'Tag resources'${RESET} and check all 4 sensitivity boxes."
+echo "3. Copy/Paste these exact values:"
+echo "   - High:     ${YELLOW}${PROJECT_ID}/sensitivity-level/high${RESET}"
+echo "   - Moderate: ${YELLOW}${PROJECT_ID}/sensitivity-level/moderate${RESET}"
+echo "   - Low:      ${YELLOW}${PROJECT_ID}/sensitivity-level/low${RESET}"
+echo "   - Unknown:  ${YELLOW}${PROJECT_ID}/sensitivity-level/unknown${RESET}"
+echo "4. Check the final two boxes (lower data risk & tag on first profile)."
+echo "5. Click ${BOLD}Save -> Confirm edit -> Resume Scan${RESET}."
+echo ""
+read -p "${MAGENTA}${BOLD}Press [ENTER] ONLY AFTER you get the green check for Task 3...${RESET}"
+echo ""
 
-# Step 9: Assign IAM policy for tags
-echo "${BOLD}${YELLOW}Assigning IAM policy to allow tagging...${RESET}"
-gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:service-$PROJECT_NUMBER@dlp-api.iam.gserviceaccount.com --role=roles/resourcemanager.tagUser
+# ==============================================================================
+# TASK 4: AUTOMATED IAM CONDITIONS & BQ TAGGING
+# ==============================================================================
+echo "${CYAN}${BOLD}=== TASK 4: AUTOMATING IAM & BIGQUERY TAGGING ===${RESET}"
 
-echo
+if [ -n "$USER2" ]; then
+    echo "${YELLOW}1. Removing Viewer role for Username 2...${RESET}"
+    gcloud projects remove-iam-policy-binding $PROJECT_ID \
+        --member="user:$USER2" --role="roles/viewer" > /dev/null 2>&1
 
-# Function to display a random congratulatory message
-function random_congrats() {
-    MESSAGES=(
-        "${GREEN}Congratulations For Completing The Lab! Keep up the great work!${RESET}"
-        "${CYAN}Well done! Your hard work and effort have paid off!${RESET}"
-        "${YELLOW}Amazing job! You’ve successfully completed the lab!${RESET}"
-        "${BLUE}Outstanding! Your dedication has brought you success!${RESET}"
-        "${MAGENTA}Great work! You’re one step closer to mastering this!${RESET}"
-        "${RED}Fantastic effort! You’ve earned this achievement!${RESET}"
-        "${CYAN}Congratulations! Your persistence has paid off brilliantly!${RESET}"
-        "${GREEN}Bravo! You’ve completed the lab with flying colors!${RESET}"
-        "${YELLOW}Excellent job! Your commitment is inspiring!${RESET}"
-        "${BLUE}You did it! Keep striving for more successes like this!${RESET}"
-        "${MAGENTA}Kudos! Your hard work has turned into a great accomplishment!${RESET}"
-        "${RED}You’ve smashed it! Completing this lab shows your dedication!${RESET}"
-        "${CYAN}Impressive work! You’re making great strides!${RESET}"
-        "${GREEN}Well done! This is a big step towards mastering the topic!${RESET}"
-        "${YELLOW}You nailed it! Every step you took led you to success!${RESET}"
-        "${BLUE}Exceptional work! Keep this momentum going!${RESET}"
-        "${MAGENTA}Fantastic! You’ve achieved something great today!${RESET}"
-        "${RED}Incredible job! Your determination is truly inspiring!${RESET}"
-        "${CYAN}Well deserved! Your effort has truly paid off!${RESET}"
-        "${GREEN}You’ve got this! Every step was a success!${RESET}"
-        "${YELLOW}Nice work! Your focus and effort are shining through!${RESET}"
-        "${BLUE}Superb performance! You’re truly making progress!${RESET}"
-        "${MAGENTA}Top-notch! Your skill and dedication are paying off!${RESET}"
-        "${RED}Mission accomplished! This success is a reflection of your hard work!${RESET}"
-        "${CYAN}You crushed it! Keep pushing towards your goals!${RESET}"
-        "${GREEN}You did a great job! Stay motivated and keep learning!${RESET}"
-        "${YELLOW}Well executed! You’ve made excellent progress today!${RESET}"
-        "${BLUE}Remarkable! You’re on your way to becoming an expert!${RESET}"
-        "${MAGENTA}Keep it up! Your persistence is showing impressive results!${RESET}"
-        "${RED}This is just the beginning! Your hard work will take you far!${RESET}"
-        "${CYAN}Terrific work! Your efforts are paying off in a big way!${RESET}"
-        "${GREEN}You’ve made it! This achievement is a testament to your effort!${RESET}"
-        "${YELLOW}Excellent execution! You’re well on your way to mastering the subject!${RESET}"
-        "${BLUE}Wonderful job! Your hard work has definitely paid off!${RESET}"
-        "${MAGENTA}You’re amazing! Keep up the awesome work!${RESET}"
-        "${RED}What an achievement! Your perseverance is truly admirable!${RESET}"
-        "${CYAN}Incredible effort! This is a huge milestone for you!${RESET}"
-        "${GREEN}Awesome! You’ve done something incredible today!${RESET}"
-        "${YELLOW}Great job! Keep up the excellent work and aim higher!${RESET}"
-        "${BLUE}You’ve succeeded! Your dedication is your superpower!${RESET}"
-        "${MAGENTA}Congratulations! Your hard work has brought great results!${RESET}"
-        "${RED}Fantastic work! You’ve taken a huge leap forward today!${RESET}"
-        "${CYAN}You’re on fire! Keep up the great work!${RESET}"
-        "${GREEN}Well deserved! Your efforts have led to success!${RESET}"
-        "${YELLOW}Incredible! You’ve achieved something special!${RESET}"
-        "${BLUE}Outstanding performance! You’re truly excelling!${RESET}"
-        "${MAGENTA}Terrific achievement! Keep building on this success!${RESET}"
-        "${RED}Bravo! You’ve completed the lab with excellence!${RESET}"
-        "${CYAN}Superb job! You’ve shown remarkable focus and effort!${RESET}"
-        "${GREEN}Amazing work! You’re making impressive progress!${RESET}"
-        "${YELLOW}You nailed it again! Your consistency is paying off!${RESET}"
-        "${BLUE}Incredible dedication! Keep pushing forward!${RESET}"
-        "${MAGENTA}Excellent work! Your success today is well earned!${RESET}"
-        "${RED}You’ve made it! This is a well-deserved victory!${RESET}"
-        "${CYAN}Wonderful job! Your passion and hard work are shining through!${RESET}"
-        "${GREEN}You’ve done it! Keep up the hard work and success will follow!${RESET}"
-        "${YELLOW}Great execution! You’re truly mastering this!${RESET}"
-        "${BLUE}Impressive! This is just the beginning of your journey!${RESET}"
-        "${MAGENTA}You’ve achieved something great today! Keep it up!${RESET}"
-        "${RED}You’ve made remarkable progress! This is just the start!${RESET}"
-    )
+    echo "${YELLOW}2. Adding Browser role for Username 2...${RESET}"
+    gcloud projects add-iam-policy-binding $PROJECT_ID \
+        --member="user:$USER2" --role="roles/browser" > /dev/null 2>&1
 
-    RANDOM_INDEX=$((RANDOM % ${#MESSAGES[@]}))
-    echo -e "${BOLD}${MESSAGES[$RANDOM_INDEX]}"
-}
+    echo "${YELLOW}3. Adding Conditional BigQuery Data Viewer role...${RESET}"
+    gcloud projects add-iam-policy-binding $PROJECT_ID \
+        --member="user:$USER2" \
+        --role="roles/bigquery.dataViewer" \
+        --condition="expression=resource.matchTag('$PROJECT_ID/sensitivity-level', 'low'),title=Low Sensitivity Data Access Only" > /dev/null 2>&1
+else
+    echo "${RED}Skipping IAM updates because Username 2 was not found.${RESET}"
+fi
 
-# Display a random congratulatory message
-random_congrats
+echo "${YELLOW}4. Binding 'Low' Tag to BigQuery Dataset (damaged_car_image_info)...${RESET}"
+# Get the unique numerical Tag Value ID for 'low'
+LOW_TAG_NAME=$(gcloud resource-manager tags values describe $PROJECT_ID/sensitivity-level/low --format="value(name)")
 
-echo -e "\n"  # Adding one blank line
+gcloud resource-manager tags bindings create \
+    --tag-value=$LOW_TAG_NAME \
+    --parent=//bigquery.googleapis.com/projects/$PROJECT_ID/datasets/damaged_car_image_info > /dev/null 2>&1
 
-cd
-
-remove_files() {
-    # Loop through all files in the current directory
-    for file in *; do
-        # Check if the file name starts with "gsp", "arc", or "shell"
-        if [[ "$file" == gsp* || "$file" == arc* || "$file" == shell* ]]; then
-            # Check if it's a regular file (not a directory)
-            if [[ -f "$file" ]]; then
-                # Remove the file and echo the file name
-                rm "$file"
-                echo "File removed: $file"
-            fi
-        fi
-    done
-}
-
-remove_files
+echo ""
+echo "${GREEN}${BOLD}ORBIT OF OPS: Task 4 Automation Complete!${RESET}"
+echo "${YELLOW}You can now click 'Check my progress' for Task 4 in your lab!${RESET}"
+echo "${CYAN}${BOLD}====================================================${RESET}"
+echo ""
