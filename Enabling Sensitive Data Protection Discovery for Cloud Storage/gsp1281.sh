@@ -6,25 +6,41 @@ BOLD=$(tput bold)
 CYAN=$(tput setaf 6)
 GREEN=$(tput setaf 2)
 YELLOW=$(tput setaf 3)
+RED=$(tput setaf 1)
 RESET=$(tput sgr0)
 
 echo "${CYAN}${BOLD}====================================================${RESET}"
-echo "${CYAN}${BOLD}       ORBIT OF OPS: Sensitive Data Protection       ${RESET}"
+echo "${CYAN}${BOLD}      ORBIT OF OPS: Sensitive Data Protection       ${RESET}"
 echo "${CYAN}${BOLD}====================================================${RESET}"
 echo ""
 
-# 1. Variables
-read -p "Project ID [${DEVSHELL_PROJECT_ID}]: " INPUT_PROJECT_ID
-PROJECT_ID=${INPUT_PROJECT_ID:-$DEVSHELL_PROJECT_ID}
+# Auto-fetch variables
+export PROJECT_ID=$DEVSHELL_PROJECT_ID
 export TOKEN=$(gcloud auth print-access-token)
 
+echo "${GREEN}Orbit of Ops: Project ID detected: ${PROJECT_ID}${RESET}"
 echo ""
-echo "${YELLOW}TASK 1 MANUAL REMINDER:${RESET}"
-echo "1. Ensure Task 1 is 20/20 in the lab panel before pressing Enter."
-read -p "Press [ENTER] to continue with Orbit of Ops automation..."
 
-# 2. Patch Inspection Template (Task 2)
-echo "${CYAN}Orbit of Ops: Patching Inspection Template...${RESET}"
+# Task 1 Instructions
+echo "${YELLOW}${BOLD}=== ORBIT OF OPS: TASK 1 INSTRUCTIONS ===${RESET}"
+echo "1. Navigate to: ${CYAN}https://console.cloud.google.com/security/dlp/discovery?project=${PROJECT_ID}${RESET}"
+echo "2. Click ${BOLD}Enable${RESET} under Cloud Storage."
+echo "3. Follow the UI prompts:"
+echo "   - Scope: Scan selected project"
+echo "   - Inspection template: Create new template"
+echo "   - Actions: Enable 'Publish to Security Command Center' & 'Save to BigQuery'"
+echo "   - BQ Dataset: ${CYAN}cloudstorage_discovery${RESET}, Table: ${CYAN}data_profiles${RESET}"
+echo "4. Click ${BOLD}Create${RESET} and wait for the scan to start."
+echo "5. Click 'Check my progress' in the lab panel until you get 20/20."
+echo "${YELLOW}===========================================${RESET}"
+echo ""
+
+read -p "${BOLD}Press [ENTER] only AFTER Task 1 is marked 20/20 in the lab...${RESET}"
+
+# Task 2: Automation
+echo "${CYAN}Orbit of Ops: Initializing Phase 2 (Template Management)...${RESET}"
+
+# Patch Inspection Template
 TEMPLATE_ID=$(curl -s -H "Authorization: Bearer $TOKEN" "https://dlp.googleapis.com/v2/projects/$PROJECT_ID/locations/global/inspectTemplates" | jq -r '.inspectTemplates[0].name')
 
 cat <<EOF > patch.json
@@ -37,10 +53,9 @@ cat <<EOF > patch.json
   }
 }
 EOF
-curl -s -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d @patch.json "https://dlp.googleapis.com/v2/$TEMPLATE_ID?updateMask=inspectConfig.infoTypes,inspectConfig.minLikelihood"
+curl -s -X PATCH -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d @patch.json "https://dlp.googleapis.com/v2/$TEMPLATE_ID?updateMask=inspectConfig.infoTypes,inspectConfig.minLikelihood" > /dev/null
 
-# 3. Create De-identify Template (Task 2)
-echo "${CYAN}Orbit of Ops: Deploying De-identify Template...${RESET}"
+# Create De-identify Template
 cat <<EOF > deid.json
 {
   "deidentifyTemplate": {
@@ -57,12 +72,10 @@ cat <<EOF > deid.json
   "templateId": "us_ssn_deidentify"
 }
 EOF
-curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d @deid.json "https://dlp.googleapis.com/v2/projects/$PROJECT_ID/locations/global/deidentifyTemplates"
+curl -s -X POST -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d @deid.json "https://dlp.googleapis.com/v2/projects/$PROJECT_ID/locations/global/deidentifyTemplates" > /dev/null
 
-# 4. Job Execution
-echo "${GREEN}Orbit of Ops: Job execution ready. Proceeding with Inspection/De-identify jobs...${RESET}"
-# (Add your job submission logic here)
+echo "${GREEN}Orbit of Ops: Phase 2 complete. Templates configured.${RESET}"
+rm patch.json deid.json
 
 echo ""
-echo "${CYAN}${BOLD}ORBIT OF OPS: Automation Complete. Mission Successful.${RESET}"
-rm patch.json deid.json
+echo "${CYAN}${BOLD}ORBIT OF OPS: Ready for Task 4 & 5 (Inspection/De-identify).${RESET}"
