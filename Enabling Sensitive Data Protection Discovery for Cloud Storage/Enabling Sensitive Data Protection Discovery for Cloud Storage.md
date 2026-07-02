@@ -1,6 +1,6 @@
 # Enabling Sensitive Data Protection Discovery for Cloud Storage || [GSP1281](https://www.cloudskillsboost.google/focuses/109504?parent=catalog) ||
 
-## 🔑 Solution [here](https://youtu.be/tnNqVFqqQks)
+## 🔑 Solution [here](https://youtu.be/o3tXYHek4ck)
 
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
