@@ -19,7 +19,7 @@ echo "${CYAN}${BOLD}====================================================${RESET}
 echo ""
 
 # ==============================================================================
-# Initialization & Auth
+# Initialization
 # ==============================================================================
 echo "${YELLOW}Initializing and fetching project details...${RESET}"
 export PROJECT_ID=$(gcloud config get-value project)
@@ -33,11 +33,13 @@ fi
 
 echo "${GREEN}Orbit of Ops: Project ID detected: ${PROJECT_ID}${RESET}"
 echo "${GREEN}Orbit of Ops: Project Number detected: ${PROJECT_NUMBER}${RESET}"
-
-# Auto-detect Username 2 for Task 4
-export USER2=$(gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --format="value(bindings.members)" | grep "user:.*@qwiklabs.net" | sed 's/user://' | grep -v "$CURRENT_USER" | head -n 1)
-echo "${GREEN}Orbit of Ops: Username 2 detected: ${USER2}${RESET}"
 echo ""
+
+# Auto-detect Username 2 for Task 4 display
+export USER2=$(gcloud projects get-iam-policy $PROJECT_ID --flatten="bindings[].members" --format="value(bindings.members)" | grep "user:.*@qwiklabs.net" | sed 's/user://' | grep -v "$CURRENT_USER" | head -n 1)
+if [ -z "$USER2" ]; then
+    USER2="[The other student-...@qwiklabs.net account]"
+fi
 
 # ==============================================================================
 # TASK 1: MANUAL DISCOVERY SETUP
@@ -46,7 +48,7 @@ echo "${YELLOW}${BOLD}=== ORBIT OF OPS: TASK 1 (MANUAL SETUP) ===${RESET}"
 echo "To ensure the grader correctly registers your scan, complete Task 1 in the UI:"
 echo ""
 echo "1. Hold CTRL (or CMD) and click this link to open a new tab:"
-echo "   ${CYAN}https://console.cloud.google.com/security/sensitive-data-protection${RESET}"
+echo "   ${CYAN}https://console.cloud.google.com/security/sensitive-data-protection/discovery${RESET}"
 echo "2. Under 'BigQuery', click ${BOLD}'Enable'${RESET}."
 echo "3. Click ${BOLD}Continue${RESET} through Discovery type, Scope, Schedules, and Inspection Template."
 echo "4. Under 'Add actions':"
@@ -120,38 +122,33 @@ read -p "${BOLD}Press [ENTER] only AFTER you get the green check for Task 3...${
 echo ""
 
 # ==============================================================================
-# TASK 4: AUTOMATED IAM CONDITIONS & BQ TAGGING
+# TASK 4: MANUAL IAM CONDITIONS & BQ TAGGING
 # ==============================================================================
-echo "${CYAN}${BOLD}=== ORBIT OF OPS: TASK 4 (AUTOMATED) ===${RESET}"
-echo "${YELLOW}Applying Conditional IAM Policies for Username 2 ($USER2)...${RESET}"
-
-if [ -n "$USER2" ]; then
-    gcloud projects remove-iam-policy-binding $PROJECT_ID \
-        --member="user:$USER2" --role="roles/viewer" > /dev/null 2>&1
-
-    gcloud projects add-iam-policy-binding $PROJECT_ID \
-        --member="user:$USER2" --role="roles/browser" > /dev/null 2>&1
-
-    gcloud projects add-iam-policy-binding $PROJECT_ID \
-        --member="user:$USER2" \
-        --role="roles/bigquery.dataViewer" \
-        --condition="expression=resource.matchTag('$PROJECT_ID/sensitivity-level', 'low'),title=Low Sensitivity Data Access Only" > /dev/null 2>&1
-    echo "${GREEN}IAM Policies updated successfully.${RESET}"
-else
-    echo "${RED}Error: Username 2 not found. Cannot update IAM policies.${RESET}"
-fi
-
-echo "${YELLOW}Binding 'Low' Tag to BigQuery Dataset 'damaged_car_image_info'...${RESET}"
-LOW_TAG_NAME=$(gcloud resource-manager tags values describe $PROJECT_ID/sensitivity-level/low --format="value(name)")
-
-gcloud resource-manager tags bindings create \
-    --tag-value=$LOW_TAG_NAME \
-    --parent=//bigquery.googleapis.com/projects/$PROJECT_ID/datasets/damaged_car_image_info > /dev/null 2>&1
-
-echo "${GREEN}Dataset tagged successfully.${RESET}"
-
+echo "${CYAN}${BOLD}=== ORBIT OF OPS: TASK 4 (MANUAL WORKAROUND) ===${RESET}"
+echo "Due to strict grader constraints and Qwiklabs limits, do this in the UI:"
+echo ""
+echo "${MAGENTA}--- Part A: Conditional IAM for Username 2 ---${RESET}"
+echo "1. Go to ${BOLD}IAM & Admin > IAM${RESET}."
+echo "2. Locate Username 2: ${CYAN}$USER2${RESET}"
+echo "3. Click the pencil icon (Edit) next to them."
+echo "4. Delete the ${BOLD}'Viewer'${RESET} role (click the trash can icon)."
+echo "5. Click 'Add another role' -> select ${BOLD}Basic > Browser${RESET}."
+echo "6. Next to the 'BigQuery Data Viewer' role, click ${BOLD}Add IAM condition${RESET}:"
+echo "   - Title: ${BOLD}Low Sensitivity Data Access Only${RESET}"
+echo "   - Condition type: ${BOLD}Tag${RESET}  |  Operator: ${BOLD}has value${RESET}"
+echo "   - Value path: ${CYAN}${PROJECT_ID}/sensitivity-level/low${RESET}"
+echo "7. Click Save, then Save again."
+echo ""
+echo "${MAGENTA}--- Part B: Tag the BigQuery Dataset ---${RESET}"
+echo "1. Go to ${BOLD}BigQuery${RESET} in the console."
+echo "2. Expand your project in the Explorer pane and click the ${BOLD}'damaged_car_image_info'${RESET} dataset."
+echo "3. Click ${BOLD}Edit details${RESET} (the pencil icon in the dataset info panel)."
+echo "4. Under 'Tags', click ${BOLD}Select scope > Select current project${RESET}."
+echo "5. Set Key 1 to: ${BOLD}sensitivity-level${RESET}"
+echo "6. Set Value 1 to: ${BOLD}low${RESET}"
+echo "7. Click Save."
 echo ""
 echo "${GREEN}${BOLD}ORBIT OF OPS: All Tasks Complete!${RESET}"
-echo "${YELLOW}Go click 'Check my progress' for Task 4. Congratulations on finishing the lab!${RESET}"
+echo "${YELLOW}WAIT 5 MINUTES before clicking 'Check my progress' for Task 4.${RESET}"
 echo "${CYAN}${BOLD}====================================================${RESET}"
 echo ""
