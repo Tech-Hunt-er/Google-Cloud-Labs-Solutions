@@ -1,6 +1,6 @@
 # Enabling Sensitive Data Protection Discovery for BigQuery || [GSP1282](https://www.cloudskillsboost.google/focuses/109503?parent=catalog) ||
 
-## 🔑 Solution [here](https://youtu.be/YYGGh6xZads)
+## 🔑 Solution [here](https://youtu.be/BrPGpng4Zpc)
 
 ### ⚙️ Execute the Following Commands in Cloud Shell
 
